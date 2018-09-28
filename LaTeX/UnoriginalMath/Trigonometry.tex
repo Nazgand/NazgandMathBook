@@ -1,0 +1,180 @@
+\input{../NazgandStyle}
+\title{
+	Trigonometry
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Geometric Foundations}
+	In [ElementaryGeometryAndTrigonometry.kig] by moving the angle control point to the second quadrant and comparing, we can see
+	\begin{equation}
+	\label{SinCosPhaseShift}
+	\sin\pqty{\theta+\frac{\pi}{2}}=\cos\pqty{\theta}
+	\land
+	\cos\pqty{\theta+\frac{\pi}{2}}=-\sin\pqty{\theta}
+	\end{equation}
+	Moreover, we see as \(\theta\to 0\)
+	\begin{equation}
+	\label{SinXOverXLimit}
+	\lim\limits_{\theta\to 0}\frac{\sin\pqty{\theta}}{\theta}=1
+	\end{equation}
+	Using the Pythagorean Theorem, we find
+	\begin{equation}
+	\label{SinCosPythagoras}
+	1=\sin\pqty{\theta}^2+\cos\pqty{\theta}^2
+	\end{equation}
+	From [SumOfAnglesSinCos.kig], we get
+	\begin{equation}
+		\label{SinSumOfAngle}
+		\sin\pqty{\alpha+\beta}=\sin\pqty{\alpha}\cos\pqty{\beta}+\cos\pqty{\alpha}\sin\pqty{\beta}
+	\end{equation}
+	And
+	\begin{equation}
+	\label{CosSumOfAngle}
+	\cos\pqty{\alpha+\beta}=\cos\pqty{\alpha}\cos\pqty{\beta}-\sin\pqty{\alpha}\sin\pqty{\beta}
+	\end{equation}
+	
+	\section{Derivatives}
+	\begin{theorem}
+	\begin{equation}
+	\pdiff{x}{}\sin\pqty{x}=\cos\pqty{x}
+	\end{equation}
+	\begin{proof}
+		\begin{equation}
+			\pdiff{x}{}\sin\pqty{x}=
+			\lim\limits_{h\to 0}\frac{\sin\pqty{x+h}-\sin\pqty{x}}{h}
+		\end{equation}
+		Use \eqref{SinSumOfAngle}
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\lim\limits_{h\to 0}\frac{\sin\pqty{x}\cos\pqty{h}+\cos\pqty{x}\sin\pqty{h}-\sin\pqty{x}}{h}
+		\end{equation}
+		Split the limit:
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\lim\limits_{h\to 0}\frac{\cos\pqty{x}\sin\pqty{h}}{h}
+		+
+		\lim\limits_{h\to 0}\frac{\sin\pqty{x}\pqty{\cos\pqty{h}-1}}{h}
+		\end{equation}
+		Simplify
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\cos\pqty{x}\lim\limits_{h\to 0}\frac{\sin\pqty{h}}{h}
+		+
+		\sin\pqty{x}\lim\limits_{h\to 0}\frac{{\cos\pqty{h}-1}}{h}
+		\end{equation}
+		Use \eqref{SinXOverXLimit} on left limit and multiply right limit by \(\frac{\cos\pqty{h}+1}{\cos\pqty{h}+1}\)
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\cos\pqty{x}
+		+
+		\sin\pqty{x}\lim\limits_{h\to 0}\frac{{\cos\pqty{h}^2-1}}{h\pqty{\cos\pqty{h}+1}}
+		\end{equation}
+		Use \eqref{SinCosPythagoras}
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\cos\pqty{x}
+		+
+		\sin\pqty{x}\lim\limits_{h\to 0}\frac{{\sin\pqty{h}^2}}{h\pqty{\cos\pqty{h}+1}}
+		\end{equation}
+		Split the limit:
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\cos\pqty{x}
+		+
+		\sin\pqty{x}\lim\limits_{a\to 0}\frac{{\sin\pqty{a}}}{a}
+		\lim\limits_{b\to 0}{{\sin\pqty{b}}}
+		\lim\limits_{c\to 0}\frac{1}{\pqty{\cos\pqty{c}+1}}
+		\end{equation}
+		Evaluate using \eqref{SinXOverXLimit} again
+		\begin{equation}
+		\pdiff{x}{}\sin\pqty{x}=
+		\cos\pqty{x}
+		+
+		\sin\pqty{x}*
+		1
+		*0
+		*\frac{1}{2}=
+		\cos\pqty{x}
+		\end{equation}
+	\end{proof}
+	\end{theorem}
+	
+	\begin{theorem}
+		\begin{equation}
+		\label{key}
+		\pdiff{x}{}\cos\pqty{x}=-\sin\pqty{x}
+		\end{equation}
+		\begin{proof}
+			Use \eqref{SinCosPhaseShift}
+			\begin{equation}
+			\pdiff{x}{}\cos\pqty{x}=\pdiff{x}{}\sin\pqty{x+\frac{\pi}{2}}
+			\end{equation}
+			Use the chain rule:
+			\begin{equation}
+			\pdiff{x}{}\cos\pqty{x}=
+			\pqty{\pdiff{z}{}\sin\pqty{z} \replace{z}{x+\frac{\pi}{2}}}
+			\pdiff{x}{}\pqty{x+\frac{\pi}{2}}
+			\end{equation}
+			Simplify
+			\begin{equation}
+			\pdiff{x}{}\cos\pqty{x}=
+			\cos\pqty{x+\frac{\pi}{2}}
+			\end{equation}
+			Use 
+			Use \eqref{SinCosPhaseShift}
+			\begin{equation}
+			\pdiff{x}{}\cos\pqty{x}=
+			-\sin\pqty{x}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+	\section{Taylor Series}
+	\begin{theorem}
+		\begin{equation}
+		\label{SinTaylor}
+		\sin\pqty{x}=\sum_{k=0}^{\infty} \frac{\pqty{-1}^kx^{2k+1}}{\pqty{2k+1}!}
+		\end{equation}
+		\begin{proof}
+			The multiple derivatives cycle through 4 functions. Let \(n\in\mathbb{Z}_{\ge 0}\):
+			\begin{equation}
+				\pdiff{x}{4n}\sin\pqty{x}=\sin\pqty{x}
+			\end{equation}
+			\begin{equation}
+				\pdiff{x}{4n+1}\sin\pqty{x}=\cos\pqty{x}
+			\end{equation}
+			\begin{equation}
+				\pdiff{x}{4n+2}\sin\pqty{x}=-\sin\pqty{x}
+			\end{equation}
+			\begin{equation}
+				\pdiff{x}{4n+3}\sin\pqty{x}=-\cos\pqty{x}
+			\end{equation}
+			The derivatives at 0 thus cycle through \(0,1,0,-1\). Use [TaylorSeries\eqref{TaylorSeriesDef}] and simplify out the zeroes.
+		\end{proof}
+	\end{theorem}
+
+	\begin{theorem}
+		\begin{equation}
+		\label{CosTaylor}
+		\cos\pqty{x}=\sum_{k=0}^{\infty} \frac{\pqty{-1}^kx^{2k}}{\pqty{2k}!}
+		\end{equation}
+		\begin{proof}
+			The multiple derivatives cycle through 4 functions. Let \(n\in\mathbb{Z}_{\ge 0}\):
+			\begin{equation}
+			\pdiff{x}{4n}\cos\pqty{x}=\cos\pqty{x}
+			\end{equation}
+			\begin{equation}
+			\pdiff{x}{4n+1}\cos\pqty{x}=-\sin\pqty{x}
+			\end{equation}
+			\begin{equation}
+			\pdiff{x}{4n+2}\cos\pqty{x}=-\cos\pqty{x}
+			\end{equation}
+			\begin{equation}
+			\pdiff{x}{4n+3}\cos\pqty{x}=\sin\pqty{x}
+			\end{equation}
+			The derivatives at 0 thus cycle through \(1,0,-1,0\). Use [TaylorSeries\eqref{TaylorSeriesDef}] and simplify out the zeroes.
+		\end{proof}
+	\end{theorem}
+\end{document}

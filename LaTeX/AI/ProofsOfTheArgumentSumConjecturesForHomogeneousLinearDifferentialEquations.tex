@@ -1,0 +1,287 @@
+\input{../NazgandStyle}
+% Title and author
+\title{
+	Proofs of the Argument Sum Conjectures for
+	
+	Homogeneous Linear Differential Equations
+}
+\author{Grok 3}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Introduction}
+	
+	We consider homogeneous linear differential equations with constant coefficients of the form:
+	
+	\begin{equation}
+		0 = \sum_{k=0}^n a_k f^{\pqty{k}}\pqty{z}, \quad a_k \in \mathbb{C}, \quad a_n \neq 0,
+	\end{equation}
+	
+	where \(f^{\pqty{k}}\pqty{z}\) denotes the \(k\)-th derivative of \(f\pqty{z}\).
+	
+	The solution space of this equation is \(n\)-dimensional, and we let \(\{g_0\pqty{z}, g_1\pqty{z}, \ldots, g_{n-1}\pqty{z}\}\) be a basis for this space.
+	
+	Define the vector:
+	
+	\begin{equation}
+		v\pqty{z} = \begin{bmatrix} g_0\pqty{z} \\ g_1\pqty{z} \\ \vdots \\ g_{n-1}\pqty{z} \end{bmatrix}.
+	\end{equation}
+	
+	The conjectures \(\text{ArgSumCon}\pqty{m}\) for positive integers \(m \in \mathbb{Z}_{>0}\) assert that for any solution \(f\), there exist constants \(c\pqty{k_0, \ldots, k_{m-1}}\) such that:
+	
+	\begin{equation}
+		f\pqty{\sum_{j=0}^{m-1} z_j} = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} c\pqty{k_0, \ldots, k_{m-1}} \prod_{j=0}^{m-1} g_{k_j}\pqty{z_j}.
+	\end{equation}
+	
+	In this document, we prove \(\text{ArgSumCon}\pqty{2}\) explicitly, generalize to \(\text{ArgSumCon}\pqty{m}\) using induction, and justify the invertibility of any matrix inverted during the proofs.
+	
+	\section{Proof of \(\text{ArgSumCon}\pqty{2}\)}
+	
+	\begin{theorem}
+		For any solution \(f\) to the differential equation, there exists a unique symmetric matrix \(A \in \mathbb{C}^{n \times n}\) such that:
+		
+		\begin{equation}
+			f\pqty{z_0 + z_1} = v\pqty{z_1}\transpose A v\pqty{z_0}.
+		\end{equation}
+		\begin{proof}
+			We proceed through a series of steps, using lemmas and claims to build the result.
+			
+			\begin{lemma}
+				For any solution \(f\) and fixed \(z_1 \in \mathbb{C}\), the function \(h\pqty{z_0} := f\pqty{z_0 + z_1}\) is also a solution to the differential equation.
+				\begin{proof}
+					Since the differential equation has constant coefficients, compute the derivatives:
+					
+					\begin{equation}
+						h^{\pqty{k}}\pqty{z_0} = f^{\pqty{k}}\pqty{z_0 + z_1}.
+					\end{equation}
+					
+					Applying the differential operator:
+					
+					\begin{equation}
+						\sum_{k=0}^n a_k h^{\pqty{k}}\pqty{z_0} = \sum_{k=0}^n a_k f^{\pqty{k}}\pqty{z_0 + z_1} = 0,
+					\end{equation}
+					
+					since \(f\) satisfies the original equation. Thus, \(h\pqty{z_0}\) is a solution.
+				\end{proof}
+			\end{lemma}
+			
+			\begin{lemma}
+				There exist infinitely differentiable functions \(c_k: \mathbb{C} \to \mathbb{C}\) such that:
+				
+				\begin{equation}
+					f\pqty{z_0 + z_1} = \sum_{k=0}^{n-1} c_k\pqty{z_1} g_k\pqty{z_0}.
+				\end{equation}
+				\begin{proof}
+					Fix \(z_1\). Since \(h\pqty{z_0} = f\pqty{z_0 + z_1}\) is a solution, and \(\{g_0\pqty{z_0}, \ldots, g_{n-1}\pqty{z_0}\}\) is a basis, we can express:
+					
+					\begin{equation}
+						h\pqty{z_0} = \sum_{k=0}^{n-1} c_k\pqty{z_1} g_k\pqty{z_0},
+					\end{equation}
+					
+					where the coefficients \(c_k\pqty{z_1}\) depend on \(z_1\). To find these coefficients, consider the Wronskian matrix of the basis at \(z_0 = 0\):
+					
+					\begin{equation}
+						W\pqty{0} = \begin{bmatrix}
+							g_0\pqty{0} & g_1\pqty{0} & \cdots & g_{n-1}\pqty{0} \\
+							g_0'\pqty{0} & g_1'\pqty{0} & \cdots & g_{n-1}'\pqty{0} \\
+							\vdots & \vdots & \ddots & \vdots \\
+							g_0^{\pqty{n-1}}\pqty{0} & g_1^{\pqty{n-1}}\pqty{0} & \cdots & g_{n-1}^{\pqty{n-1}}\pqty{0}
+						\end{bmatrix}.
+					\end{equation}
+					
+					Since \(\{g_0, \ldots, g_{n-1}\}\) are linearly independent solutions, \(W\pqty{0}\) is invertible (justified in Section 4). Solve for the coefficients using initial conditions at \(z_0 = 0\):
+					
+					\begin{equation}
+						\begin{bmatrix} h\pqty{0} \\ h'\pqty{0} \\ \vdots \\ h^{\pqty{n-1}}\pqty{0} \end{bmatrix} = \begin{bmatrix} f\pqty{z_1} \\ f'\pqty{z_1} \\ \vdots \\ f^{\pqty{n-1}}\pqty{z_1} \end{bmatrix} = W\pqty{0} \begin{bmatrix} c_0\pqty{z_1} \\ c_1\pqty{z_1} \\ \vdots \\ c_{n-1}\pqty{z_1} \end{bmatrix}.
+					\end{equation}
+					
+					Thus:
+					
+					\begin{equation}
+						\begin{bmatrix} c_0\pqty{z_1} \\ c_1\pqty{z_1} \\ \vdots \\ c_{n-1}\pqty{z_1} \end{bmatrix} = W\pqty{0}^{-1} \begin{bmatrix} f\pqty{z_1} \\ f'\pqty{z_1} \\ \vdots \\ f^{\pqty{n-1}}\pqty{z_1} \end{bmatrix}.
+					\end{equation}
+					
+					Since \(f\) is infinitely differentiable (as a solution to a linear ODE with constant coefficients), each \(c_k\pqty{z_1}\) is infinitely differentiable.
+				\end{proof}
+			\end{lemma}
+			
+			\begin{theorem}
+				Each coefficient \(c_k\pqty{z_1}\) satisfies the differential equation:
+				
+				\begin{equation}
+					\sum_{j=0}^n a_j c_k^{\pqty{j}}\pqty{z_1} = 0.
+				\end{equation}
+				\begin{proof}
+					Differentiate \(f\pqty{z_0 + z_1} = \sum_{k=0}^{n-1} c_k\pqty{z_1} g_k\pqty{z_0}\) with respect to \(z_1\):
+					
+					\begin{equation}
+						\pdiff{z_1}{j} f\pqty{z_0 + z_1} = \sum_{k=0}^{n-1} c_k^{\pqty{j}}\pqty{z_1} g_k\pqty{z_0}.
+					\end{equation}
+					
+					Since \(f\pqty{z_0 + z_1}\) satisfies the differential equation in \(z_0 + z_1\), apply the operator with respect to \(z_1\) (noting \(\pdiff{z_1}{} f = f'\)):
+					
+					\begin{equation}
+						0 = \sum_{j=0}^n a_j \pdiff{z_1}{j} f\pqty{z_0 + z_1} = \sum_{j=0}^n a_j \sum_{k=0}^{n-1} c_k^{\pqty{j}}\pqty{z_1} g_k\pqty{z_0} = \sum_{k=0}^{n-1} \pqty{\sum_{j=0}^n a_j c_k^{\pqty{j}}\pqty{z_1}} g_k\pqty{z_0}.
+					\end{equation}
+					
+					Since the \(g_k\pqty{z_0}\) are linearly independent, each coefficient must vanish:
+					
+					\begin{equation}
+						\sum_{j=0}^n a_j c_k^{\pqty{j}}\pqty{z_1} = 0,
+					\end{equation}
+					
+					proving that each \(c_k\pqty{z_1}\) is a solution.
+				\end{proof}
+			\end{theorem}
+			
+			\begin{lemma}
+				There exist constants \(d_{km} \in \mathbb{C}\) such that:
+				
+				\begin{equation}
+					c_k\pqty{z_1} = \sum_{m=0}^{n-1} d_{km} g_m\pqty{z_1}.
+				\end{equation}
+				\begin{proof}
+					Since \(c_k\pqty{z_1}\) satisfies the differential equation and \(\{g_0\pqty{z_1}, \ldots, g_{n-1}\pqty{z_1}\}\) is a basis for the solution space, we can write:
+					
+					\begin{equation}
+						c_k\pqty{z_1} = \sum_{m=0}^{n-1} d_{km} g_m\pqty{z_1},
+					\end{equation}
+					
+					where the \(d_{km}\) are constants because the differential equation has constant coefficients.
+				\end{proof}
+			\end{lemma}
+			
+			Now, substitute into the expression for \(f\):
+			
+			\begin{equation}
+				f\pqty{z_0 + z_1} = \sum_{k=0}^{n-1} c_k\pqty{z_1} g_k\pqty{z_0} = \sum_{k=0}^{n-1} \pqty{\sum_{m=0}^{n-1} d_{km} g_m\pqty{z_1}} g_k\pqty{z_0} = \sum_{k=0}^{n-1} \sum_{m=0}^{n-1} d_{km} g_m\pqty{z_1} g_k\pqty{z_0}.
+			\end{equation}
+			
+			Define the matrix \(D\) with entries \(D_{mk} = d_{km}\), so:
+			
+			\begin{equation}
+				f\pqty{z_0 + z_1} = v\pqty{z_1}\transpose D v\pqty{z_0}.
+			\end{equation}
+			
+			Since \(f\pqty{z_0 + z_1} = f\pqty{z_1 + z_0}\), we have:
+			
+			\begin{equation}
+				v\pqty{z_1}\transpose D v\pqty{z_0} = v\pqty{z_0}\transpose D v\pqty{z_1} = v\pqty{z_1}\transpose D\transpose v\pqty{z_0}.
+			\end{equation}
+			
+			This holds for all \(z_0, z_1\), so \(D = D\transpose\). Set \(A = D\), which is symmetric. Thus:
+			
+			\begin{equation}
+				f\pqty{z_0 + z_1} = v\pqty{z_1}\transpose A v\pqty{z_0}.
+			\end{equation}
+			
+			For uniqueness, suppose there exist two symmetric matrices \(A\) and \(B\) such that \(v\pqty{z_1}\transpose A v\pqty{z_0} = v\pqty{z_1}\transpose B v\pqty{z_0}\) for all \(z_0, z_1\). Then:
+			
+			\begin{equation}
+				v\pqty{z_1}\transpose \pqty{A - B} v\pqty{z_0} = 0.
+			\end{equation}
+			
+			Since the \(g_k\pqty{z}\) span the solution space, and thus \(v\pqty{z_0}, v\pqty{z_1}\) can take on independent values, \(A - B = 0\), so \(A = B\). Hence, \(A\) is unique.
+		\end{proof}
+	\end{theorem}
+	
+	\section{Proof of \(\text{ArgSumCon}\pqty{m}\)}
+	
+	\begin{theorem}
+		For any positive integer \(m\), \(\text{ArgSumCon}\pqty{m}\) holds: there exist constants \(c\pqty{k_0, \ldots, k_{m-1}}\) such that:
+		
+		\begin{equation}
+			f\pqty{\sum_{j=0}^{m-1} z_j} = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} c\pqty{k_0, \ldots, k_{m-1}} \prod_{j=0}^{m-1} g_{k_j}\pqty{z_j}.
+		\end{equation}
+		\begin{proof}
+			We prove this by induction on \(m\).
+			
+			\textbf{Base Case (\(m = 1\)):} For any solution \(f\pqty{z_0}\), since \(\{g_0\pqty{z_0}, \ldots, g_{n-1}\pqty{z_0}\}\) is a basis:
+			
+			\begin{equation}
+				f\pqty{z_0} = \sum_{k_0=0}^{n-1} c\pqty{k_0} g_{k_0}\pqty{z_0},
+			\end{equation}
+			
+			where the \(c\pqty{k_0}\) are constants. Thus, \(\text{ArgSumCon}\pqty{1}\) holds.
+			
+			\textbf{Inductive Step:} Assume \(\text{ArgSumCon}\pqty{m}\) holds for some \(m \geq 1\). We show it holds for \(m+1\). Consider:
+			
+			\begin{equation}
+				f\pqty{\sum_{j=0}^{m} z_j}.
+			\end{equation}
+			
+			Define \(u = \sum_{j=0}^{m-1} z_j\), so:
+			
+			\begin{equation}
+				f\pqty{\sum_{j=0}^{m} z_j} = f\pqty{u + z_m}.
+			\end{equation}
+			
+			By \(\text{ArgSumCon}\pqty{2}\) (Theorem 1), there exists a symmetric matrix \(A\) such that:
+			
+			\begin{equation}
+				f\pqty{u + z_m} = v\pqty{z_m}\transpose A v\pqty{u}.
+			\end{equation}
+			
+			Now, \(v\pqty{u} = \begin{bmatrix} g_0\pqty{u} \\ \vdots \\ g_{n-1}\pqty{u} \end{bmatrix}\), where \(u = \sum_{j=0}^{m-1} z_j\). Since each \(g_l\pqty{u}\) is a solution, by the inductive hypothesis:
+			
+			\begin{equation}
+				g_l\pqty{u} = g_l\pqty{\sum_{j=0}^{m-1} z_j} = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} d_l\pqty{k_0, \ldots, k_{m-1}} \prod_{j=0}^{m-1} g_{k_j}\pqty{z_j},
+			\end{equation}
+			
+			for some constants \(d_l\pqty{k_0, \ldots, k_{m-1}}\). Substitute into the expression:
+			
+			\begin{align}
+				f\pqty{u + z_m} &= v\pqty{z_m}\transpose A v\pqty{u} = \sum_{k=0}^{n-1} \sum_{l=0}^{n-1} A_{kl} g_k\pqty{z_m} g_l\pqty{u} \\
+				&= \sum_{k=0}^{n-1} \sum_{l=0}^{n-1} A_{kl} g_k\pqty{z_m} \bqty{\sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} d_l\pqty{k_0, \ldots, k_{m-1}} \prod_{j=0}^{m-1} g_{k_j}\pqty{z_j}}.
+			\end{align}
+			
+			Rearrange the summations:
+			
+			\begin{align}
+				f\pqty{\sum_{j=0}^{m} z_j} = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} \sum_{k=0}^{n-1} \sum_{l=0}^{n-1} A_{kl} d_l\pqty{k_0, \ldots, k_{m-1}} g_k\pqty{z_m} \prod_{j=0}^{m-1} g_{k_j}\pqty{z_j}.
+			\end{align}
+			
+			Let \(k_m = k\), and define:
+			
+			\begin{equation}
+				c\pqty{k_0, \ldots, k_m} = \sum_{l=0}^{n-1} A_{kl_m} d_l\pqty{k_0, \ldots, k_{m-1}},
+			\end{equation}
+			
+			which are constants. Then:
+			
+			\begin{align}
+				f\pqty{\sum_{j=0}^{m} z_j} &= \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} \sum_{k_m=0}^{n-1} \pqty{\sum_{l=0}^{n-1} A_{k_m l} d_l\pqty{k_0, \ldots, k_{m-1}}} g_{k_m}\pqty{z_m} \prod_{j=0}^{m-1} g_{k_j}\pqty{z_j} \\
+				&= \sum_{k_0=0}^{n-1} \cdots \sum_{k_m=0}^{n-1} c\pqty{k_0, \ldots, k_m} \prod_{j=0}^{m} g_{k_j}\pqty{z_j},
+			\end{align}
+			
+			proving \(\text{ArgSumCon}\pqty{m+1}\). By induction, \(\text{ArgSumCon}\pqty{m}\) holds for all \(m \geq 1\).
+		\end{proof}
+	\end{theorem}
+		
+	\section{Justification of Matrix Invertibility}
+	
+	In the proof of \(\text{ArgSumCon}\pqty{2}\), we inverted the Wronskian matrix \(W\pqty{0}\). Here, we justify its invertibility.
+	
+	\begin{lemma}
+		The Wronskian matrix \(W\pqty{z}\) of the basis \(\{g_0\pqty{z}, g_1\pqty{z}, \ldots, g_{n-1}\pqty{z}\}\) is invertible for some \(z \in \mathbb{C}\), including \(z = 0\).
+		\begin{proof}
+			The Wronskian matrix at \(z\) is:
+			
+			\begin{equation}
+				W\pqty{z} = \begin{bmatrix}
+					g_0\pqty{z} & g_1\pqty{z} & \cdots & g_{n-1}\pqty{z} \\
+					g_0'\pqty{z} & g_1'\pqty{z} & \cdots & g_{n-1}'\pqty{z} \\
+					\vdots & \vdots & \ddots & \vdots \\
+					g_0^{\pqty{n-1}}\pqty{z} & g_1^{\pqty{n-1}}\pqty{z} & \cdots & g_{n-1}^{\pqty{n-1}}\pqty{z}
+				\end{bmatrix}.
+			\end{equation}
+			
+			The determinant \(\det W\pqty{z}\) is the Wronskian of the functions \(g_0, \ldots, g_{n-1}\). Since these are linearly independent solutions to an \(n\)-th order linear differential equation, \(\det W\pqty{z} \neq 0\) for some \(z\). For constant-coefficient equations, if the characteristic equation has distinct roots, the solutions (e.g., \(e^{\lambda_i z}\)) ensure \(\det W\pqty{z} \neq 0\) for all \(z\). Even with repeated roots, using solutions like \(z^k e^{\lambda z}\), the Wronskian is non-zero at \(z = 0\). Thus, \(W\pqty{0}\) is invertible.
+		\end{proof}
+	\end{lemma}
+		
+	This completes the justification of all matrix inversions in the proofs.
+	
+\end{document}

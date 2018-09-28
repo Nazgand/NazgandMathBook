@@ -1,0 +1,142 @@
+\input{NazgandStyle}
+\DeclareMathOperator{\cidf}{cidf}
+\DeclareMathOperator{\cidzero}{cidzero}
+\DeclareMathOperator{\Cid}{Cid}
+\DeclareMathOperator{\cidrues}{cidrues}
+\title{
+	Complex Iterated Derivatives
+}
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to analyze the iterated derivative extended to a complex number of iterations.
+	\end{abstract}
+	
+	\section{Complex Iterated Derivative For Functions, In General}
+	Let us have a function, \(\mathbb{C}^2\to\mathbb{C}\), \(\cidf\pqty{m,z}\) such that \(\cidf\pqty{0,z}=f\pqty{z}\) and \(\pdiff{z}{k}\cidf\pqty{m,z}=\cidf\pqty{m+k,z}\). Let \(\Cid\pqty{f\pqty{z}}\) be the set of functions with the properties of \(\cidf\), so \(\cidf\pqty{m,z}\in\Cid\pqty{f\pqty{z}}\).
+	
+	We can deduce \(\infty\) more functions with the same properties as \(\cidf\). 
+	If we have an arbitrary wave function, \(w\pqty{m}=w\pqty{m+1}\), then it produces another function with the properties of \(\cidf\):
+	\begin{equation}
+		\cidf\pqty{m+w\pqty{m}-w\pqty{0},z}\in \Cid\pqty{f\pqty{z}}
+	\end{equation}
+	\begin{equation}
+		\pqty{1+w\pqty{m}-w\pqty{0}}\cidf\pqty{m,z}\in \Cid\pqty{f\pqty{z}}
+	\end{equation}
+	The previous statement can be simplified:
+	\begin{equation}
+		\pqty{w\pqty{m}-w\pqty{0}}\cidf\pqty{m,z}\in \Cid\pqty{0}
+	\end{equation}
+	A simple thing to note is:
+	\begin{equation}
+		\label{Cid scale function argument}
+		k\in\mathbb{Z}_{\geq 0}
+		\Rightarrow
+		\pdiff{z}{k}\cidf\pqty{m,bz}=b^k\cidf\pqty{m+k,bz}
+	\end{equation}
+	\eqref{Cid scale function argument} can be restated as
+	\begin{equation}
+		b^m\cidf\pqty{m,bz}\in\Cid\pqty{f\pqty{bz}}
+	\end{equation}
+	Note that [the weighted average of a set of functions all having the property of \(\cidf\)] also has the properties of \(\cidf\). Let \(\sum_{j\in\mathbb{Z}}c_j=1\) and \(\cidf_j\pqty{m,z}\in\Cid\pqty{f\pqty{z}}\). Then
+	\begin{equation}
+		\sum_{j\in\mathbb{Z}}c_j \cidf_j\pqty{m,z}\in \Cid\pqty{f\pqty{z}}
+	\end{equation}
+	
+	If we has solutions for the complex iterated derivative of 2 function, we can add the solutions to get a solution to the complex iterated derivative of the sum of the functions:
+	\begin{equation}
+		\bqty{\forall k,\cidf_k\pqty{m,z}\in\Cid\pqty{f_k\pqty{z}}}
+		\Rightarrow
+		\cidf_1\pqty{m,z}+\cidf_2\pqty{m,z}\in\Cid\pqty{f_1\pqty{z}+f_2\pqty{z}}
+	\end{equation}
+	
+	The complications of multiple solutions can be shifted by adding the set \(\Cid\pqty{0}\) to a single solution:
+	\begin{equation}
+		\Cid\pqty{f\pqty{z}}=
+		\Bqty{\cidf\pqty{m,z}+\cidzero\pqty{m,z} \mid \cidzero\pqty{m,z}\in\Cid\pqty{0}}
+	\end{equation}
+	I thus declare the shorthand notation, reminiscent of the constant of integration:
+	\begin{equation}
+		\pdiff{z}{m}f\pqty{z}=\cidf\pqty{m,z}+\Cid\pqty{0}
+	\end{equation}
+	
+	Another useful property is
+	\begin{equation}
+		\label{cid m+k}
+		\cidf\pqty{m+k,z}\in\Cid\pqty{\cidf\pqty{k,z}}
+	\end{equation}
+
+	\section{Complex Iterated Derivative For Specific Functions}
+	First, the simplest solution to the complex iterated derivative of the exponential function:
+	\begin{equation}
+		e^z\in \Cid\pqty{e^z}
+	\end{equation}
+	Thus, for an arbitrary exponential function, using \eqref{Cid scale function argument}, we can say:
+	\begin{equation}
+		\ln\pqty{t}^m t^z\in \Cid\pqty{t^z}
+	\end{equation}
+	Thus, with the linearity of the complex iterated derivative, we have a way to evaluate the complex iterated derivative of arbitrary linear combinations of exponential functions. Example, where the sums converge or are continued analytically:
+	\begin{equation}
+		\zeta\pqty{z}-1=\sum_{t=2}^{\infty}t^{-z}
+		\Rightarrow
+		\sum_{t=2}^{\infty}\ln\pqty{t^{-1}}^m t^{-z}\in\Cid\pqty{\zeta\pqty{z}-1}
+	\end{equation}
+	We might want to add \(1\) to get \(\zeta\pqty{z}\), so next is \(\Cid\pqty{1}\):
+	\begin{equation}
+		\frac{z^{-m}}{\Gamma\pqty{1-m}}\in\Cid\pqty{1}
+	\end{equation}
+	For \(k\in\mathbb{Z}_{>0}\) and an arbitrary constant \(c\),
+	\begin{equation}
+		\frac{cz^{-k-m}}{\Gamma\pqty{1-k-m}}\in\Cid\pqty{0}
+	\end{equation}
+	From \eqref{cid m+k} and \(\Cid\pqty{1}\), the power functions are obtained:
+	\begin{equation}
+		\frac{z^{-m-k}}{\Gamma\pqty{1-m-k}}\in\Cid\pqty{\frac{z^{-k}}{\Gamma\pqty{1-k}}}
+	\end{equation}
+	As can be seen by dividing by \(\Gamma\pqty{1-k}\) and substituting \(k\to -k\), in the specific case where the left side of the following equation is not an indeterminate form:
+	\begin{equation} \frac{\Gamma\pqty{1+k}z^{k-m}}{\Gamma\pqty{1+k-m}}\in\Cid\pqty{z^{k}}
+	\end{equation}
+	The linearity of complex iterated derivatives combines with the linearity of integrals so that for an arbitrary function \(g\) and arbitrary constants \(a,b\), where the integral converges:
+	\begin{equation}
+		\dint{a}{b}{g\pqty{t}\ln\pqty{t}^m t^z}{t}
+		\in\Cid\pqty{\dint{a}{b}{g\pqty{t}t^z}{t}}
+	\end{equation}
+	Letting \(g\pqty{t}=e^{-t},a=0,b=\infty\), the complex iterated derivative of the gamma function is found where \(z\in\mathbb{C}\land -z\not\in\mathbb{Z}_{>0}\):
+	\begin{equation}
+		\Gamma\pqty{z+1} = \dint{0}{\infty}{e^{-t}t^z}{t}
+		\Rightarrow
+		\dint{0}{\infty}{e^{-t}\ln\pqty{t}^m t^z}{t}\in\Cid\pqty{\Gamma\pqty{z+1}}
+	\end{equation}
+	
+	\section{Relation to earlier work}
+	Where \(n\in\mathbb{Z}_{>0}\land z\in\mathbb{C}\):
+	\begin{equation}
+		\cidrues_n\pqty{0,z}=
+		\rues_n\pqty{z}=
+		\sum_{k=0}^{\infty}\frac{z^{nk}}{\pqty{nk}!}=
+		\frac{1}{n}\sum _{k=1}^n \exp\pqty{ze^{2ki\pi/n}}
+	\end{equation}
+	
+	The reason these functions are named \(\cidrues_n\) is because it is an acronym for Complex Iterated Derivative Root of Unity Exponential Sum function.
+	\begin{definition}
+		Where \(n\in\mathbb{Z}_{>0},\Bqty{m,z}\subset\mathbb{C}\):
+		\begin{equation}
+			\label{cidrues Exponential sum form}
+			\cidrues_n\pqty{m,z}=
+			\frac{1}{n}\sum _{k=1}^n \exp\pqty{ze^{2ki\pi/n}+2mki\pi/n}
+			\in\Cid\pqty{\rues_n\pqty{z}}
+		\end{equation}
+	\end{definition}
+	The functions are periodic:
+	\begin{equation}
+		\cidrues_n\pqty{m,x}=\cidrues_n\pqty{m+n,x}
+	\end{equation}
+
+	Thus there exists some functions \(c_{n,k}\pqty{m}\) relatively constant to \(z\) such that
+	\begin{equation}
+		\cidrues_n\pqty{m,z}=\sum_{k=0}^{n-1}c_{n,k}\pqty{m}\cidrues_n\pqty{k,z}
+	\end{equation}
+	
+\end{document}

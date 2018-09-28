@@ -1,0 +1,66 @@
+\input{NazgandStyle}
+\title{
+	Cauchy Sequence Permutations
+}
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to notice that [every reordering of a Cauchy Sequence] is a Cauchy Sequence.
+	\end{abstract}
+	
+	Let a bijection exist on \(\mathbb{Z}_{\ge 0}\) (The set of natural numbers including 0), \(perm:\mathbb{Z}_{\ge 0}\to\mathbb{Z}_{\ge 0}\). \(perm\) is short for 'permutation', because every bijection from a set to itself is a permutation.
+	
+	Let a Cauchy Sequence exist, \(cs:\mathbb{Z}_{\ge 0}\to\mathbb{C}\), with the limit
+	\begin{equation}
+		l=\lim\limits_{k\to\infty}cs\pqty{k}\in\mathbb{C}
+	\end{equation}
+
+	Then
+	\begin{equation}
+		l=\lim\limits_{k\to\infty}cs\pqty{perm\pqty{k}}\in\mathbb{C}
+	\end{equation}
+	Let \(\epsilon\in\mathbb{R}^+\). Then consider the set
+	\begin{equation}
+		OutsideCs\pqty{\epsilon}=\Bqty{k\in\mathbb{Z}_{\ge 0}|\abs{cs\pqty{k}-l}>\epsilon}
+	\end{equation}
+	Notice \(OutsideCs\pqty{\epsilon}\) is finite [because if \(OutsideCs\pqty{\epsilon}\) were infinite in cardinality, then the limit could not be \(l\)]. Maximums of finite non-empty sets are well defined, so...
+	\begin{equation}
+		csSkip\pqty{\epsilon}=\max\pqty{\Bqty{-1}\cup OutsideCs\pqty{\epsilon}}+1
+	\end{equation}
+	This function tells [how much of the Cauchy Series to skip] such that [the new Cauchy Sequence created by the skip] in a precision circle of size \(\epsilon\).
+	\begin{equation}
+		cs_2\pqty{k,\epsilon}=cs\pqty{k+csSkip\pqty{\epsilon}}
+	\end{equation}
+	
+	\begin{equation}
+		\bqty{k\in\mathbb{Z}_{\ge 0},\epsilon\in\mathbb{R}^+}\Rightarrow \abs{cs_2\pqty{k,\epsilon}-l}\leq\epsilon
+	\end{equation}
+
+	We need to create an analogous \(csPermSkip\pqty{\epsilon}\) function for the second series, requiring
+	\begin{equation}
+		cs_3\pqty{k,\epsilon}=cs\pqty{perm\pqty{k+csPermSkip\pqty{\epsilon}}}
+	\end{equation}
+	
+	\begin{equation}
+		\bqty{k\in\mathbb{Z}_{\ge 0},\epsilon\in\mathbb{R}^+}\Rightarrow \abs{cs_3\pqty{k,\epsilon}-l}\leq\epsilon
+	\end{equation}
+
+	\begin{equation}
+		OutsideCsPerm\pqty{\epsilon}=\Bqty{k\in\mathbb{Z}_{\ge 0}|\abs{cs\pqty{perm\pqty{k}}-l}>\epsilon}
+	\end{equation}
+	It should be noticed that
+	\begin{equation}
+		OutsideCsPerm\pqty{\epsilon}=\Bqty{k\in\mathbb{Z}_{\ge 0}|perm\pqty{k}\in OutsideCs\pqty{\epsilon}}
+	\end{equation}
+	The finiteness of \(OutsideCsPerm\pqty{\epsilon}\) is enough to show the limit is \(l\), yet we explicitly define the skip function:
+	\begin{equation}
+		csPermSkip\pqty{\epsilon}=\max\pqty{\Bqty{-1}\cup OutsideCsPerm\pqty{\epsilon}}+1
+	\end{equation}
+	Equivalently, 
+	\begin{equation}
+		csPermSkip\pqty{\epsilon}=\max\pqty{\Bqty{-1}\cup \Bqty{perm^{-1}\pqty{k}|k\in OutsideCs\pqty{\epsilon}}}+1
+	\end{equation}
+	\qed
+\end{document}

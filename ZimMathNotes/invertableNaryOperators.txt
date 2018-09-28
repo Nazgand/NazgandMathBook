@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-07T20:36:53+00:00
+
+====== invertableNaryOperators ======
+Created Wednesday 07 November 2018
+
+Let {{./equation010.png?type=equation}} be the set of invertable functions {{./equation008.png?type=equation}} with n inputs on the set {{./equation007.png?type=equation}}.
+{{./equation009.png?type=equation}} is the set of permutations on the set {{./equation007.png?type=equation}}.
+For {{./equation011.png?type=equation}} and a permutation {{./equation012.png?type=equation}}, **p**ermuting the **p**ositions of the **i**nputs and **o**utput produces another invertable n-ary operator {{./equation015.png?type=equation}}:
+{{./equation013.png?type=equation}}.
+Composition of permutations applies: {{./equation014.png?type=equation}}.
+For any fixed permutation, {{./equation016.png?type=equation}}.
+Similarly, **p**ermuting the **v**alues of the **i**nputs and **o**utputs produces another invertable nary operator.
+{{./equation017.png?type=equation}}
+{{./equation018.png?type=equation}}
+Composition of permutations applies: {{./equation020.png?type=equation}}
+For any fixed tuple of permutations, {{./equation019.png?type=equation}}.
+A generalization of function composition
+
+===== Equivalence to permuted modular arithmetic =====

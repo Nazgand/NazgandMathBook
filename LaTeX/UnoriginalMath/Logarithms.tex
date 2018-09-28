@@ -1,0 +1,139 @@
+\input{../NazgandStyle}
+\title{
+	Logarithms
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Logarithms}
+	\begin{definition}
+		The logarithm functions are the inverse functions of the exponentiation functions:
+		\begin{equation}
+			\label{LogarithmDefinition}
+			\bqty{\Bqty{b,x}\subset\mathbb{C}\land b\ne 0}\Rightarrow
+			b^{\log_b\pqty{x}}=x
+		\end{equation}
+		\begin{equation}
+			\label{RealLogarithmSimp}
+			\bqty{\Bqty{b,x}\subset\mathbb{R}\land b>0}\Rightarrow
+			\log_b\pqty{b^x}=x
+		\end{equation}
+		\begin{equation}
+		\log_e\pqty{x}=\ln\pqty{x}
+		\end{equation}
+	\end{definition}
+
+	\begin{theorem}[Power rule]
+		\begin{equation}
+			\bqty{\Bqty{b,x}\subset\mathbb{R}\land b>0}\Rightarrow		\log_b\pqty{x^p}=p*\log_b\pqty{x}
+		\end{equation}
+		\begin{proof}
+			Start with \eqref{LogarithmDefinition}:
+			\begin{equation}
+			b^{\log_b\pqty{x}}=x
+			\end{equation}
+			Raise both sides to the power of \(p\):
+			\begin{equation}
+			b^{p*\log_b\pqty{x}}=x^p
+			\end{equation}
+			Apply the \(\log_b\) function to both sides, simplifying with \eqref{RealLogarithmSimp}:
+			\begin{equation}
+			p*\log_b\pqty{x}=\log_b\pqty{x^p}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+	\begin{theorem}[Product sum rule]
+		\begin{equation}
+		\log_b\pqty{x*y}=\log_b\pqty{x}+\log_b\pqty{y}
+		\end{equation}
+		\begin{proof}
+			Use \eqref{LogarithmDefinition}
+			\begin{equation}
+			\log_b\pqty{x*y}=
+			\log_b\pqty{b^{\log_b\pqty{x}}*b^{\log_b\pqty{x}}}
+			\end{equation}
+			Use the additive property of exponential functions
+			\begin{equation}
+			\log_b\pqty{x*y}=
+			\log_b\pqty{b^{\log_b\pqty{x}+\log_b\pqty{x}}}
+			\end{equation}
+			Use \eqref{LogarithmDefinition}
+			\begin{equation}
+			\log_b\pqty{x*y}=
+			\log_b\pqty{x}+\log_b\pqty{x}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+	\begin{theorem}[Change of base]
+		\begin{equation}
+			\log_b\pqty{x}=\frac{\log_k\pqty{x}}{\log_k\pqty{b}}
+		\end{equation}
+		\begin{proof}
+			Start with \eqref{LogarithmDefinition}:
+			\begin{equation}
+				b^{\log_b\pqty{x}}=x
+			\end{equation}
+			Apply the \(\log_k\) function to both sides:
+			\begin{equation}
+				\log_k\pqty{b^{\log_b\pqty{x}}}=\log_k\pqty{x}
+			\end{equation}
+			\begin{equation}
+				\log_b\pqty{x}\log_k\pqty{b}=\log_k\pqty{x}
+			\end{equation}
+			Divide both sides by \(\log_k\pqty{b}\)
+		\end{proof}
+	\end{theorem}
+
+	\begin{theorem}[Integral form]
+		\begin{equation}
+		\label{LnIntegralForm}
+		z\in\mathbb{R}^+\Rightarrow
+		\ln\pqty{z}=\dint{1}{z}{\frac{1}{x}}{x}
+		\end{equation}
+	\begin{proof}
+		Proof from \url{https://math.stackexchange.com/q/1341995}. 
+		The derivative of the logarithm functions exist because the exponential functions have derivatives.
+		\url{https://en.wikipedia.org/wiki/Inverse_function_theorem}
+		\begin{equation}
+		\pdiff{x}{}x=1
+		\end{equation}
+		Substitute \eqref{LogarithmDefinition}:
+		\begin{equation}
+		\pdiff{x}{}e^{\ln\pqty{x}}=1
+		\end{equation}
+		The chain rule [Differentiation\eqref{DiffChainRule}]
+		\begin{equation}
+		\pqty{\pdiff{z}{}e^{z}\replace{z}{\ln\pqty{x}}}\pdiff{x}{}{\ln\pqty{x}}=1
+		\end{equation}
+		The derivative of the natural exponential function is itself: [ExponentialFunction\eqref{expOwnDeriv}]
+		\begin{equation}
+		\pqty{e^{z}\replace{z}{\ln\pqty{x}}}\pdiff{x}{}{\ln\pqty{x}}=1
+		\end{equation}
+		Substitute:
+		\begin{equation}
+		e^{\ln\pqty{x}}\pdiff{x}{}{\ln\pqty{x}}=1
+		\end{equation}
+		Simplify:
+		\begin{equation}
+		x\pdiff{x}{}{\ln\pqty{x}}=1
+		\end{equation}
+		Divide:
+		\begin{equation}
+		\pdiff{x}{}{\ln\pqty{x}}=\frac{1}{x}
+		\end{equation}
+		Integrate:
+		\begin{equation}
+		\ln\pqty{z}={\ln\pqty{z}-\ln\pqty{1}}=\dint{1}{z}{\frac{1}{x}}{x}
+		\end{equation}
+		
+	\end{proof}
+	\end{theorem}
+
+
+	
+	
+	\url{https://en.wikipedia.org/wiki/Logarithm}
+\end{document}

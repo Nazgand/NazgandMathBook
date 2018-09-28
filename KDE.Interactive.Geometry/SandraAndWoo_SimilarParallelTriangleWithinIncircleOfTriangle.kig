@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KigDocument>
+<KigDocument Version="1.0" CompatibilityVersion="0.7.0" grid="1" axes="1">
+ <CoordinateSystem>Euclidean</CoordinateSystem>
+ <Hierarchy>
+  <Data id="1" type="int">1</Data>
+  <Data id="2" type="int">-1</Data>
+  <Data id="3" type="int">-1</Data>
+  <Data id="4" type="int">-1</Data>
+  <Data id="5" type="double">2.86138</Data>
+  <Data id="6" type="double">4.27731</Data>
+  <Data id="7" type="double">-4.02622</Data>
+  <Object id="8" type="FixedPoint">
+   <Parent id="7"/>
+   <Parent id="5"/>
+  </Object>
+  <Data id="9" type="double">-7.76602</Data>
+  <Object id="10" type="FixedPoint">
+   <Parent id="9"/>
+   <Parent id="6"/>
+  </Object>
+  <Object id="11" type="SegmentAB">
+   <Parent id="10"/>
+   <Parent id="8"/>
+  </Object>
+  <Data id="12" type="int">1</Data>
+  <Data id="13" type="double">5.68244</Data>
+  <Data id="14" type="int">1</Data>
+  <Data id="15" type="double">-5.43135</Data>
+  <Object id="16" type="FixedPoint">
+   <Parent id="15"/>
+   <Parent id="13"/>
+  </Object>
+  <Object id="17" type="SegmentAB">
+   <Parent id="16"/>
+   <Parent id="10"/>
+  </Object>
+  <Object id="18" type="SegmentAB">
+   <Parent id="16"/>
+   <Parent id="8"/>
+  </Object>
+  <Object id="19" type="CircleBTP">
+   <Parent id="16"/>
+   <Parent id="10"/>
+   <Parent id="8"/>
+  </Object>
+  <Property which="center" id="20">
+   <Parent id="19"/>
+  </Property>
+  <Object id="21" type="LinePerpend">
+   <Parent id="17"/>
+   <Parent id="20"/>
+  </Object>
+  <Object id="22" type="ConicLineIntersection">
+   <Parent id="19"/>
+   <Parent id="21"/>
+   <Parent id="1"/>
+  </Object>
+  <Object id="23" type="LinePerpend">
+   <Parent id="21"/>
+   <Parent id="22"/>
+  </Object>
+  <Object id="24" type="ConicLineIntersection">
+   <Parent id="19"/>
+   <Parent id="21"/>
+   <Parent id="2"/>
+  </Object>
+  <Object id="25" type="LinePerpend">
+   <Parent id="18"/>
+   <Parent id="20"/>
+  </Object>
+  <Object id="26" type="ConicLineIntersection">
+   <Parent id="19"/>
+   <Parent id="25"/>
+   <Parent id="12"/>
+  </Object>
+  <Object id="27" type="ConicLineIntersection">
+   <Parent id="19"/>
+   <Parent id="25"/>
+   <Parent id="4"/>
+  </Object>
+  <Object id="28" type="LinePerpend">
+   <Parent id="25"/>
+   <Parent id="27"/>
+  </Object>
+  <Object id="29" type="LineLineIntersection">
+   <Parent id="23"/>
+   <Parent id="28"/>
+  </Object>
+  <Object id="30" type="LineAB">
+   <Parent id="16"/>
+   <Parent id="29"/>
+  </Object>
+  <Object id="31" type="LinePerpend">
+   <Parent id="11"/>
+   <Parent id="20"/>
+  </Object>
+  <Object id="32" type="ConicLineIntersection">
+   <Parent id="19"/>
+   <Parent id="31"/>
+   <Parent id="14"/>
+  </Object>
+  <Object id="33" type="LinePerpend">
+   <Parent id="31"/>
+   <Parent id="32"/>
+  </Object>
+  <Object id="34" type="LineLineIntersection">
+   <Parent id="33"/>
+   <Parent id="23"/>
+  </Object>
+  <Object id="35" type="LineAB">
+   <Parent id="10"/>
+   <Parent id="34"/>
+  </Object>
+  <Object id="36" type="LineLineIntersection">
+   <Parent id="33"/>
+   <Parent id="28"/>
+  </Object>
+  <Object id="37" type="LineAB">
+   <Parent id="8"/>
+   <Parent id="36"/>
+  </Object>
+  <Object id="38" type="LineLineIntersection">
+   <Parent id="37"/>
+   <Parent id="35"/>
+  </Object>
+  <Object id="39" type="ConicLineIntersection">
+   <Parent id="19"/>
+   <Parent id="31"/>
+   <Parent id="3"/>
+  </Object>
+ </Hierarchy>
+ <View>
+  <Draw object="18" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="21" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="16" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="10" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="33" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="20" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="23" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="27" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="19" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="32" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="39" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="30" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="17" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="24" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="26" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="35" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="22" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="37" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="28" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="8" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="34" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="25" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="38" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="31" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="29" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="11" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+  <Draw object="36" color="#0000ff" shown="true" namecalcer="none" style="SolidLine" font="Cantarell,10,-1,5,50,0,0,0,0,0" point-style="Round" width="-1"/>
+ </View>
+</KigDocument>

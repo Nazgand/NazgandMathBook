@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="index">
+  <titlepage>
+    <author>
+      <personname>Nazgand</personname>
+      <email>Nazgand@Gmail.Com</email>
+    </author>
+    <date>
+      <today/>
+    </date>
+  </titlepage>
+  <colophon xml:id="front-colophon">
+    <website>
+      <name>
+        <c>Nazgand's GitHub</c>
+      </name>
+      <address>https://GitHub.Com/Nazgand/</address>
+    </website>
+    <website>
+      <name>
+        <c>Nazgand's Facebook</c>
+      </name>
+      <address>https://FaceBook.Com/Mark.Gerads.50</address>
+    </website>
+    <copyright>
+      <year>1991<ndash/>2026</year>
+      <holder>Nazgand</holder>
+      <minilicense>CC0 1.0 Universal</minilicense>
+    </copyright>
+  </colophon>
+  <!-- A section of its own in HTML, migrates to copyright-page in LaTeX -->
+  <!-- Titles are optional, presumably none for single author,           -->
+  <!-- or for every author, even if we test a mix here                   -->
+  <biography xml:id="author-bio-Nazgand">
+    <p>Was born 1991-08-25 as Mark Andrew Gerads. Learned Microsoft QBasic age 8. Enjoyed mathematics. Chose the name Nazgand for the game Runescape.</p>
+  </biography>
+  <acknowledgement xml:id="acknowledgement">
+    <p>I acknowledge the existence of the following.<ul><li><p>Computers</p></li><li><p>The Internet</p></li><li><p>Linux</p></li><li><p>Books</p></li><li><p>The MathBook XML project</p></li></ul></p>
+  </acknowledgement>
+  <preface xml:id="preface">
+    <p>This text is meant to eventually contain all interesting maths(or uninteresting maths which interesting maths depend on) learned by Nazgand(also known as Mark Andrew Gerads).</p>
+    <p>This text is based on https://github.com/rbeezer/mathbook/tree/dev/examples/sample-book .</p>
+  </preface>
+</frontmatter>

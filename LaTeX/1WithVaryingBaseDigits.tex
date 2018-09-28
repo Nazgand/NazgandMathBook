@@ -1,0 +1,42 @@
+\input{NazgandStyle}
+\title{
+	1 With Varying Base Digits
+}
+\begin{document}
+	
+	\maketitle
+	
+	Let exist a sequence \(a_k\in\mathbb{Z},a_k>1\). Then
+	\begin{equation}
+		1=\sum_{k\in\mathbb{Z}_{>0}}\frac{a_k-1}{\prod_{m=1}^{k}a_m}
+		=\sum_{k=1}^{\infty}\frac{a_k-1}{\prod_{m=1}^{k}a_m}
+	\end{equation}
+
+	This can be seen via the limit \(j\to\infty\) in the following equation.
+	\begin{equation}
+	1-\prod_{m=1}^{j}a_m^{-1}=
+	\sum_{k=1}^{j}\frac{a_k-1}{\prod_{m=1}^{k}a_m}
+	\end{equation}
+	
+	Proof of previous equation by induction: For the base case, \(j=0\), we have \(1-1=0\).
+	For the inductive step, we can simply prove
+	\begin{equation}
+		\pqty{1-\prod_{m=1}^{j+1}a_m^{-1}}-\pqty{1-\prod_{m=1}^{j}a_m^{-1}}=
+		\pqty{\sum_{k=1}^{j+1}\frac{a_k-1}{\prod_{m=1}^{k}a_m}}-
+		\pqty{\sum_{k=1}^{j}\frac{a_k-1}{\prod_{m=1}^{k}a_m}}
+	\end{equation}
+	
+	Simplify both sides to get:
+	\begin{equation}
+		\prod_{m=1}^{j}a_m^{-1}-\prod_{m=1}^{j+1}a_m^{-1}
+		=\sum_{k=j+1}^{j+1}\frac{a_k-1}{\prod_{m=1}^{k}a_m}
+		=\frac{a_{j+1}-1}{\prod_{m=1}^{j+1}a_m}
+	\end{equation}
+
+	Multiply both sides by \(\prod_{m=1}^{j+1}a_m\):
+	\begin{equation}
+		a_{j+1}-1=a_{j+1}-1
+	\end{equation}
+	\qed
+
+\end{document}

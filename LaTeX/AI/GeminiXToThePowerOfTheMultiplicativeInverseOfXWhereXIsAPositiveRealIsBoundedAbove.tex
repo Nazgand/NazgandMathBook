@@ -1,0 +1,65 @@
+\input{../NazgandStyle}
+\title{Proof of \(x^{\frac{1}{x}} \leq e^{\frac{1}{e}}\) for \(x > 0\)}
+\author{Gemini 2.0 Flash Experimental}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		We provide a complete proof that for any positive real number \(x\), the inequality \(x^{\frac{1}{x}} \leq e^{\frac{1}{e}}\) holds. This is achieved by analyzing the natural logarithm of the function \(g\pqty{x} = x^{\frac{1}{x}}\), demonstrating that its maximum occurs at \(x=e\).
+	\end{abstract}
+	
+	\section{Introduction}
+	
+	The inequality \(x^{\frac{1}{x}} \leq e^{\frac{1}{e}}\) for \(x > 0\) is a well-known result. Our approach involves examining the function \(g\pqty{x} = x^{\frac{1}{x}}\). Since the natural logarithm is a strictly increasing function, finding the maximum of \(\ln(g\pqty{x})\) is equivalent to finding the maximum of \(g\pqty{x}\). This simplification makes the analysis considerably easier.
+	
+	\section{Proof}
+	
+	Let \(g\pqty{x} = x^{\frac{1}{x}}\) for \(x > 0\). We define \(f\pqty{x} = \ln(g\pqty{x})\):
+	
+	\[f\pqty{x} = \ln\pqty{x^{\frac{1}{x}}} = \frac{1}{x} \ln x = \frac{\ln x}{x}\]
+	
+	Our goal is to find the maximum of \(f\pqty{x}\). Since the natural logarithm is a monotonically increasing function, the \(x\) value at which \(f\pqty{x}\) attains its maximum will be the same \(x\) value at which \(g\pqty{x}\) attains its maximum.
+	
+	To find the maximum of \(f\pqty{x}\), we compute its first derivative:
+	
+	\[f'\pqty{x} = \frac{\frac{1}{x} \cdot x - \ln x \cdot 1}{x^2} = \frac{1 - \ln x}{x^2}\]
+	
+	We find the critical points by setting \(f'\pqty{x} = 0\):
+	
+	\[\frac{1 - \ln x}{x^2} = 0\]
+	
+	Since \(x^2 > 0\) for \(x > 0\), this is equivalent to:
+	
+	\[1 - \ln x = 0\]
+	\[\ln x = 1\]
+	\[x = e\]
+	
+	Now, we use the second derivative test to determine if this critical point corresponds to a maximum or minimum. We calculate the second derivative of \(f\pqty{x}\):
+	
+	\[f''\pqty{x} = \frac{-\frac{1}{x} \cdot x^2 - \pqty{1 - \ln x} \cdot 2x}{x^4} = \frac{-x - 2x + 2x \ln x}{x^4} = \frac{-3x + 2x \ln x}{x^4} = \frac{-3 + 2 \ln x}{x^3}\]
+	
+	We evaluate the second derivative at \(x = e\):
+	
+	\[f''\pqty{e} = \frac{-3 + 2 \ln e}{e^3} = \frac{-3 + 2}{e^3} = \frac{-1}{e^3}\]
+	
+	Since \(f''\pqty{e} < 0\), the function \(f\pqty{x}\) has a local maximum at \(x = e\).
+	
+	Because \(f'\pqty{x} > 0\) for \(0 < x < e\) and \(f'\pqty{x} < 0\) for \(x > e\), \(f\pqty{x}\) is increasing on \(\pqty{0, e}\) and decreasing on \(\pqty{e, \infty}\). Thus, the local maximum at \(x=e\) is a global maximum.
+	
+	The maximum value of \(f\pqty{x}\) is:
+	
+	\[f\pqty{e} = \frac{\ln e}{e} = \frac{1}{e}\]
+	
+	Since the maximum of \(f\pqty{x} = \ln(g\pqty{x})\) occurs at \(x=e\), the maximum of \(g\pqty{x} = x^{\frac{1}{x}}\) also occurs at \(x=e\). The maximum value of \(g\pqty{x}\) is:
+	
+	\[g\pqty{e} = e^{\frac{1}{e}}\]
+	
+	Therefore, for all \(x > 0\):
+	
+	\[g\pqty{x} = x^{\frac{1}{x}} \leq e^{\frac{1}{e}}\]
+	
+	This completes the proof.
+	
+\end{document}

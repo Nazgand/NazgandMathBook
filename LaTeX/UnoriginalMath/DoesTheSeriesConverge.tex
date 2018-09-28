@@ -1,0 +1,126 @@
+\input{../NazgandStyle}
+\title{
+	Does the Series Converge?
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Problem -2}
+	Given [a function from [the natural numbers] to [the real numbers]] which is [inclusively bounded in magnitude by 1], i.e.
+	\begin{equation}
+		\exists f_1:\mathbb{Z}_{\geq 0}\to\mathbb{R},
+		\bqty{\forall k\in\mathbb{Z}_{\geq 0}, \abs{f_1\pqty{k}}\leq 1}
+	\end{equation}
+	and [a positive real number smaller than 1], i.e.
+	\begin{equation}
+		\exists r\in\mathbb{R}^+,
+		r<1
+	\end{equation}
+	, prove
+	\begin{equation}
+		\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=0}^m{f_1\pqty{k}}r^k}
+		\in\mathbb{R}
+	\end{equation}
+	Solution: Note
+	\begin{equation}
+		\forall n\in\mathbb{Z}_{\geq 0},\bqty{
+			\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=0}^m{f_1\pqty{k}}r^k}
+			\in\mathbb{R}
+			\Leftrightarrow
+			\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=n}^m{f_1\pqty{k}}r^k}
+			\in\mathbb{R}
+		}
+	\end{equation}
+	and
+	\begin{equation}
+		-\frac{r^n-r^{m+1}}{1-r}=-\sum_{k=n}^m r^k\leq\sum_{k=n}^m{f_1\pqty{k}}r^k\leq\sum_{k=n}^m r^k=\frac{r^n-r^{m+1}}{1-r}
+	\end{equation}
+	First, let \(m\to\infty\).
+	\begin{equation}
+		-\frac{r^n}{1-r}\leq\lim\limits_{m\to\infty}\sum_{k=n}^m{f_1\pqty{k}}r^k\leq\frac{r^n}{1-r}
+	\end{equation}
+	Then let \(n\to\infty\) to observe the Squeeze Theorem.
+	\begin{equation}
+		0\leq\lim\limits_{n\to\infty}\lim\limits_{m\to\infty}\sum_{k=n}^m{f_1\pqty{k}}r^k\leq 0
+	\end{equation}
+
+	\section{Problem -1}
+	Given [a function from [the natural numbers] to [the complex numbers]] which is [inclusively bounded in magnitude by 1], i.e.
+	\begin{equation}
+		\exists f_1:\mathbb{Z}_{\geq 0}\to\mathbb{C},
+		\bqty{\forall k\in\mathbb{Z}_{\geq 0}, \abs{f_1\pqty{k}}\leq 1}
+	\end{equation}
+	and [a complex number smaller than 1 in magnitude], i.e.
+	\begin{equation}
+		\exists r\in\mathbb{C},
+		\abs{r}<1
+	\end{equation}
+	, prove
+	\begin{equation}
+		\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=0}^m{f_1\pqty{k}}r^k}
+		\in\mathbb{C}
+	\end{equation}
+	Without loss of generality, we can set \(r=\abs{r}\), as seen by the substitutions
+	\(f_1\pqty{k}\to f_1\pqty{k}\frac{r^k}{\abs{r}^k}, r\to\abs{r}\).
+	The case \(r=0\) is trivial, so let \(r\in\mathbb{R},0<r<1\).
+	The relevant Cauchy series can be split into 2 Cauchy series for the imaginary and real parts; [the complex limit can be proved to exist] by [proving the existence of the \{real, imaginary\} parts]; thus, the problem  is reduced to [Problem -2]
+	
+	\section{Problem 0}
+	Given [a function from [the natural numbers] to [the complex numbers]] which is [exponentially bounded in magnitude], i.e.
+	\begin{equation}
+		\exists f_a:\mathbb{Z}_{\geq 0}\to\mathbb{C},
+		\exists a\in\mathbb{R},
+		\bqty{\forall k\in\mathbb{Z}_{\geq 0},
+		a^{k+1}\geq\abs{f_a\pqty{k}}}
+	\end{equation}
+	, and
+	\begin{equation}
+		\exists t\in\mathbb{R}^+
+	\end{equation}
+	, prove:
+	\begin{equation}
+		\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=0}^m\frac{f_a\pqty{k}}{\pqty{k!}^t}}
+		\in\mathbb{C}
+	\end{equation}
+	This sum 'obviously' converges via \(\bqty{\forall b\in\mathbb{R}^+,\mathcal{O}\pqty{\pqty{k!}^t}>\mathcal{O}\pqty{b^k}}\), \(\mathcal{O}\pqty{a^k}\geq\mathcal{O}\pqty{\abs{f_a\pqty{k}}}\). We must be more rigorous than that to build a solid foundation.
+	A good first step is to notice
+	\begin{equation}
+		\forall K\in\mathbb{Z}_{\geq 0},
+		\bqty{\bqty{\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=0}^m\frac{f_a\pqty{k}}{\pqty{k!}^t}}
+		\in\mathbb{C}}
+		\Leftrightarrow
+		\bqty{\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=K}^m\frac{f_a\pqty{k}}{\pqty{k!}^t}}
+		\in\mathbb{C}}}
+	\end{equation}
+	and let \(K\) be sufficiently large so that \(\frac{\pqty{\pqty{K+1}!}^t}{\pqty{K!}^t}>a\), i.e. \(K>\sqrt[t]{a}-1\). Then this problem reduces to [Problem -1].
+
+	\section{Problem 1}
+	Given [a function from [the natural numbers] to [the complex numbers]] which is [exponentially bounded in magnitude], i.e.
+	\begin{equation}
+		\exists f_b:\mathbb{Z}_{\geq 0}\to\mathbb{C},
+		\exists b\in\mathbb{R},
+		\bqty{\forall k\in\mathbb{Z}_{\geq 0},
+			b^{k+1}\geq\abs{f_b\pqty{k}}}
+	\end{equation}
+	, and
+	\begin{equation}
+		\exists t\in\mathbb{R}^+,
+		\exists z\in\mathbb{C}
+	\end{equation}
+	, prove:
+	\begin{equation}
+		\exists \bqty{\lim\limits_{m\to\infty}\sum_{k=0}^m\frac{f_b\pqty{k}z^k}{\pqty{k!}^t}}
+		\in\mathbb{C}
+	\end{equation}
+	Solution: Let \(f_a\pqty{k}=f_b\pqty{k}z^k,a\geq b\abs{z}\), and note
+	\begin{equation}
+		\bqty{\forall k\in\mathbb{Z}_{\geq 0},
+			b^{k+1}\geq\abs{f_b\pqty{k}}}
+		\Rightarrow
+		\bqty{\forall k\in\mathbb{Z}_{\geq 0},
+			a^{k+1}\geq\abs{f_a\pqty{k}}}
+	\end{equation}
+	Thus [Problem 1] has been reduced to [Problem 0].
+
+\end{document}

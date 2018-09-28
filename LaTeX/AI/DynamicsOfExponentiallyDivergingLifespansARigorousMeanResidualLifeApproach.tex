@@ -1,0 +1,172 @@
+\input{../NazgandStyle}
+\title{
+	Gamma Function
+}
+\title{\textbf{Dynamics of Exponentially Diverging Lifespans: \\ A Rigorous Mean Residual Life Approach}}
+\author{Gemini (in collaboration with Project Choiceness)}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		We analyze a mortality model where the expected age at death increases exponentially with current age. We explicitly model time in seconds to ensure rigorous unit consistency. Starting from fundamental definitions of the Survival Function and Probability Density Function, we derive the governing differential equation linking Mean Residual Life (MRL) to the Hazard Rate. We explicitly derive the Hazard Rate and Survival Function for this specific model. We identify a critical condition required for the hazard rate to remain finite for all time (Singularity Avoidance). Finally, we prove that despite the exponentially growing lifespan potential, the probability of living forever is zero.
+	\end{abstract}
+	
+	\section{Problem Statement}
+	
+	Let \(T\) be a non-negative continuous random variable representing the age of a person at death in \textbf{seconds}.
+	Let \(x \ge 0\) represent the current age of the person in seconds.
+	Let \(\beta > 1\) be the exponential base (growth factor per second).
+	Let \(E_0\) be the initial expected age at death at time \(x=0\) (in seconds).
+	
+	The governing constraint is defined by the conditional expectation of the total age at death:
+	\begin{equation}
+		\mathbb{E}\bqty{T \mid T > x} = E_0 \beta^x
+	\end{equation}
+	This value is assumed to be finite for every finite \(x\). Our objective is to determine the Survival Function \(S\pqty{x}\) and Probability Density Function (PDF) \(f\pqty{x}\).
+	
+	\section{Fundamental Definitions}
+	
+	To maximize rigor and intuition, we define the core functions of survival analysis in the following order:
+	
+	\begin{enumerate}
+		\item \textbf{Survival Function:} 
+		\[S\pqty{x} = P\pqty{T > x}\]
+		We assume \(S\pqty{x}\) is absolutely continuous, with \(S\pqty{0}=1\) and \(\lim_{x \to \infty} S\pqty{x} = 0\).
+		
+		\item \textbf{Probability Density Function (PDF):}
+		Defined explicitly using the Survival Function:
+		\begin{equation}
+			f\pqty{x} = -\frac{d}{dx} S\pqty{x}
+		\end{equation}
+		
+		\item \textbf{Hazard Rate:}
+		Defined intuitively as the ratio of the PDF to the Survival Function (the conditional probability density of death given survival to \(x\)):
+		\begin{equation}
+			\lambda\pqty{x} = \frac{f\pqty{x}}{S\pqty{x}}
+		\end{equation}
+		Substituting the definition of \(f\pqty{x}\), we relate this to the logarithmic derivative:
+		\begin{equation}
+			\lambda\pqty{x} = \frac{-S'\pqty{x}}{S\pqty{x}} = -\frac{d}{dx} \ln S\pqty{x}
+		\end{equation}
+		
+		\item \textbf{Mean Residual Life (MRL):}
+		The expected remaining life given survival to age \(x\):
+		\begin{equation}
+			\mu\pqty{x} = \mathbb{E}\bqty{T - x \mid T > x} = \frac{1}{S\pqty{x}} \dint{x}{\infty}{S\pqty{t}}{t}
+		\end{equation}
+	\end{enumerate}
+	
+	\section{Derivation of the Model from First Principles}
+	
+	We do not assume the inversion formula; we derive it.
+	From the MRL definition (Eq. 5), we write the integral equation:
+	\begin{equation}
+		\mu\pqty{x} S\pqty{x} = \dint{x}{\infty}{S\pqty{t}}{t}
+	\end{equation}
+	Differentiating both sides with respect to \(x\) (applying the Fundamental Theorem of Calculus to the right side):
+	\begin{align*}
+		\frac{d}{dx} \bqty{\mu\pqty{x} S\pqty{x}} &= \frac{d}{dx} \dint{x}{\infty}{S\pqty{t}}{t} \\
+		\mu'\pqty{x} S\pqty{x} + \mu\pqty{x} S'\pqty{x} &= -S\pqty{x}
+	\end{align*}
+	We now solve for the quotient \(-S'\pqty{x}/S\pqty{x}\), which is the definition of the Hazard Rate \(\lambda\pqty{x}\):
+	\begin{align*}
+		\mu\pqty{x} S'\pqty{x} &= -S\pqty{x} - \mu'\pqty{x} S\pqty{x} \\
+		\mu\pqty{x} S'\pqty{x} &= -S\pqty{x} \bqty{1 + \mu'\pqty{x}} \\
+		-\frac{S'\pqty{x}}{S\pqty{x}} &= \frac{1 + \mu'\pqty{x}}{\mu\pqty{x}}
+	\end{align*}
+	Thus, we establish the fundamental link between MRL and Hazard:
+	\begin{equation}
+		\lambda\pqty{x} = \frac{1 + \mu'\pqty{x}}{\mu\pqty{x}}
+	\end{equation}
+	
+	\subsection{Derivation of the Survival Function (Inversion Formula)}
+	Using \(\lambda\pqty{x} = -\frac{d}{dx} \ln S\pqty{x}\), we integrate Eq. (7) from \(0\) to \(x\):
+	\begin{align*}
+		\ln S\pqty{x} - \ln S\pqty{0} &= - \dint{0}{x}{\frac{1 + \mu'\pqty{t}}{\mu\pqty{t}}}{t} \\
+		\ln S\pqty{x} &= - \dint{0}{x}{\pqty{\frac{1}{\mu\pqty{t}} + \frac{\mu'\pqty{t}}{\mu\pqty{t}}}}{t} \\
+		\ln S\pqty{x} &= - \dint{0}{x}{\frac{1}{\mu\pqty{t}}}{t} - \bqty{\ln \mu\pqty{t}}_0^x \\
+		\ln S\pqty{x} &= - \dint{0}{x}{\frac{1}{\mu\pqty{t}}}{t} - (\ln \mu\pqty{x} - \ln \mu\pqty{0})
+	\end{align*}
+	Exponentiating both sides yields the inversion formula:
+	\begin{equation}
+		S\pqty{x} = \frac{\mu\pqty{0}}{\mu\pqty{x}} \exp\pqty{- \dint{0}{x}{\frac{1}{\mu\pqty{t}}}{t}}
+	\end{equation}
+	
+	\section{Application to the Exponential Model}
+	
+	We now apply these general results to the specific constraint:
+	\begin{equation}
+		\mathbb{E}\bqty{T \mid T > x} = x + \mu\pqty{x} = E_0 \beta^x \Rightarrow \mu\pqty{x} = E_0 \beta^x - x
+	\end{equation}
+	
+	\subsection{The Hazard Rate}
+	Differentiating \(\mu\pqty{x}\):
+	\[\mu'\pqty{x} = E_0 \beta^x \ln \beta - 1\]
+	Substituting into Eq. (7):
+	\begin{equation}
+		\lambda\pqty{x} = \frac{1 + \pqty{E_0 \beta^x \ln \beta - 1}}{E_0 \beta^x - x} = \frac{E_0 \beta^x \ln \beta}{E_0 \beta^x - x}
+	\end{equation}
+	\textbf{Asymptotic Behavior:}
+	We analyze the limit as \(x \to \infty\):
+	\[\lim_{x \to \infty} \lambda\pqty{x} = \lim_{x \to \infty} \frac{\ln \beta}{1 - \frac{x}{E_0 \beta^x}} = \ln \beta\]
+	Since the hazard rate converges to a positive constant, the survival function must exhibit exponential tail decay.
+	
+	\subsection{The Survival Function}
+	Substituting \(\mu\pqty{x}\) into Eq. (8):
+	\begin{equation}
+		S\pqty{x} = \frac{E_0}{E_0 \beta^x - x} \exp\pqty{- \dint{0}{x}{\frac{1}{E_0 \beta^t - t}}{t}}
+	\end{equation}
+	
+	\subsection{The Probability Density Function}
+	Using the definition \(f\pqty{x} = S\pqty{x}\lambda\pqty{x}\):
+	\begin{equation}
+		f\pqty{x} = \bqty{\frac{E_0}{E_0 \beta^x - x} \exp\pqty{- \dint{0}{x}{\frac{1}{E_0 \beta^t - t}}{t}}} \cdot \bqty{\frac{E_0 \beta^x \ln \beta}{E_0 \beta^x - x}}
+	\end{equation}
+	Simplifying:
+	\begin{equation}
+		f\pqty{x} = \frac{E_0^2 \beta^x \ln \beta}{\pqty{E_0 \beta^x - x}^2} \exp\pqty{- \dint{0}{x}{\frac{1}{E_0 \beta^t - t}}{t}}
+	\end{equation}
+	
+	\section{Validity and Asymptotic Constraints}
+	
+	\subsection{Condition for Finite Hazard (Singularity Avoidance)}
+	For the hazard rate (Eq. 10) to be well-defined (finite) for all \(x \ge 0\), the denominator \(\mu\pqty{x}\) must remain strictly positive. If \(\mu\pqty{x}\) touches zero, \(\lambda\pqty{x} \to \infty\), implying a deterministic maximum lifespan.
+	The minimum of \(\mu\pqty{x}\) occurs where \(\mu'\pqty{x}=0\), which implies \(\beta^x = \frac{1}{E_0 \ln \beta}\).
+	Evaluating \(\mu\pqty{x}\) at this critical point yields the condition:
+	\begin{equation}
+		E_0 \ln \beta > \frac{1}{e}
+	\end{equation}
+	If this condition holds, \(\lambda\pqty{x}\) is finite for all \(x\). This ensures that death is not forced at any finite age.
+	
+	\subsection{Proof of Almost Certain Mortality}
+	We analyze whether the probability of infinite life is non-zero.
+	Let \(I\pqty{x} = \dint{0}{x}{\frac{1}{\mu\pqty{t}}}{t}\).
+	For large \(t\), \(\mu\pqty{t}\) is asymptotically equivalent to \(E_0 \beta^t\) (i.e., \(\mu\pqty{t}/E_0 \beta^t \to 1\)).
+	We split the integral at a large \(M\):
+	\[I\pqty{x} = \dint{0}{M}{\frac{1}{\mu\pqty{t}}}{t} + \dint{M}{x}{\frac{1}{\mu\pqty{t}}}{t}\]
+	The second term behaves as \(\dint{}{}{\beta^{-t}}{t}\), which converges to a finite constant as \(x \to \infty\). Thus, \(\lim_{x \to \infty} I\pqty{x} = K < \infty\).
+	The survival function behaves as:
+	\[S\pqty{x} = \frac{E_0}{\mu\pqty{x}} e^{-I\pqty{x}}\]
+	As \(x \to \infty\):
+	
+	1. The exponential term \(e^{-I\pqty{x}} \to e^{-K} > 0\).
+	
+	2. The prefactor \(\frac{E_0}{\mu\pqty{x}} \to 0\) (decaying as \(\beta^{-x}\)).
+	
+	Therefore, \(\lim_{x \to \infty} S\pqty{x} = 0\).
+	
+	\textbf{Theorem:} Under the specific constraint \(\mathbb{E}\bqty{T \mid T > x} = E_0 \beta^x\) (assuming \(E_0 \ln \beta > 1/e\)), the hazard rate is valid and finite for all time, but the probability of death is 1. The survival probability decays asymptotically as \(\beta^{-x}\).
+	
+	\section{Summary}
+	
+	\begin{enumerate}
+		\item \textbf{PDF Definition:} \(f\pqty{x} = -S'\pqty{x}\).
+		\item \textbf{Hazard Definition:} \(\lambda\pqty{x} = f\pqty{x}/S\pqty{x} = (1+\mu'\pqty{x})/\mu\pqty{x}\).
+		\item \textbf{Derived Hazard:} \(\lambda\pqty{x} = \frac{E_0 \beta^x \ln \beta}{E_0 \beta^x - x}\).
+		\item \textbf{Derived Survival:} \(S\pqty{x} = \frac{E_0}{E_0 \beta^x - x} \exp \pqty{- \dint{0}{x}{\frac{1}{E_0 \beta^t - t}}{t}}\).
+		\item \textbf{Conclusion:} Lifespan potential is unbounded (no finite wall of death), but death is almost certain.
+	\end{enumerate}
+	
+\end{document}

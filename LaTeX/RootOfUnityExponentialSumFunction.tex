@@ -1,0 +1,417 @@
+\input{NazgandStyle}
+\DeclareMathOperator{\ez}{Ez}
+\DeclareMathOperator{\GeneralSplit}{gs}
+\title{
+	Root Of Unity Exponential Sum Function Related To
+	
+	Generalized Split-complex Numbers
+}
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to analyze a class of functions which are equal to their own \(n\)th derivative.
+	\end{abstract}
+	
+	\section{Exponential Sum Definition}
+	For the fundamental definition where \(n\in\mathbb{Z}_{>0}\land x\in\mathbb{C}\), define:
+	\begin{equation}
+	\label{Es fundamenta definition}
+	\rues_n\pqty{x}=
+	\sum_{k=0}^{\infty}\frac{x^{nk}}{\pqty{nk}!}
+	\end{equation}
+	
+	\section{Laplace inverse transform form}
+	\begin{theorem}
+		\begin{equation}
+		\rues_n\pqty{t}=
+		\laplaceInv{\frac{s^{n-1}}{s^n-1}}
+		\end{equation}
+		\begin{proof}
+		Equivalence is shown using the General derivative rule for Laplace transforms:
+		\begin{equation}
+			\label{Laplace General Derivatives}
+			\laplace{f^{\pqty{n}}\pqty{t}}=
+			s^n \laplace{f\pqty{t}} - \sum_{k=1}^{n} s^{n-k} f^{\pqty{k-1}}\pqty{0^{+}}
+		\end{equation}
+		
+		Substitute \(f\) with \(\rues_n^{\pqty{k}}\) in \eqref{Laplace General Derivatives}, use the derivatives provided by \eqref{Es fundamenta definition} to simplify noting \(\md\pqty{-m,n}=\md\pqty{k-1,n}\) is the only surviving summand:
+		\begin{equation}
+			\laplace{\rues_n^{\pqty{m}}\pqty{t}}=
+			\laplace{\rues_n^{\pqty{m+n}}\pqty{t}}=
+			s^n\laplace{\rues_n^{\pqty{m}}\pqty{t}}-s^{\md\pqty{m-1,n}}
+		\end{equation}
+		
+		Solve:
+		\begin{equation}
+			\laplace{\rues_n^{\pqty{m}}\pqty{t}}=
+			\frac{s^{\md\pqty{m-1,n}}}{s^n-1}
+		\end{equation}
+		\end{proof}
+	\end{theorem}
+	
+	\section{As a sum of exponential functions}
+	The reason this function is named \(\rues\) is because it is a Root of Unity Exponential Sum function.
+	\begin{theorem}
+		\begin{equation}
+		\label{Es Exponential sum form}
+		\rues_n\pqty{x}=
+		\frac{1}{n}\sum _{k=1}^n \exp\pqty{xe^{2ki\pi/n}}
+		\end{equation}
+		\begin{proof}
+		Proof of equivalence to \eqref{Es fundamenta definition} via Taylor series:
+		\begin{equation}
+			\sum _{k=1}^n \exp\pqty{xe^{2ki\pi/n}}
+			=
+			\sum _{k=1}^n \sum _{j=0}^\infty e^{2jki\pi/n}\frac{x^j}{j!}
+			=
+			\sum _{j=0}^\infty \frac{x^j}{j!} \sum _{k=1}^n e^{2jki\pi/n}
+			=
+			\sum_{m=0}^{\infty}\frac{nx^{nm}}{\pqty{nm}!}
+		\end{equation}
+		\end{proof}
+	\end{theorem}
+	
+	\section{Real formulae derived from \eqref{Es Exponential sum form}}
+	This section exploits this fact:
+	\begin{equation}
+	\exp\pqty{xe^{iy}}+\exp\pqty{xe^{-iy}}
+	=
+	2e^{x\cos\pqty{y}} \cos\pqty{x\sin\pqty{y}}
+	\end{equation}
+	Thus:
+	\begin{equation}
+	\label{Es trig sum form 1}
+	\rues_n\pqty{x}
+	=
+	\frac{1}{n}\pqty{
+		e^x+e^{-x}\frac{1+\cos\pqty{\pi n}}{2} 
+		+2\sum _{k=1}^{\lceil n/2\rceil-1}e^{x\cos\pqty{\frac{2k\pi}{n}}} \cos\pqty{x\sin\pqty{\frac{2k\pi}{n}}}
+	}
+	\end{equation}
+	And:
+	\begin{equation}
+	\rues_n\pqty{xe^{i\pi/n}}
+	=
+	\frac{1}{n}\pqty{
+		e^{-x}\frac{1-\cos\pqty{\pi n}}{2}
+		+2\sum _{k=1}^{\lfloor n/2\rfloor}e^{x\cos\pqty{\frac{2k-1}{n}\pi}} \cos\pqty{x\sin\pqty{\frac{2k-1}{n}\pi}}
+	}
+	\end{equation}
+	
+	\section{other}
+	Notable values of \(n\):
+	\begin{equation}
+	\rues_1\pqty{x}=e^x\land\rues_2\pqty{x}=\cosh\pqty{x}\land\rues_4\pqty{x}=\cosh\pqty{\frac{x}{1+i}}\cosh\pqty{\frac{x}{1-i}}
+	\end{equation}
+	
+	Complex rotation property:
+	\begin{equation}
+	\rues_n^{\pqty{k}}\pqty{x}=
+	\rues_n^{\pqty{k}}\pqty{x*e^{2i\pi/n}}e^{2ki\pi/n}
+	\end{equation}
+	
+	Derivative sum rules:
+	\begin{equation}
+	e^x=\sum_{k=0}^{n-1}\rues_n^{\pqty{k}}\pqty{x}\land\rues_n\pqty{x}=\sum_{k=0}^{m-1}\rues_{nm}^{\pqty{kn}}\pqty{x}
+	\end{equation}
+	
+	\begin{equation}
+	\rues_m\pqty{x}=
+	\frac{1}{m}
+	\sum_{k=1}^{n}\sum_{j=1}^{m}\rues_n^{\pqty{k}}\pqty{x\exp\pqty{\frac{2 i \pi j}{m}}}
+	\end{equation}
+	
+	\begin{theorem}[Argument sum rule]
+		\begin{equation}
+		\label{EsArgSumRule}
+		\rues_n\pqty{x+y}=
+		\sum_{k=0}^{n-1}
+		\rues_n^{\pqty{k}}\pqty{x}
+		\rues_n^{\pqty{n-k}}\pqty{y}
+		\end{equation}
+		\begin{proof}
+		\begin{equation}
+			e^{x+y}=\sum_{k=0}^{n-1}\sum_{j=0}^{n-1}\rues_n^{\pqty{k}}\pqty{x}\rues_n^{\pqty{j}}\pqty{y}
+		\end{equation}
+		
+		\begin{equation}
+			\rues_n\pqty{x+y}=
+			\frac{1}{n}\sum _{l=1}^n \sum_{k=0}^{n-1}\sum_{j=0}^{n-1}
+			\rues_n^{\pqty{k}}\pqty{x\exp\pqty{\frac{2 i \pi  l}{n}}}
+			\rues_n^{\pqty{j}}\pqty{y\exp\pqty{\frac{2 i \pi  l}{n}}}
+		\end{equation}
+		
+		\begin{equation}
+			\rues_n\pqty{x+y}=
+			\frac{1}{n}\sum _{l=1}^n \sum_{k=0}^{n-1}\sum_{j=0}^{n-1}
+			\rues_n^{\pqty{k}}\pqty{x}
+			\rues_n^{\pqty{j}}\pqty{y}
+			\exp\pqty{\frac{-2\pqty{j+k} i \pi  l}{n}}
+		\end{equation}
+		
+		The \(l\) index cancels out all the terms where \(j+k\neq 0\).
+		\end{proof}
+	\end{theorem}
+
+	\begin{corollary}
+		\begin{equation}
+			\label{EsmArgSumRule}
+			\rues_n^{\pqty{m}}\pqty{x+y}=
+			\sum_{k=0}^{n-1}
+			\rues_n^{\pqty{m+k}}\pqty{x}
+			\rues_n^{\pqty{n-k}}\pqty{y}
+		\end{equation}
+		\begin{proof}
+		Differentiate \eqref{EsArgSumRule}
+		\end{proof}
+	\end{corollary}
+	
+	\begin{corollary}
+		\begin{equation}
+		\delta\pqty{\md\pqty{m,n}}=
+		\sum_{k=0}^{n-1}
+		\rues_n^{\pqty{m+k}}\pqty{x}
+		\rues_n^{\pqty{n-k}}\pqty{-x}
+		\end{equation}
+		\begin{proof}
+		Substituting \(y\to -x\) in \eqref{EsmArgSumRule} produces the equations analogous to \(\sin\pqty{x}^2 + \cos\pqty{x}^2=1\)
+		\end{proof}
+	\end{corollary}
+	
+	\section{Real and imaginary parts}
+	Using \eqref{Es Exponential sum form}
+	\begin{equation}
+	\Re\pqty{\rues_n\pqty{z}}=
+	\frac{1}{n}\sum _{k=1}^n \exp\pqty{ze^{2ki\pi/n}}\exp\pqty{ze^{2ki\pi/n}}
+	\end{equation}
+	
+	For \(n\geq 2\), arbitrary complex numbers many be decomposed as \(z=\Re\pqty{z}+e^{i\pi/n}\)
+	
+	\section{Weierstrass product conjecture}
+	This conjecture states all zeroes of \(\rues_n^{\pqty{m}}\) not on the origin are of degree 1 and are located on the critical rays \(e^{i\pi\pqty{1+2k}/n}, k\in\mathbb{Z}\).
+	The absolute values of the zeroes are denoted
+	\begin{equation}
+	\ez\pqty{n,m,1}=\min\Bqty{\rues_n^{\pqty{m}}\pqty{r*e^{i\pi/n}}\Big\vert r\in\mathbb{R}^+}
+	\end{equation}
+	\begin{equation}
+	\ez\pqty{n,m,k+1}=\min\Bqty{\rues_n^{\pqty{m}}\pqty{r*e^{i\pi/n}}\Big\vert r\in\mathbb{R}^+, r>\ez\pqty{n,m,k}}
+	\end{equation}
+	
+	Moreover, for \(n>1\),
+	\begin{equation}
+	\rues_n^{\pqty{m}}\pqty{z}=z^{\md\pqty{-m,n}}\prod_{k=1}^{\infty}\pqty{1+\pqty{\frac{z}{\ez\pqty{n,m,k}}}^n}
+	\end{equation}
+	
+	This conjecture is easily verifiable for \(\pqty{n,m}\in\Bqty{\pqty{2,0}, \pqty{2,1}, \pqty{4,0}}\).
+	
+	Work has been done in German to show this works for \(\rues_n\pqty{z}\).
+	
+	\href{https://math.stackexchange.com/questions/3221569/}{Mathematics Stack Exchange|All complex roots of \(\sum_{k=0}^\infty \frac{z^k}{\pqty{nk}!}\) are real}
+	
+	\subsection{Bounds on Complex Zeroes \(\rues_3\)}
+	Lemma
+	\begin{equation}
+	\cos\pqty{a+bi}=\cos\pqty{a}\cosh\pqty{b}-i\sin\pqty{a}\sinh\pqty{b}
+	\end{equation}
+	\begin{equation}
+	\abs{\cos\pqty{a+bi}} \leq \abs{\cos\pqty{a}\cosh\pqty{b}}+\abs{\sin\pqty{a}\sinh\pqty{b}}
+	\end{equation}
+	\begin{equation}
+	\abs{\cos\pqty{a+bi}} \leq \abs{\cosh\pqty{b}}+\abs{\sinh\pqty{b}}
+	= \cosh\pqty{\abs{b}}+{\sinh\pqty{\abs{b}}} = \exp\pqty{\abs{b}}
+	\end{equation}
+	\begin{equation}
+	\label{cos exp bound lemma}
+	\abs{\cos\pqty{a+bi}} \leq \exp\pqty{\abs{b}}
+	\end{equation}
+	A bound which supports this conjecture is attainable from \eqref{Es trig sum form 1}.
+	\begin{equation}
+	\rues_3\pqty{x}=
+	\frac{1}{3}\pqty{
+		e^x
+		+2e^{x\cos\pqty{\frac{2\pi}{3}}} \cos\pqty{x\sin\pqty{\frac{2\pi}{3}}}
+	}
+	\end{equation}
+	\begin{equation}
+	0=\rues_3\pqty{a+bi}=
+	\frac{1}{3}\pqty{
+		e^\pqty{a+bi}
+		+2e^{\pqty{a+bi}\cos\pqty{\frac{2\pi}{3}}} \cos\pqty{\pqty{a+bi}\sin\pqty{\frac{2\pi}{3}}}
+	}
+	\end{equation}
+	\begin{equation}
+	-e^\pqty{a+bi}=
+	2e^{\pqty{a+bi}\cos\pqty{\frac{2\pi}{3}}} \cos\pqty{\pqty{a+bi}\sin\pqty{\frac{2\pi}{3}}}
+	\end{equation}
+	Absolute value:
+	\begin{equation}
+	e^{a}=
+	2e^{{a}\cos\pqty{\frac{2\pi}{3}}} \abs{\cos\pqty{\pqty{a+bi}\sin\pqty{\frac{2\pi}{3}}}}
+	\end{equation}
+	\begin{equation}
+	\exp\pqty{\frac{3a}{2}}=
+	2 \abs{\cos\pqty{\pqty{a+bi}\sin\pqty{\frac{2\pi}{3}}}}
+	\end{equation}
+	Use lemma \eqref{cos exp bound lemma}:
+	\begin{equation}
+	\exp\pqty{\frac{3a}{2}} \leq
+	2 {\exp\pqty{\abs{b}\sin\pqty{\frac{2\pi}{3}}}}
+	\end{equation}
+	\begin{equation}
+	{\frac{3a}{2}} \leq
+	\ln{2}+ {\abs{b}\frac{\sqrt{3}}{2}}
+	\end{equation}
+	The last inequality carves out a sector of the complex plane where zeroes are not allowed. The symmetric properties of \(\rues_3\) restrict zeroes to appearing near the conjectured region.
+	
+	\subsection{Non-Rigorous Bounds on Complex Zeroes \(\rues_n, n\geq 3\)}
+	A bound which supports this conjecture is attainable from \eqref{Es trig sum form 1}.
+	\begin{equation}
+	\rues_n\pqty{x}
+	=
+	\frac{1}{n}\pqty{
+		e^x+e^{-x}\frac{1+\cos\pqty{\pi n}}{2} 
+		+2\sum _{k=1}^{\lceil n/2\rceil-1}e^{x\cos\pqty{\frac{2k\pi}{n}}} \cos\pqty{x\sin\pqty{\frac{2k\pi}{n}}}
+	}
+	\end{equation}
+	Note \(\rues_n\pqty{x}\) has the same zeroes as \(\rues_n\pqty{x}\exp\pqty{-x\cos\pqty{\frac{2\pi}{n}}}\), and most terms go to zero as \(\Re\pqty{x}\to\infty\).
+	\begin{equation}
+	\rues_n\pqty{x}\exp\pqty{-x\cos\pqty{\frac{2\pi}{n}}}
+	\approx\mathcal{O}\pqty{
+	\frac{1}{n}\pqty{
+		e^{x\pqty{1-\cos\pqty{\frac{2\pi}{n}}}}
+		+2 \cos\pqty{x\sin\pqty{\frac{2\pi}{n}}}}
+	}
+	\end{equation}
+	Zeroes of \(\rues_n\pqty{x}\) with large real parts are approximately bound by this equation:
+	\begin{equation}
+		0=
+		e^{x\pqty{1-\cos\pqty{\frac{2\pi}{n}}}}
+		+2 \cos\pqty{x\sin\pqty{\frac{2\pi}{n}}}
+	\end{equation}
+	\begin{equation}
+	-
+	e^{\pqty{a+b*i}\pqty{1-\cos\pqty{\frac{2\pi}{n}}}}=
+	2 \cos\pqty{\pqty{a+b*i}\sin\pqty{\frac{2\pi}{n}}}
+	\end{equation}
+	Absolute value:
+	\begin{equation}
+	\exp\pqty{a\pqty{1-\cos\pqty{\frac{2\pi}{n}}}}=
+	2 \abs{\cos\pqty{\pqty{a+b*i}\sin\pqty{\frac{2\pi}{n}}}}
+	\end{equation}
+	Use lemma \eqref{cos exp bound lemma}:
+	\begin{equation}
+	\exp\pqty{a\pqty{1-\cos\pqty{\frac{2\pi}{n}}}}\leq
+	2 \exp\pqty{\abs{b}\sin\pqty{\frac{2\pi}{n}}}
+	\end{equation}
+	Logarithm:
+	\begin{equation}
+	{a\pqty{1-\cos\pqty{\frac{2\pi}{n}}}}\leq
+	\ln\pqty{2} + {\abs{b}\sin\pqty{\frac{2\pi}{n}}}
+	\end{equation}
+	Equation form with slope:
+	\begin{equation}
+	{a\leq
+	\frac{\ln\pqty{2}}{{1-\cos\pqty{\frac{2\pi}{n}}}}} + {\abs{b}\cot\pqty{\frac{\pi}{n}}}
+	\end{equation}
+	The last inequality carves out a sector of the complex plane where zeroes are not allowed. The symmetric properties of \(\rues_n\) restrict zeroes to appearing near the conjectured region.
+
+	\section{Generalized split-complex numbers}
+	\subsection{Introduction}
+	Split complex numbers a ring extending the reals with an extra unit which is a square root of 1 which is not a complex number.
+	\subsection{Generalization}
+	This concept may be generalized to rings with \(n\)th roots of 1, and these rings are interrelated. Define the general split units as
+	\begin{equation}
+	\GeneralSplit\pqty{r_0}*\GeneralSplit\pqty{r_1}=\GeneralSplit\pqty{\md\pqty{r_0+r_1,1}}
+	\land
+	\bqty{\GeneralSplit\pqty{z}\in\mathbb{C}\Leftrightarrow z\in\mathbb{Z}}
+	\end{equation}
+	The general split units commute with complex numbers:
+	\begin{equation}
+	c\in\mathbb{C}\Rightarrow c*\GeneralSplit\pqty{r_0}=\GeneralSplit\pqty{r_0}*c
+	\end{equation}
+	
+	Simple deduction from the Taylor series of the exponential function for \(m\in\mathbb{Z}, c\in\mathbb{C}\).
+	\begin{equation}
+	\exp\pqty{c*\GeneralSplit\pqty{\frac{m}{n}}}=\sum_{k=0}^{n-1}\GeneralSplit\pqty{\frac{m}{n}}^k \rues_n^{\pqty{n-k}}\pqty{c}
+	=\sum_{k=0}^{n-1}\GeneralSplit\pqty{\frac{km}{n}} \rues_n^{\pqty{n-k}}\pqty{c}
+	\end{equation}
+	
+	The \(n\)-split-complex number ring is
+	\begin{equation}
+	\mathbf{Gs}_n=\Bqty{\sum_{k=0}^{n-1} c_k*\GeneralSplit\pqty{\frac{k}{n}} \Bigg\vert c_k\in\mathbb{C}}
+	\end{equation}
+	
+	Sub-ring property:
+	\begin{equation}
+	m\in\mathbb{Z}_{>0}\Rightarrow\mathbf{Gs}_n\subseteq\mathbf{Gs}_{m*n}
+	\end{equation}
+	
+	This self-isomorphism of \(f:\mathbf{Gs}_n\to\mathbf{Gs}_n\) exists for \(m\in\mathbb{Z}\land\gcd\pqty{j,n}=1\).
+	\begin{equation}
+	f\pqty{\sum_{k=0}^{n-1} c_k*\GeneralSplit\pqty{\frac{k}{n}}}=\sum_{k=0}^{n-1} c_k\exp\pqty{\frac{2kmi\pi}{n}}\GeneralSplit\pqty{\frac{kj}{n}}
+	\end{equation}
+	
+	The above is a homomorphism for arbitrary \(j,m\in\mathbb{Z}\). \(f:\mathbf{Gs}_n\to\mathbf{Gs}_{n/\gcd\pqty{j,n}}\).
+	\begin{equation}
+	\label{GS Homomorphism}
+	f\pqty{\sum_{k=0}^{n-1} c_k*\GeneralSplit\pqty{\frac{k}{n}}}=\sum_{k=0}^{n-1} c_k\exp\pqty{\frac{2kmi\pi}{n}}\GeneralSplit\pqty{\frac{kj}{n}}
+	\end{equation}
+	
+	Co-set isomorphism property, \(f:\mathbf{Gs}_{m_0n}/\mathbf{Gs}_{m_0}\to \mathbf{Gs}_{m_1n}/\mathbf{Gs}_{m_1}\) for \(n,m_0,m_1\in\mathbb{Z}_{>0}\)
+	\begin{equation}
+	f\pqty{\mathbf{Gs}_{m_0}*\sum_{k=0}^{n-1} c_k*\GeneralSplit\pqty{\frac{k}{m_0n}}}=\mathbf{Gs}_{m_1}*\sum_{k=0}^{n-1} c_k*\GeneralSplit\pqty{\frac{k}{m_1n}}
+	\end{equation}
+	
+	Idempotent elements: Easily found:
+	\begin{equation}
+	\pqty{\sum_{k=0}^{n-1}\frac{1}{n}\GeneralSplit\pqty{\frac{k}{n}}}^2
+	=
+	\sum_{k=0}^{n-1}\frac{1}{n}\GeneralSplit\pqty{\frac{k}{n}}
+	\end{equation}
+	Because homomorphisms map idempotent elements to idempotent elements, using \eqref{GS Homomorphism} produces a set of idempotent elements
+	\begin{equation}
+	\Bqty{ \sum_{k=0}^{n-1} \frac{1}{n}\exp\pqty{\frac{2kmi\pi}{n}}\GeneralSplit\pqty{\frac{kj}{n}} \Bigg\vert m,j\in\mathbb{Z} }
+	\end{equation}
+	The set of idempotent elements is closed under multiplication in abelian groups.
+	\begin{equation}
+	\bqty{n\in\mathbb{Z}_{>0}\land F_1F_2=F_2F_1\land F_1^2=F_1\land F_2^2=F_2}\Rightarrow \pqty{\pqty{F_1F_2}^n}^2=\pqty{F_1F_2}^n
+	\end{equation}.
+	\begin{equation}
+	\bqty{F_1F_2=F_2F_1\land F_1^2=F_1\land F_2^2=F_2}\Rightarrow \pqty{{F_1+F_2-2F_1F_2}}^2=\pqty{F_1+F_2-2F_1F_2}
+	\end{equation}.
+	
+	\subsection{Possible applications}
+	\url{http://www.math.usm.edu/lee/quantum.html} Traditional Split-complex numbers, a sub-ring of \(\mathbf{Gs}_2\), are used in quantum mechanics, thus General Split-complex numbers likely also have application.
+	
+	\section{More general rings}
+	\subsection{Extending the reals}
+	The goal here is to extend the real numbers, \(\mathbb{R}\), using an abelian multiplicative group, \(G\), such that exponential functions still work. The extension is the abelian ring \(\Bqty{\sum_{g\in G}g*x_g \bigg\vert x_g\in\mathbb{R}}\), denoted \(\mathbb{R}\bqty{G}\).
+	
+	Defining
+	\begin{equation}
+	\exp\pqty{x}=\sum_{k=0}^{\infty}\frac{x^k}{k!}
+	\end{equation}
+	, an immediate consequence for all rings is
+	\begin{equation}
+	x_1*x_2=x_2*x_1\Rightarrow\exp\pqty{x_1}*\exp\pqty{x_2}=\exp\pqty{x_1+x_2}
+	\end{equation}
+	. The ring \(\mathbb{R}\bqty{G}\) is abelian, thus \(x_1,x_2\in\mathbb{R}\bqty{G}\Rightarrow\exp\pqty{x_1}*\exp\pqty{x_2}=\exp\pqty{x_1+x_2}\). The elements of finite order may be simplified:
+	\begin{equation}
+	\bqty{1=g^n\land n\in\mathbb{Z}_{>0}\land g\in G\land x\in\mathbb{R}}\Rightarrow\exp\pqty{g*x}=\sum_{k=0}^{n-1}g^k*\rues_n^{\pqty{n-k}}\pqty{x}
+	\end{equation}
+	Every homomorphism, \(f\pqty{a*b}=f\pqty{a}*f\pqty{b}\), \(f:G_1\to G_2\) may be extended to \(f:\mathbb{R}\bqty{G_1}\to \mathbb{R}\bqty{G_2}\), \(f\pqty{a+b}=f\pqty{a}+f\pqty{b}\), \(f\pqty{a*b}=f\pqty{a}*f\pqty{b}\), \(f\pqty{\exp\pqty{a}}=\exp\pqty{f\pqty{a}}\).
+	
+	By the fundamental theorem of finite abelian groups, every finite abelian group is the direct sum of cyclic groups. Every cyclic group is isomorphic to a subgroup of \(\pqty{\mathbb{R}/\mathbb{Z},+}\). Thus every finite abelian group is isomorphic to a subgroup of the ring generated by \(\pqty{\pqty{\mathbb{R}/\mathbb{Z}}^{\beth_0},+}\).
+	
+	\subsection{Extending other rings}
+	The goal here is to extend an abelian ring, \(R_a\), with an exponential function, \(x_1,x_2\in R_a\Rightarrow f\pqty{x_1+x_2}=f\pqty{x_1}*f\pqty{x_2}\), using an abelian multiplicative group, \(G\).
+	\(f\pqty{0}=f\pqty{0}^2\), i.e. \(f\pqty{0}\) is idempotent. \(\Bqty{f\pqty{x}*a \vert a^2=a\land a\in R_a}\) are all valid exponential functions.
+	
+	\section{Bibliography}
+	\href{https://math.stackexchange.com/questions/1542147/}{Mathematics Stack Exchange|Find the complex (or real) roots of \(e^{\frac{3 x}{2}}+2 \cos\pqty{\frac{\sqrt{3} x}{2}}\)}
+	
+	\url{https://en.wikipedia.org/wiki/Split-complex_number}
+	
+\end{document}

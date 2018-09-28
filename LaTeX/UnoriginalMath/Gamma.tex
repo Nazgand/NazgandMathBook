@@ -1,0 +1,35 @@
+\input{../NazgandStyle}
+\title{
+	Gamma Function
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Definition}
+	\begin{definition}
+		\begin{equation}
+		\label{defGamma}
+		\forall z : \mathbb{C},\Re\pqty{z}>-1\Rightarrow
+		\Pi\pqty{z}=\Gamma\pqty{z+1}=\dint{0}{\infty}{t^z e^{-t}}{t}
+		\end{equation}
+	\end{definition}
+	
+	\section{Convergence of Integral}
+	\(t^z e^{-t}\) shrinks exponentially quickly as \(t\to\infty\), thus the integral \(\dint{1}{\infty}{t^z e^{-t}}{t}\) converges.
+	The integral \(\dint{0}{1}{t^z e^{-t}}{t}\) only converges for \(\Re\pqty{z}>-1\).
+	
+	\section{Recursive Property}
+	From \eqref{defGamma}, integrate by parts with \(u=t^z, v=-e^{-t}\)
+	\begin{equation}
+	\Gamma\pqty{z+1}=\bqty{-t^ze^{-t}}_{t=0}^\infty - 
+	\dint{0}{\infty}{-e^{-t}zt^{z-1}}{t}
+	\end{equation}
+	Simplify
+	\begin{equation}
+	\Gamma\pqty{z+1}=
+	z\dint{0}{\infty}{e^{-t}t^{z-1}}{t}= 
+	z\Gamma\pqty{z}
+	\end{equation}
+
+\end{document}

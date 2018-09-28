@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="real-analysis">
+  <title>Real Analysis</title>
+  <introduction>
+    <p>This section examines general weighted arithmetic mean geometric mean inequalities.</p>
+  </introduction>
+  
+  <section xml:id="section-arithmetic-mean-geometric-mean">
+    <title>Arithmetic Mean Geometric Mean Inequality</title>
+    <lemma xml:id="lemma-positive-real-amgm-2-variables">
+      <statement>
+        <me>\bqty{0\leq w\leq 1\land w\in\mathbb{R} \land \Bqty{x_1,x_2}\subset\mathbb{R}^+}\implies w x_1 +\pqty{1-w} x_2\geq x_1^w*x_2^\pqty{1-w}</me>
+      </statement>
+      <proof>
+        <p>Let <m>f\pqty{x_1}=x_1^w*x_2^\pqty{1-w}</m>.</p>
+        <me>\pdiff{x_1}{2}f\pqty{x_1}=w\pqty{w-1} x_1^\pqty{w-2}*x_2^\pqty{1-w}\leq 0</me>
+        <p>Thus <m>f\pqty{x_1}</m> is a non-convex function on the positive reals, allowing the next step.</p>
+        <me>f\pqty{x_1}\leq\pqty{\pdiff{x_1}{}f\pqty{x_1}:x\to x_2}\pqty{x_1-x_2}+f\pqty{x_2}</me>
+        <me>x_1^w*x_2^\pqty{1-w}\leq w\pqty{x_1-x_2}+x_2=w*x_1+\pqty{1-w}*x_2</me>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-positive-real-amgm-induction">
+      <statement>
+        <me>\bqty{n\in\mathbb{Z}^+
+        \land\Bqty{x_1,\dots,x_n}\subset\mathbb{R}^+
+        \land\Bqty{w_1,\dots,w_n}\subset\mathbb{R}^{\geq 0}
+        \land\sum_{k=1}^n w_k=1}\implies
+        \sum_{k=1}^n w_k*x_k\geq \prod_{k=1}^n x_k^{w_k}</me>
+      </statement>
+      <proof>
+        <p>The base case where <m>n=1</m> is <m>x_k\geq x_k</m>.</p>
+        <p>The induction step: Let</p>
+        <me>{n-1}\in\mathbb{Z}^+
+        \land\Bqty{x_1,\dots,x_{n-1}}\subset\mathbb{R}^+
+        \land\Bqty{W_1,\dots,W_{n-1}}\subset\mathbb{R}^{\geq 0}
+        \land\sum_{k=1}^{n-1} W_k=1</me>
+        <me>x_n\in\mathbb{R}^+
+        \land 0\leq w_n\leq 1
+        \land w_k=W_k*\pqty{1-w_n}</me>
+        <p>Thus</p>
+        <me>\sum_{k=1}^{n} w_k=1
+        \land\sum_{k=1}^{n-1} W_k*x_k\geq \prod_{k=1}^{n-1} x_k^{W_k}</me>
+        <p>Multiply both sides of the inequality by <m>\pqty{1-w_n}</m> then add <m>w_n*x_n</m>.</p>
+        <me>\pqty{1-w_n}*\pqty{\sum_{k=1}^{n-1} W_k*x_k}+w_n*x_n\geq \pqty{1-w_n}\pqty{\prod_{k=1}^{n-1} x_k^{W_k}}+w_n*x_n</me>
+        <p>Simplify the left:</p>
+        <me>\sum_{k=1}^{n} w_k*x_k\geq \pqty{1-w_n}\pqty{\prod_{k=1}^{n-1} x_k^{W_k}}+w_n*x_n</me>
+        <p>By <xref ref="lemma-positive-real-amgm-2-variables"/>:</p>
+        <me>\pqty{1-w_n}\pqty{\prod_{k=1}^{n-1} x_k^{W_k}}+w_n*x_n\geq \pqty{\prod_{k=1}^{n-1} x_k^{W_k}}^\pqty{1-w_n}*x_n^{w_n}=\prod_{k=1}^n x_k^{w_k}</me>
+        <p>Thus:</p>
+        <me>\sum_{k=1}^{n} w_k*x_k\geq \prod_{k=1}^n x_k^{w_k}</me>
+      </proof>
+    </lemma>
+  </section>
+  
+  <references>
+    <title>References and Suggested Readings</title>
+    <biblio type="raw"><url href="http://mathworld.wolfram.com/ExponentialFunction.html">Mathworld</url></biblio>
+    <biblio type="raw"><url href="https://en.wikipedia.org/wiki/Exponential_function">Wikipedia</url></biblio>
+  </references>
+</chapter>

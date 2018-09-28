@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-05T05:12:16+00:00
+
+====== similarTriangles ======
+Created Monday 05 November 2018
+
+{{~/Pictures/Screenshot from 2018-11-05 05-10-37.png}}
+In Euclidean Geometry, a pair of triangles share a set of angles IFF the set of ratios of the sides of 1 triangle equals the set of ratios of the sides of the other triangle. Given lengths and an integer, {{./equation.png?type=equation}} is a length constructable with finite steps.

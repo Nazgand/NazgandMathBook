@@ -1,0 +1,28 @@
+\input{../NazgandStyle}
+\title{
+	Geometric Series
+}
+\begin{document}
+	
+	\maketitle
+	
+	Consider
+	\begin{equation}
+		b*\pqty{\sum_{k=a}^{n} b^k}
+		=\pqty{\sum_{k=a}^{n} b^k}-b^a+b^{n+1}
+	\end{equation}
+	Rearranging:
+	\begin{equation}
+	\pqty{\sum_{k=a}^{n} b^k}
+	=\frac{b^a+b^{n+1}}{1-b}
+	\end{equation}
+	Note if \(\abs{b}<1\) then as \(n\to\infty, b^{n+1}\to 0\)
+	\begin{equation}
+	\label{GeometricSeries}
+	\abs{b}<1\Rightarrow
+	\pqty{\sum_{k=a}^{\infty} b^k}
+	=\frac{b^a}{1-b}
+	\end{equation}
+	Note if \(\abs{b}>1\) then as \(n\to\infty, \abs{b^{n+1}}\to \infty\) resulting in a diverging series.
+
+\end{document}

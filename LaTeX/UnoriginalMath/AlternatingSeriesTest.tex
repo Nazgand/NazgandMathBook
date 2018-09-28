@@ -1,0 +1,52 @@
+\input{../NazgandStyle}
+\title{
+	Alternative series test
+}
+\begin{document}
+	
+	\maketitle
+	\section{Alternating series with monotone decreasing absolute value}
+	
+	\begin{theorem}
+		Let a sequence \(a_n\) exist such that \(\abs{a_n}\geq\abs{a_{n+1}}\), \(a_{2n}\geq 0,a_{2n+1}\leq 0\), and \(\lim\limits_{n\to\infty}a_n=0\). Then the series \(\sum_{n=0}^{\infty}a_n\) converges.
+		\begin{proof}
+		\begin{equation}
+			\sum_{n=0}^{\infty}a_n
+			=
+			\sum_{n=0}^{2k}a_n+\sum_{n=2k+1}^{\infty}a_n
+			=
+			\sum_{n=0}^{2k}a_n+\sum_{m=0}^{\infty}\pqty{a_{2m+1}+a_{2m+2}}
+		\end{equation}
+		Because each pair \(\pqty{a_{2m+1}+a_{2m+2}}\) is negative, \(\sum_{m=0}^{\infty}\pqty{a_{2m+1}+a_{2m+2}}\) is negative, and thus \(\sum_{n=0}^{2k}a_n\geq \sum_{n=0}^{\infty}a_n\). Likewise,
+		\begin{equation}
+			\sum_{n=0}^{\infty}a_n
+			=
+			\sum_{n=0}^{2k+1}a_n+\sum_{n=2k+2}^{\infty}a_n
+			=
+			\sum_{n=0}^{2k+1}a_n+\sum_{n=m}^{\infty}\pqty{a_{2m+2}+a_{2m+3}}
+		\end{equation}
+		Because each pair \(\pqty{a_{2m+2}+a_{2m+3}}\) is positive, \(\sum_{m=0}^{\infty}\pqty{a_{2m+2}+a_{2m+3}}\) is positive, and thus \(\sum_{n=0}^{2k+1}a_n\leq \sum_{n=0}^{\infty}a_n\). Thus
+		\begin{equation}
+			\sum_{n=0}^{2k+1}a_n\leq
+			\sum_{n=0}^{\infty}a_n\leq
+			\sum_{n=0}^{2k}a_n
+		\end{equation}
+		The right and left sides differ only by \(a_{2k}\) and \(\lim\limits_{k\to\infty}a_{2k}=0\). Thus by the squeeze theorem, \(\sum_{n=0}^{\infty}a_n\) converges.
+		\end{proof}
+	\end{theorem}
+	
+	\section{\(\dint{0}{\infty}{\sin\pqty{xf\pqty{x}}}{x}\) converges for positive monotone increasing unbounded continuous \(f\pqty{x}\)}
+	\begin{definition}
+		Let a speed function \(f:\mathbb{R}^+\to\mathbb{R}^+\) exist such that
+		\begin{equation}
+		\bqty{\Bqty{a,b}\subseteq\mathbb{R}^+\land a<b}
+		\Rightarrow
+		f\pqty{a}<f\pqty{b}
+		\end{equation}
+	\end{definition}
+	
+	As \(f\pqty{x}\to\infty\), the "period" of \(\sin\pqty{xf\pqty{x}}\) decreases, making the integral converge. This is valid by using the Alternating Series test on the positive and negative chunks of the integral which decrease in area monotonically.
+	
+	\url{https://en.wikipedia.org/wiki/Alternating_series_test}
+	
+\end{document}

@@ -1,0 +1,48 @@
+\input{../NazgandStyle}
+\title{
+	Complex Number Law Of Sines
+}
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to appreciate The Law of Sines rewritten in the form of complex numbers.
+	\end{abstract}
+	
+	\subsection{The obvious single variable case where \(z\in\mathbb{C},\lnot\bqty{z\in\Bqty{0,1}}\):}
+	\begin{equation}
+		\frac{\sin\pqty{\Im\pqty{\ln\pqty{z}}}}{\abs{1-z}}=
+		\frac{\sin\pqty{\Im\pqty{\ln\pqty{1-\bar{z}}}}}{\abs{z}}=
+		\sin\pqty{\Im\pqty{\ln\pqty{z}+\ln\pqty{1-\bar{z}}}}
+	\end{equation}
+	For \(x\in\mathbb{R}\),
+	\begin{equation}
+		\sin\pqty{\Im\pqty{\ln\pqty{z}+\ln\pqty{1-\bar{z}}}}
+		=\sin\pqty{\Im\pqty{\ln\pqty{z-\abs{z}^2}}}
+		=\sin\pqty{\Im\pqty{\ln\pqty{z\abs{z}^x-\abs{z}^{2+x}}}}
+	\end{equation}
+	A nice substitution is \(x\to -2\):
+	
+	\begin{equation}
+		\sin\pqty{\Im\pqty{\ln\pqty{z\abs{z}^x-\abs{z}^{2+x}}}}
+		=
+		\sin\pqty{\Im\pqty{\ln\pqty{z\abs{z}^{-2}-1}}}
+		=
+		\sin\pqty{\Im\pqty{\ln\pqty{\bar{z}^{-1}-1}}}
+	\end{equation}
+
+	\subsection{The distinct 3 variable case where \(\Bqty{z_0,z_1,z_2}\subset\mathbb{C},z_0\neq z_1,z_1\neq z_2,z_2\neq z_0\):}
+	\begin{equation}
+		\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_2-z_0}{z_1-z_0}}}}}{\abs{z_2-z_1}}
+		=\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_0-z_1}{z_2-z_1}}}}}{\abs{z_0-z_2}}
+		=\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_1-z_2}{z_0-z_2}}}}}{\abs{z_1-z_0}}
+	\end{equation}
+	is a formula with a symmetry rotating of the 3 variables, that is, substituting
+	\(z_0\to z_1,z_1\to z_2,z_2\to z_0\). Furthermore, swapping 2 variables negates the value, so
+	\begin{equation}
+		\abs{\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_2-z_0}{z_1-z_0}}}}}{z_2-z_1}}
+	\end{equation}
+	is invariant under any permutation of the 3 variables.
+
+\end{document}

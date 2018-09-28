@@ -1,0 +1,184 @@
+\input{../NazgandStyle}
+\title{
+	Differentiation
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Definition}
+	\begin{equation}
+	\label{DerivLimit}
+	\pdiff{x}{}f\pqty{x}=\lim\limits_{h\to 0}\frac{f\pqty{x+h}-f\pqty{x}}{h}
+	\end{equation}
+	
+	\section{Sum Rule}
+	\begin{theorem}
+		\begin{equation}
+		\label{DiffSum}
+		\pdiff{x}{}\pqty{f\pqty{x}+g\pqty{x}}=
+		\pqty{\pdiff{x}{}f\pqty{x}}+
+		\pqty{\pdiff{x}{}g\pqty{x}}
+		\end{equation}
+		\begin{proof}
+			Use \eqref{DerivLimit}
+			\begin{equation}
+			\pdiff{x}{}\pqty{f\pqty{x}+g\pqty{x}}
+			=\lim\limits_{h\to 0}
+			\frac{\pqty{f\pqty{x+h}+g\pqty{x+h}}-\pqty{f\pqty{x}+g\pqty{x}}}{h}
+			\end{equation}
+			Rearrange
+			\begin{equation}
+			\pdiff{x}{}\pqty{f\pqty{x}+g\pqty{x}}
+			=\lim\limits_{h\to 0}
+			\pqty{\frac{{f\pqty{x+h}-f\pqty{x}}}{h}
+			+
+			\frac{{g\pqty{x+h}-g\pqty{x}}}{h}}
+			\end{equation}
+			Split the limit
+			\begin{equation}
+			\pdiff{x}{}\pqty{f\pqty{x}+g\pqty{x}}
+			=\pqty{\lim\limits_{h\to 0}
+			\frac{{f\pqty{x+h}-f\pqty{x}}}{h}}
+				+ \pqty{\lim\limits_{a\to 0}
+				\frac{{g\pqty{x+a}-g\pqty{x}}}{a}}
+			\end{equation}
+			Simplify with \eqref{DerivLimit}
+			\begin{equation}
+			\pdiff{x}{}\pqty{f\pqty{x}+g\pqty{x}}=
+			\pqty{\pdiff{x}{}f\pqty{x}}+
+			\pqty{\pdiff{x}{}g\pqty{x}}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+	\section{Constant Multiple Rule}
+	\begin{theorem}
+		\begin{equation}
+			\pdiff{x}{}\pqty{a*f\pqty{x}}=
+			a*\pdiff{x}{}\pqty{f\pqty{x}}
+		\end{equation}
+		\begin{proof}
+			Use \eqref{DerivLimit}
+			\begin{equation}
+			\pdiff{x}{}\pqty{a*f\pqty{x}}=
+			\lim\limits_{h\to 0}\frac{a*f\pqty{x+h}-a*f\pqty{x}}{h}=
+			a*\lim\limits_{h\to 0}\frac{f\pqty{x+h}-f\pqty{x}}{h}=
+			a*\pdiff{x}{}\pqty{f\pqty{x}}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+	\section{Chain Rule}
+	\begin{theorem}
+		\begin{equation}
+		\label{DiffChainRule}
+		\pdiff{x}{}{f\pqty{g\pqty{x}}}
+		=\pqty{\pdiff{g}{}f\pqty{g}\replace{g}{g\pqty{x}}}*\pdiff{x}{}{g\pqty{x}}
+		\end{equation}
+		\begin{proof}
+			Start with \eqref{DerivLimit}
+			\begin{equation}
+			\pdiff{x}{}{f\pqty{g\pqty{x}}}
+			=\lim\limits_{h\to 0}
+			\frac{f\pqty{g\pqty{x+h}}-f\pqty{g\pqty{x}}}{h}
+			\end{equation}
+			Multiply by \(1=\frac{g\pqty{x+h}-g\pqty{x}}{g\pqty{x+h}-g\pqty{x}}\):
+			\begin{equation}
+			\pdiff{x}{}{f\pqty{g\pqty{x}}}
+			=\lim\limits_{h\to 0}
+			\frac{f\pqty{g\pqty{x+h}}-f\pqty{g\pqty{x}}}{g\pqty{x+h}-g\pqty{x}}
+			\frac{g\pqty{x+h}-g\pqty{x}}{h}
+			\end{equation}
+			Split the limit:
+			\begin{equation}
+			\pdiff{x}{}{f\pqty{g\pqty{x}}}
+			=\lim\limits_{h\to 0}
+			\frac{f\pqty{g\pqty{x+h}}-f\pqty{g\pqty{x}}}{g\pqty{x+h}-g\pqty{x}}
+			\lim\limits_{a\to 0}
+			\frac{g\pqty{x+a}-g\pqty{x}}{a}
+			\end{equation}
+			Simplify \eqref{DerivLimit}
+			\begin{equation}
+			\pdiff{x}{}{f\pqty{g\pqty{x}}}
+			=\lim\limits_{h\to 0}
+			\frac{f\pqty{g\pqty{x+h}}-f\pqty{g\pqty{x}}}{g\pqty{x+h}-g\pqty{x}}
+			\pdiff{x}{}{g\pqty{x}}
+			\end{equation}
+			Substitute \(g\pqty{x+h}\to g+\epsilon,g\pqty{x}\to g\)
+			\begin{equation}
+			\pdiff{x}{}{f\pqty{g\pqty{x}}}
+			=\pqty{\lim\limits_{\epsilon\to 0}
+			\frac{f\pqty{g+\epsilon}-f\pqty{g}}{\epsilon}\replace{g}{g\pqty{x}}}
+			\pdiff{x}{}{g\pqty{x}}
+			\end{equation}
+			Simplify \eqref{DerivLimit}
+			\begin{equation}
+			\pdiff{x}{}{f\pqty{g\pqty{x}}}
+			=\pqty{\pdiff{g}{}f\pqty{g}\replace{g}{g\pqty{x}}}
+			\pdiff{x}{}{g\pqty{x}}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+	
+	\section{Logarithmic Derivative}
+	\begin{theorem}
+		\begin{equation}
+		\label{LogDiff}
+		\pdiff{x}{}f\pqty{x}=f\pqty{x}\pdiff{x}{}\ln\pqty{f\pqty{x}}
+		\end{equation}
+		\begin{proof}
+			Use the chain rule
+			\begin{equation}
+			\pdiff{x}{}\ln\pqty{f\pqty{x}}=
+			\pqty{\pdiff{z}{}\ln\pqty{z}\replace{z}{f\pqty{x}}}*\pdiff{x}{}{f\pqty{x}}
+			\end{equation}
+			Simplify. [Logarithms\eqref{LnIntegralForm}]
+			\begin{equation}
+			\pdiff{x}{}\ln\pqty{f\pqty{x}}=
+			\pqty{\frac{1}{z}\replace{z}{f\pqty{x}}}*\pdiff{x}{}{f\pqty{x}}=
+			\frac{1}{f\pqty{x}}*\pdiff{x}{}{f\pqty{x}}
+			\end{equation}
+			Multiply
+			\begin{equation}
+			f\pqty{x}\pdiff{x}{}\ln\pqty{f\pqty{x}}=
+			\pdiff{x}{}{f\pqty{x}}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+	\section{Product Rule}
+	\begin{theorem}
+		\begin{equation}
+			\pdiff{x}{}\prod_{k=1}^{n}f_k\pqty{x}=
+			\pqty{\prod_{k=1}^{n}f_k\pqty{x}}
+			\sum_{k=1}^{n}\frac{\pdiff{x}{}f_k\pqty{x}}{f_k\pqty{x}}
+		\end{equation}
+		\begin{proof}
+			Use \eqref{LogDiff}
+			\begin{equation}
+			\pdiff{x}{}\prod_{k=1}^{n}f_k\pqty{x}=
+			\pqty{\prod_{k=1}^{n}f_k\pqty{x}}\pdiff{x}{}\ln\pqty{\prod_{k=1}^{n}f_k\pqty{x}}
+			\end{equation}
+			Expand the logarithms
+			\begin{equation}
+			\pdiff{x}{}\prod_{k=1}^{n}f_k\pqty{x}=
+			\pqty{\prod_{k=1}^{n}f_k\pqty{x}}
+			\pdiff{x}{}\pqty{\sum_{k=1}^{n}\ln\pqty{f_k\pqty{x}}}
+			\end{equation}
+			Sum rule \eqref{DiffSum}
+			\begin{equation}
+			\pdiff{x}{}\prod_{k=1}^{n}f_k\pqty{x}=
+			\pqty{\prod_{k=1}^{n}f_k\pqty{x}}
+			\pqty{\sum_{k=1}^{n}\pdiff{x}{}\ln\pqty{f_k\pqty{x}}}
+			\end{equation}
+			Simplify logarithmic derivative using \eqref{LogDiff}
+			\begin{equation}
+			\pdiff{x}{}\prod_{k=1}^{n}f_k\pqty{x}=
+			\pqty{\prod_{k=1}^{n}f_k\pqty{x}}
+			{\sum_{k=1}^{n}\frac{\pdiff{x}{}f_k\pqty{x}}{f_k\pqty{x}}}
+			\end{equation}
+		\end{proof}
+	\end{theorem}
+
+\end{document}

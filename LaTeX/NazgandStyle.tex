@@ -1,0 +1,197 @@
+%!TEX engine = lualatex
+\documentclass{article}
+
+% --- CORE MATH & LOGIC ---
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{physics}
+\usepackage{mathtools}
+
+% --- TYPOGRAPHY & LAYOUT ---
+\usepackage[a4paper,margin=0.0931547in]{geometry}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage[skip=0.5\baselineskip]{parskip}
+
+% --- COLORS ---
+\usepackage{xcolor}
+% Define Palette
+\definecolor{FavoriteColor1}{HTML}{607CB2} % Background (Medium Blue)
+\definecolor{FavoriteColor2}{HTML}{303E59} % Text/Frame (Dark Blue)
+\definecolor{LinkColor}{HTML}{FFFF00}	  % Links (Bright Yellow)
+
+% Apply Background to Page
+\pagecolor{FavoriteColor1}
+
+% Apply Default Text Color (Global)
+\makeatletter
+\newcommand{\globalcolor}{\color{FavoriteColor2}\global\let\default@color\current@color}
+\makeatother
+\AtBeginDocument{\globalcolor}
+
+% --- THEOREM STYLING ---
+\usepackage[many]{tcolorbox}
+
+% Define the box style
+\tcbset{
+	nazgandbox/.style={
+		enhanced,
+		% Background matches page color exactly (looks transparent)
+		colback=FavoriteColor1,
+		% Frame matches text color
+		colframe=FavoriteColor2,
+		% Text inside box matches global text color
+		coltext=FavoriteColor2,
+		% Title text matches background (high contrast against dark frame)
+		coltitle=FavoriteColor1,
+		fonttitle=\bfseries\sffamily,
+		boxrule=1pt,
+		arc=2pt,
+		left=5pt, right=5pt, top=5pt, bottom=5pt,
+		boxsep=1pt,
+		sharp corners=downhill,
+		breakable
+	}
+}
+
+% Standard Definitions
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+% Wrap standard theorems in the custom box
+\tcolorboxenvironment{theorem}{nazgandbox}
+\tcolorboxenvironment{lemma}{nazgandbox}
+\tcolorboxenvironment{definition}{nazgandbox}
+\tcolorboxenvironment{corollary}{nazgandbox}
+
+% --- UTILITIES ---
+\usepackage{datetime2}
+\usepackage{minted}
+
+% --- FONTS ---
+\directlua{luaotfload.add_fallback("EmojiFallback",{"NotoColorEmoji:mode=harf;"})}
+\setmainfont{Noto Serif}[RawFeature={fallback=EmojiFallback}, Ligatures=TeX]
+\setsansfont{Noto Sans}[RawFeature={fallback=EmojiFallback}]
+\setmonofont{Noto Sans Mono}[RawFeature={fallback=EmojiFallback}]
+
+% --- REFERENCES & LINKS ---
+\usepackage{xr}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=LinkColor, % Internal links (equations, sections)
+	urlcolor=LinkColor,  % Web URLs
+	citecolor=LinkColor, % Bibliography citations
+	filecolor=LinkColor, % Links to local files
+	pdfnewwindow=true
+}
+\usepackage{cleveref}
+
+% --- CUSTOM MACROS ---
+\pdfstringdefDisableCommands{\def\eqref#1{(\ref{#1})}}
+\newcommand{\inlineeqnum}{\refstepcounter{equation}~~\mbox{(\theequation)}}
+\numberwithin{equation}{section}
+
+% Operators
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\rues}{Rues}
+\DeclareMathOperator{\md}{Mod}
+\DeclareMathOperator{\pow}{Pow}
+
+% Helpers
+\newcommand{\floor}[1]{{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{{\left\lceil#1\right\rceil}}
+\newcommand{\transpose}{^\intercal}
+\newcommand{\laplace}[1]{\mathcal{L}\Bqty{#1}\pqty{s}}
+\newcommand{\laplaceInv}[1]{\mathcal{L}^{-1}\Bqty{#1}\pqty{t}}
+\newcommand{\pdiff}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
+\newcommand{\dint}[4]{\int_{#1}^{#2}#3\,\mathrm{d}#4}
+\newcommand{\ketten}[4]{\underset{#1}{\overset{#2}{\mathop{\vcenter{\hbox{\huge\(\mathrm{K}\)}}}}}\frac{#3}{#4}}
+\newcommand{\replace}[2]{\Big\vert_{#1\to{#2}}}
+
+% --- METADATA & TITLE ---
+\author{Mark Andrew Gerads \(<\)\href{MailTo:Nazgand@Gmail.Com}{Nazgand@Gmail.Com}\(>\)}
+\let\oldauthor\author
+\renewcommand{\author}[1]{
+	\oldauthor{
+		Author: #1
+		\\
+		Editor: Mark Andrew Gerads \(<\)\href{MailTo:Nazgand@Gmail.Com}{Nazgand@Gmail.Com}\(>\)
+	}
+}
+\date{\DTMnow}
+\let\oldtitle\title
+\renewcommand{\title}[1]{
+	\oldtitle{
+		\vspace{-1.5cm}
+		\url{https://GitHub.Com/Nazgand/NazgandMathBook}
+		\\
+		#1
+	}
+}
+
+% --- LUA AUTO-REFERENCER ---
+\usepackage{luacode}
+\begin{luacode*}
+	local lfs = require("lfs")
+
+	local function split_path(path)
+		local t = {}
+		for part in path:gmatch("[^/]+") do table.insert(t, part) end
+		return t
+	end
+
+	local function get_relative_path(base, target)
+		local b_parts = split_path(base)
+		local t_parts = split_path(target)
+		local i = 1
+		while b_parts[i] and t_parts[i] and b_parts[i] == t_parts[i] do
+			i = i + 1
+		end
+		local rel = {}
+		for j = i, #b_parts do table.insert(rel, "..") end
+		for j = i, #t_parts do table.insert(rel, t_parts[j]) end
+		return table.concat(rel, "/")
+	end
+
+	local handle = io.popen("git rev-parse --show-toplevel 2>/dev/null")
+	local git_root = handle:read("*a"):gsub("%s+$", "")
+	handle:close()
+
+	if git_root ~= "" then
+		local project_root = git_root .. "/LaTeX"
+		local cwd = lfs.currentdir()
+		
+		local function scan_recursive(path)
+			if not lfs.attributes(path) then return end
+			for file in lfs.dir(path) do
+				if file ~= "." and file ~= ".." then
+					local full_path = path .. "/" .. file
+					local f_attr = lfs.attributes(full_path)
+					
+					if f_attr and f_attr.mode == "directory" then
+						scan_recursive(full_path)
+					elseif file:match("%.tex$") then
+						local job = file:gsub("%.tex$", "")
+						if job ~= tex.jobname and job ~= "NazgandStyle" then
+							local target_base = full_path:gsub("%.tex$", "")
+							local rel_path = get_relative_path(cwd, target_base)
+							
+							tex.sprint("\\externaldocument{" .. rel_path .. "}[" .. rel_path .. ".pdf]")
+						end
+					end
+				end
+			end
+		end
+
+		texio.write_nl("--- [XR] Auto-Linking ---")
+		scan_recursive(project_root)
+	end
+\end{luacode*}

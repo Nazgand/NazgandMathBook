@@ -1,0 +1,9 @@
+
+  H_n(a,b) = a[n]b = 
+    \begin{cases}
+                          b + 1 & \text{if } n = 0 \\
+                              a & \text{if } n = 1 \text{ and } b = 0 \\
+                              0 & \text{if } n = 2 \text{ and } b = 0 \\
+                              1 & \text{if } n \ge 3 \text{ and } b = 0 \\
+      H_{n-1}(a, H_n(a, b - 1)) & \text{otherwise}
+    \end{cases}

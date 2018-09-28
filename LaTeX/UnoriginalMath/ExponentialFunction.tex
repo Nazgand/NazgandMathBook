@@ -1,0 +1,295 @@
+\input{../NazgandStyle}
+\title{
+	Exponential Function
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Power function definition}
+	\begin{definition}
+			Here I formally define the power function.
+		\begin{equation}
+			\pow\pqty{x,y}=x^y
+		\end{equation}
+		\begin{equation}
+			\pow\pqty{x,0}=1
+		\end{equation}
+		\begin{equation}
+			\exists\pow\pqty{x,y-1}\Rightarrow\pow\pqty{x,y}=\pow\pqty{x,y-1}*x
+		\end{equation}
+		\begin{equation}
+			{\exists\pow\pqty{x,b}^{-1}}\Rightarrow\pow\pqty{x,-b}=\pow\pqty{x,b}^{-1}
+		\end{equation}
+		\begin{equation}
+			\bqty{\exists\pow\pqty{x,a}\land\exists\pow\pqty{x,b}}\Rightarrow\pow\pqty{x,a+b}=\pow\pqty{x,a}\pow\pqty{x,b}
+		\end{equation}
+		\begin{equation}
+			\bqty{x\in\mathbb{R}^+ \land y\in\mathbb{R}}\Rightarrow\exists\pow\pqty{x,y}\in\mathbb{R}
+		\end{equation}
+		\begin{equation}
+			\bqty{x\in\mathbb{R}^+\land y\in\mathbb{R}}
+			\Rightarrow\exists\pqty{\pdiff{z}{}\pow\pqty{x,z}\replace{z}{y}}
+		\end{equation}
+	\end{definition}
+	
+	\section{Basic results and definition of \(e\)}
+	\begin{theorem}
+		The derivative of an exponential function is a multiple of the same exponential function.
+		\begin{equation}
+		\pdiff{y}{}x^y=\pqty{\pdiff{z}{}x^z\replace{z}{0}}x^y
+		\end{equation}
+		\begin{proof}
+		Substitute \(y\to z+a\) in the left side of the equation to get the right side
+		\begin{equation}
+			\pdiff{y}{}x^y=\pqty{\pdiff{z}{}x^{z+a}\replace{z}{\pqty{y-a}}}
+		\end{equation}
+		Substitute \(x^{z+a}\to x^zx^a\)
+		\begin{equation}
+			\pdiff{y}{}x^y=\pqty{\pdiff{z}{}x^zx^a\replace{z}{\pqty{y-a}}}
+		\end{equation}
+		Bring \(x^a\) out:
+		\begin{equation}
+			\pdiff{y}{}x^y=x^a\pqty{\pdiff{z}{}x^z\replace{z}{\pqty{y-a}}}
+		\end{equation}
+		Substitute \(a\to y\)
+		\begin{equation}
+			\label{expDiffMultOfExp}
+			\pdiff{y}{}x^y=x^y\pqty{\pdiff{z}{}x^z\replace{z}{0}}
+		\end{equation}
+		\end{proof}
+	\end{theorem}
+	
+	\begin{definition}
+		Define \(e\) to be the base of the exponential function which has a derivative of \(1\) at \(0\).
+		\begin{equation}
+		\label{defineE}
+			1=\pqty{\pdiff{z}{}e^z\replace{z}{0}}
+		\end{equation}
+	\end{definition}
+	
+	\begin{lemma}
+		\begin{equation}
+		\label{expOwnDeriv}
+		\pdiff{y}{}e^y=e^y
+		\end{equation}
+		\begin{proof}
+		Substitute \(x\to e\) in \eqref{expDiffMultOfExp} and simplify with \eqref{defineE}.
+		\end{proof}
+	\end{lemma}
+	
+	\begin{corollary}
+		The derivative of an exponential function is the natural logarithm of the base of the exponential function times the exponential function.
+		\begin{equation}
+			\pdiff{y}{}x^y
+			={\ln\pqty{x}}x^y
+		\end{equation}
+		\begin{proof}
+		\begin{equation}
+			\pqty{\pdiff{z}{}x^z\replace{z}{0}}=\ln\pqty{x}
+		\end{equation}
+		\begin{equation}
+			\pdiff{y}{}x^y=x^y\pqty{\pdiff{z}{}x^z\replace{z}{0}}
+		\end{equation}
+		Substitute \(x\to e^{\ln\pqty{x}}\) in the left to get the right
+		\begin{equation}
+			\pdiff{y}{}x^y=\pdiff{y}{}e^{\ln\pqty{x}y}
+		\end{equation}
+		Apply the chain rule:
+		\begin{equation}
+			\pdiff{y}{}x^y
+			=\pqty{\pdiff{z}{}e^{z}\replace{z}{\ln\pqty{x}y}}*\pdiff{y}{}{\ln\pqty{x}y}
+		\end{equation}
+		Simplify
+		\begin{equation}
+			\pdiff{y}{}x^y
+			=\pqty{e^{z}\replace{z}{\ln\pqty{x}y}}*{\ln\pqty{x}}
+			=e^{\ln\pqty{x}y}*{\ln\pqty{x}}
+			={\ln\pqty{x}}x^y
+		\end{equation}
+		\end{proof}
+	\end{corollary}
+	
+	\section{Exponential Function Derivative}
+	\begin{theorem}
+		\begin{equation}
+			e^x=\sum_{k=0}^{\infty}\frac{x^k}{k!}
+		\end{equation}
+		\begin{proof}
+		We have a formula which is it's own derivative \eqref{expOwnDeriv}.
+		Another formula which is it's own derivative is
+		\begin{equation}
+			\exp\pqty{x}
+			=\sum_{k=0}^{\infty}\frac{x^k}{k!}
+			=\pdiff{x}{}\exp\pqty{x}
+		\end{equation}
+		The differential equation \(f\pqty{x}=f'\pqty{x}\) has 1 degree of freedom which is filled by \(f\pqty{0}=1\) by both formulae. Thus both formulae express the same function; \(e^x=\exp\pqty{x}\).
+		\end{proof}
+	\end{theorem}
+	
+	\section{Convergence of \(\exp\pqty{x}\)}
+	\begin{theorem}
+		\(\exp\pqty{x}\) converges for all \(x\in\mathbb{C}\)
+		\begin{proof}
+		By the triangle inequality, an upper bound and a lower bound exist for all complex numbers.
+		\begin{equation}
+			-\frac{\abs{x}^k}{k!}\leq
+			\frac{x^k}{k!}\leq
+			\frac{\abs{x}^k}{k!}
+		\end{equation}
+		\begin{equation}
+			-\exp\pqty{\abs{x}}\leq
+			\exp\pqty{x}\leq
+			\exp\pqty{\abs{x}}
+		\end{equation}
+		Thus convergence for \(x\in\mathbb{R}^+\) implies convergence for \(x\in\mathbb{C}\). Let \(x\in\mathbb{R}^+\). Bound part of the sum by a geometric series:
+		\begin{equation}
+			\exp\pqty{x}
+			=\sum_{k=0}^{n-1}\frac{x^k}{k!}
+			+\sum_{k=n}^{\infty}\frac{x^k}{k!}
+			<\sum_{k=0}^{n-1}\frac{x^k}{k!}
+			+\sum_{k=n}^{\infty}\frac{x^k}{n^{k-n}\pqty{n}!}
+		\end{equation}
+		Simplify
+		\begin{equation}
+			\sum_{k=n}^{\infty}\frac{x^k}{n^{k-n}\pqty{n}!}
+			=\frac{n^{n}}{\pqty{n}!}\sum_{k=n}^{\infty}\pqty{\frac{x}{n}}^k
+			=\frac{x^{n}}{\pqty{n}!}\sum_{m=0}^{\infty}\pqty{\frac{x}{n}}^{m}
+		\end{equation}
+		Find where the bounding geometric series converges. [GeometricSeries\eqref{GeometricSeries}]
+		\begin{equation}
+			\frac{x}{n}<1
+			\Rightarrow
+			\sum_{m=0}^{\infty}\pqty{\frac{x}{n}}^{m}
+			=\frac{1}{1-\frac{x}{n}}
+		\end{equation}
+		
+		Every specific \(x\) has an integer larger than it and is bounded by a circle of convergence from a corresponding geometric series. Let \(n\to\infty\) and \(\exp\pqty{x}\) converges for all \(x\in\mathbb{C}\).
+		\end{proof}
+	\end{theorem}
+	
+	\section{Limit Form of E}
+	\begin{theorem}
+		\begin{equation}
+		\label{limitE}
+		e=\lim\limits_{n\to\infty}\pqty{1+\frac{1}{n}}^n
+		=\lim\limits_{n\to\infty}\pqty{\frac{1+n}{n}}^n
+		\end{equation}
+		\begin{proof}
+		Proof from \url{https://mathcs.clarku.edu/~djoyce/ma122/elimit.pdf}.
+		Note
+		\begin{equation}
+			\bqty{\Bqty{n,t}\subset\mathbb{R}^+\land 1\leq t\leq \frac{1+n}{n}}
+			\Rightarrow
+			1\geq \frac{1}{t}\geq \frac{n}{1+n}
+		\end{equation}
+		Integrate over the inequality:
+		\begin{equation}
+			\dint{1}{\frac{1+n}{n}}{1}{t}
+			\geq \dint{1}{\frac{1+n}{n}}{\frac{1}{t}}{t}
+			\geq \dint{1}{\frac{1+n}{n}}{\frac{n}{1+n}}{t}
+		\end{equation}
+		Simplify using [Logarithms\eqref{LnIntegralForm}]
+		\begin{equation}
+			\frac{1}{n}
+			\geq \ln\pqty{\frac{1+n}{n}}
+			\geq \frac{1}{n+1}
+		\end{equation}
+		Apply the exponential function:
+		\begin{equation}
+			e^{\frac{1}{n}}
+			\geq \frac{1+n}{n}
+			\geq e^{\frac{1}{n+1}}
+		\end{equation}
+		Raise to the power of \(n\) and \(n+1\)
+		\begin{equation}
+			e
+			\geq \pqty{\frac{1+n}{n}}^n
+			\land
+			\pqty{\frac{1+n}{n}}^{n+1}
+			\geq e
+		\end{equation}
+		Divide
+		\begin{equation}
+			e
+			\geq \pqty{\frac{1+n}{n}}^n
+			\land
+			\pqty{\frac{1+n}{n}}^n
+			\geq \frac{en}{1+n}
+		\end{equation}
+		Let \(n\to\infty\) using the squeeze theorem, simplify.
+		\begin{equation}
+			e
+			\geq \lim\limits_{n\to\infty}\pqty{\frac{1+n}{n}}^n
+			\geq e
+		\end{equation}
+		\end{proof}
+	\end{theorem}
+	
+	\section{Exponential Function Limit Form}
+	\begin{theorem}
+		\begin{equation}
+			\label{expLim2}
+			e^x=\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+		\end{equation}
+		\begin{proof}
+		Raise \eqref{limitE} to the power of \(x\)
+		\begin{equation}
+			e^x=\lim\limits_{n\to\infty}\pqty{1+\frac{1}{n}}^{xn}
+		\end{equation}
+		For \(x\in\mathbb{R}^+\), a substitution \(n\to \frac{m}{x}\) can be made to obtain a limit known to exist.
+		\begin{equation}
+			e^x=\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+		\end{equation}
+		The existence of the limit for \(x\in\mathbb{R}^+\) extends analytically to \(x\in\mathbb{C}\) because the new formula fulfills the differential equation \(f\pqty{x}=f'\pqty{x}\) and has \(f\pqty{0}=1\).
+		Chain rule used:
+		\begin{equation}
+			\pdiff{x}{}\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+			=
+			\lim\limits_{m\to\infty}\pqty{\pdiff{z}{}z^m\replace{z}{\pqty{1+\frac{x}{m}}}}*\pdiff{x}{}\pqty{1+\frac{x}{m}}
+		\end{equation}
+		Simplify:
+		\begin{equation}
+			\pdiff{x}{}\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+			=
+			\lim\limits_{m\to\infty}m\pqty{1+\frac{x}{m}}^{m-1}*\frac{1}{m}
+		\end{equation}
+		Split the limit
+		\begin{equation}
+			\pdiff{x}{}\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+			=
+			\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^{m}*\pqty{1+\frac{x}{m}}^{-1}
+		\end{equation}
+		\begin{equation}
+			\pdiff{x}{}\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+			=
+			\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^{m}*
+			\lim\limits_{p\to\infty}\pqty{1+\frac{x}{p}}^{-1}
+		\end{equation}
+		Simplify to see \(f\pqty{x}=f'\pqty{x}\).
+		\begin{equation}
+			\pdiff{x}{}\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^m
+			=
+			\lim\limits_{m\to\infty}\pqty{1+\frac{x}{m}}^{m}
+		\end{equation}
+		\end{proof}
+	\end{theorem}
+	
+	\section{Euler's Identity}
+	\begin{theorem}
+		\begin{equation}
+		e^{ix}=\cos\pqty{x}+i\sin\pqty{x}
+		\end{equation}
+		\begin{proof}
+		\begin{equation}
+			\pdiff{x}{n}e^{ix}=i^ne^{ix}
+		\end{equation}
+		The derivatives at 0 thus cycle through \(1,i,-1,-i\).
+		Use [TaylorSeries\eqref{TaylorSeriesDef}] and compare to [Trigonometry\eqref{SinTaylor}] and [Trigonometry\eqref{CosTaylor}]
+		\end{proof}
+	\end{theorem}
+	
+	\section{Bibliography}
+	\url{https://en.wikipedia.org/wiki/Exponential_function}
+	
+\end{document}

@@ -1,0 +1,269 @@
+\input{NazgandStyle}
+\title{
+	Degree 2 Differential Equation Argument Sum Rules
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Assumptions and definitions}
+	A degree 2 [homogeneous linear differential equation of constant coefficients] has the form
+	\begin{equation}
+		\label{DifferentialEquation}
+		0=\sum_{k=0}^{2}a_k f^\pqty{k}\pqty{z}
+	\end{equation}
+	where \(\forall k, a_k\in\mathbb{C}, a_2 \neq 0\), and \(f:\mathbb{C}\to\mathbb{C}\) is differentiable infinitely many times.
+	
+	Let 
+	\begin{equation}
+		\lambda_0=\frac{-a_1-\sqrt{a_1^2-4 a_0 a_2}}{2 a_2},
+		\lambda_1=\frac{-a_1+\sqrt{a_1^2-4 a_0 a_2}}{2 a_2}
+	\end{equation}
+	
+	\section{Case \(\lambda_0\neq\lambda_1\)}
+	\begin{equation}
+		f\pqty{z}=c_0 \exp\pqty{\lambda_0 z}+c_1 \exp\pqty{\lambda_1 z},
+		c_0=\frac{f^\pqty{1}\pqty{0}-f\pqty{0}\lambda_1}{\lambda_0-\lambda_1},
+		c_1=\frac{f^\pqty{1}\pqty{0}-f\pqty{0}\lambda_0}{\lambda_1-\lambda_0}
+	\end{equation}
+	
+	We can choose the basis of the set of solutions to be \(\Bqty{\exp\pqty{\lambda_0 z}, \exp\pqty{\lambda_1 z}}\).
+	Let
+	\begin{equation}
+		v_0\pqty{z}=
+		\begin{pmatrix}
+			\exp\pqty{\lambda_0 z} \\
+			\exp\pqty{\lambda_1 z}
+		\end{pmatrix}
+		,
+		B_0=
+		\begin{pmatrix}
+			c_0 & 0 \\
+			0 & c_1
+		\end{pmatrix}
+		,
+		B_1=
+		\begin{pmatrix}
+			c_0 \lambda_0 & 0 \\
+			0 & c_1 \lambda_1
+		\end{pmatrix}
+	\end{equation}
+	
+	Then
+	\begin{equation}
+		\begin{pmatrix}
+			f\pqty{z_0+z_1}
+		\end{pmatrix}
+		=v_0\pqty{z_0}\transpose B_0 v_0\pqty{z_1}
+		,
+		\begin{pmatrix}
+			f^\pqty{1}\pqty{z_0+z_1}
+		\end{pmatrix}
+		=v_0\pqty{z_0}\transpose B_1 v_0\pqty{z_1}
+	\end{equation}
+	
+	These facts are a bit too obvious. We want \(\Bqty{f\pqty{z},f^\pqty{1}\pqty{z}}\) to be a basis of the set of solutions to get an awesome equation. Thus we require \(c_0\neq 0,c_1\neq 0\).
+	
+	Let
+	\begin{equation}
+		M=
+		\begin{pmatrix}
+			c_0 & c_1 \\
+			c_0 \lambda_0 & c_1 \lambda_1
+		\end{pmatrix}
+		,
+		v_1\pqty{z}=
+		\begin{pmatrix}
+			f\pqty{z} \\
+			f^\pqty{1}\pqty{z}
+		\end{pmatrix}
+	\end{equation}
+	
+	Then
+	\begin{equation}
+		M v_0\pqty{z}=v_1\pqty{z}
+		,
+		M^{-1}=
+		\frac{\begin{pmatrix}
+			-c_1 \lambda_1 & c_1 \\
+			c_0 \lambda_0 & -c_0
+		\end{pmatrix}}{c_0 c_1 \pqty{\lambda_0-\lambda_1}}
+		,
+		v_0\pqty{z}=M^{-1} v_1\pqty{z}
+	\end{equation}
+	
+	Thus, by substitution,
+	\begin{equation}
+		\begin{pmatrix}
+			f\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\pqty{M^{-1} v_1\pqty{z_0}}\transpose B_0 M^{-1} v_1\pqty{z_1}
+		,
+		\begin{pmatrix}
+			f^\pqty{1}\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\pqty{M^{-1} v_1\pqty{z_0}}\transpose B_1 M^{-1} v_1\pqty{z_1}
+	\end{equation}
+	
+	Simplify:
+	\begin{equation}
+		\begin{pmatrix}
+			f\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\frac{
+		\begin{pmatrix}
+			f\pqty{z_0} \\
+			f^\pqty{1}\pqty{z_0}
+		\end{pmatrix}\transpose
+		\begin{pmatrix}
+			c_0 \lambda_0^2+c_1 \lambda_1^2 & -c_0 \lambda_0-c_1 \lambda_1 \\
+			-c_0 \lambda_0-c_1 \lambda_1 & c_0 +c_1
+		\end{pmatrix}
+		\begin{pmatrix}
+			f\pqty{z_1} \\
+			f^\pqty{1}\pqty{z_1}
+		\end{pmatrix}}{c_0 c_1 \pqty{\lambda_0-\lambda_1}^2}
+	\end{equation}
+	\begin{equation}
+		\begin{pmatrix}
+			f^\pqty{1}\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\frac{
+		\begin{pmatrix}
+			f\pqty{z_0} \\
+			f^\pqty{1}\pqty{z_0}
+		\end{pmatrix}\transpose
+		\begin{pmatrix}
+			\lambda_0 \lambda_1\pqty{c_0 \lambda_0+c_1 \lambda_1} & -\lambda_0 \lambda_1 \pqty{c_0+c_1} \\
+			-\lambda_0 \lambda_1 \pqty{c_0+c_1} & c_0 \lambda_1+c_1\lambda_0
+		\end{pmatrix}
+		\begin{pmatrix}
+			f\pqty{z_1} \\
+			f^\pqty{1}\pqty{z_1}
+		\end{pmatrix}}{c_0 c_1 \pqty{\lambda_0-\lambda_1}^2}
+	\end{equation}
+	
+	\section{Case \(\lambda_0=\lambda_1=\lambda\)}
+	\begin{equation}
+		f\pqty{z}=c_0 \exp\pqty{\lambda z}+c_1 z \exp\pqty{\lambda z},
+		c_0=f\pqty{0},
+		c_1=f^\pqty{1}\pqty{0}-f\pqty{0}\lambda
+	\end{equation}
+	
+	We can choose the basis of the set of solutions to be \(\Bqty{\exp\pqty{\lambda z}, z\exp\pqty{\lambda z}}\).
+	Let
+	\begin{equation}
+		v_0\pqty{z}=
+		\begin{pmatrix}
+			\exp\pqty{\lambda z} \\
+			z\exp\pqty{\lambda z}
+		\end{pmatrix}
+		,
+		B_0=
+		\begin{pmatrix}
+			c_0 & c_1 \\
+			c_1 & 0
+		\end{pmatrix}
+		,
+		B_1=
+		\begin{pmatrix}
+			c_1+c_0\lambda & c_1 \lambda \\
+			c_1 \lambda & 0
+		\end{pmatrix}
+	\end{equation}
+	
+	Then
+	\begin{equation}
+		\begin{pmatrix}
+			f\pqty{z_0+z_1}
+		\end{pmatrix}
+		=v_0\pqty{z_0}\transpose B_0 v_0\pqty{z_1}
+		,
+		\begin{pmatrix}
+			f^\pqty{1}\pqty{z_0+z_1}
+		\end{pmatrix}
+		=v_0\pqty{z_0}\transpose B_1 v_0\pqty{z_1}
+	\end{equation}
+	
+	These facts are a bit too obvious. We want \(\Bqty{f\pqty{z},f^\pqty{1}\pqty{z}}\) to be a basis of the set of solutions to get an awesome equation. Thus we require \(c_1\neq 0\).
+	
+	Let
+	\begin{equation}
+		M=
+		\begin{pmatrix}
+			c_0 & c_1 \\
+			c_1+c_0 \lambda & c_1 \lambda
+		\end{pmatrix}
+		,
+		v_1\pqty{z}=
+		\begin{pmatrix}
+			f\pqty{z} \\
+			f^\pqty{1}\pqty{z}
+		\end{pmatrix}
+	\end{equation}
+	
+	Then
+	\begin{equation}
+		M v_0\pqty{z}=v_1\pqty{z}
+		,
+		M^{-1}=
+		\frac{\begin{pmatrix}
+			-c_1 \lambda & c_1 \\
+			c_1+c_0\lambda & -c_0
+		\end{pmatrix}}{c_1^2}
+		,
+		v_0\pqty{z}=M^{-1} v_1\pqty{z}
+	\end{equation}
+	
+	Thus, by substitution,
+	\begin{equation}
+		\begin{pmatrix}
+			f\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\pqty{M^{-1} v_1\pqty{z_0}}\transpose B_0 M^{-1} v_1\pqty{z_1}
+		,
+		\begin{pmatrix}
+			f^\pqty{1}\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\pqty{M^{-1} v_1\pqty{z_0}}\transpose B_1 M^{-1} v_1\pqty{z_1}
+	\end{equation}
+	
+	Simplify:
+	\begin{equation}
+		\begin{pmatrix}
+			f\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\frac{
+		\begin{pmatrix}
+			f\pqty{z_0} \\
+			f^\pqty{1}\pqty{z_0}
+		\end{pmatrix}\transpose
+		\begin{pmatrix}
+			-\lambda\pqty{2 c_1+c_0 \lambda} & c_1+c_0 \lambda \\
+			c_1+c_0 \lambda & -c_0
+		\end{pmatrix}
+		\begin{pmatrix}
+			f\pqty{z_1} \\
+			f^\pqty{1}\pqty{z_1}
+		\end{pmatrix}}{c_1^2}
+	\end{equation}
+	\begin{equation}
+		\begin{pmatrix}
+			f^\pqty{1}\pqty{z_0+z_1}
+		\end{pmatrix}
+		=\frac{
+		\begin{pmatrix}
+			f\pqty{z_0} \\
+			f^\pqty{1}\pqty{z_0}
+		\end{pmatrix}\transpose
+		\begin{pmatrix}
+			-\lambda^2\pqty{c_1+c_0\lambda} & c_0 \lambda^2 \\
+			c_0 \lambda^2 & c_1-c_0\lambda
+		\end{pmatrix}
+		\begin{pmatrix}
+			f\pqty{z_1} \\
+			f^\pqty{1}\pqty{z_1}
+		\end{pmatrix}}{c_1^2}
+	\end{equation}
+	
+\end{document}

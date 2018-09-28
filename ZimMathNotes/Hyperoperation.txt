@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-13T19:17:52+00:00
+
+====== Hyperoperation ======
+Created Tuesday 13 November 2018
+
+{{./equation001.png?type=equation}}
+{{./equation.png?type=equation}}
+What is {{./equation002.png?type=equation}}?

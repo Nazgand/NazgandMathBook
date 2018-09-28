@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="sigma-sum-pi-product">
+  <title>Sigma Sum and Pi Product notation</title>
+  <introduction>
+    <p>This section examines sigma sum notation and related notations.</p>
+  </introduction>
+  <section xml:id="section-sigma-sum">
+    <title>Sigma Sum</title>
+    <definition xml:id="definition-sigma-sum-empty-set">
+      <me>\sum_{k\in\Bqty{}}f\pqty{k}=0</me>
+    </definition>
+    <definition xml:id="definition-sigma-sum-single-element-set">
+      <me>\sum_{k\in\Bqty{a}}f\pqty{k}=f\pqty{a}</me>
+    </definition>
+    <definition xml:id="definition-sigma-sum-union-set">
+      <me>\sum_{k\in\pqty{S_1\cup S_2}}f\pqty{k}=\pqty{\sum_{k\in{S_1}}f\pqty{k}}+\pqty{\sum_{k\in{S_2}}f\pqty{k}}-\pqty{\sum_{k\in\pqty{S_1\cap S_2}}f\pqty{k}}</me>
+    </definition>
+    <lemma xml:id="lemma-function-composition-set">
+      <statement>
+        <me>\bqty{\forall\Bqty{x_1,x_2}\subseteq S : g\pqty{x_1}=g\pqty{x_2}\implies x_1=x_2} \implies
+        \sum_{k\in S}f\pqty{g\pqty{k}}=\sum_{j\in\Bqty{g\pqty{k} \vert k\in S}}f\pqty{j}</me>
+      </statement>
+      <proof>
+        <p>Obvious.</p>
+      </proof>
+    </lemma>
+    <definition xml:id="definition-sigma-sum-shorthand">
+      <p>Shorthand:</p>
+      <me>{\pqty{b-a}\in\Bqty{z\in\mathbb{Z} \vert z\geq -1}}\implies\sum_{k=a}^b f\pqty{k}=\pqty{\sum_{k=a}^{c} f\pqty{k}}+\pqty{\sum_{k=c+1}^{b} f\pqty{k}}=
+      \sum_{k\in\Bqty{z+a\vert z\in\mathbb{Z}\land 0\leq z\leq b-a}}f\pqty{k}</me>
+    </definition>
+  </section>
+  <references>
+    <title>References and Suggested Readings</title>
+    <biblio type="raw">>Text test</biblio>
+  </references>
+</chapter>

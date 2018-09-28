@@ -1,0 +1,232 @@
+\input{NazgandStyle}
+\DeclareMathOperator{\dcc}{dcc}
+\title{
+	\(L^p\) Planar Algebraic Geometry
+}
+\begin{document}
+
+\maketitle
+
+\section{\texorpdfstring{The \(L^p\) norm for \(p\in\mathbb{R},p\geq 1\)}{The L-p norm for real p, p≥1}}
+The distance between points \(\pqty{x_1,y_1}\) and \(\pqty{x_1,y_1}\) is:
+\begin{equation}
+\sqrt[p]{\abs{x_1-x_2}^p+\abs{y_1-y_2}^p}
+\end{equation}
+
+This has the triangle inequality:
+\begin{equation}
+\sqrt[p]{\abs{x_1-x_2}^p+\abs{y_1-y_2}^p}+
+\sqrt[p]{\abs{x_2-x_3}^p+\abs{y_2-y_3}^p}\geq
+\sqrt[p]{\abs{x_1-x_3}^p+\abs{y_1-y_3}^p}
+\end{equation}
+
+Euclidean translations and scalings of objects preserves shape in \(L^p\) space. Euclidean rotations do not generally preserve shape.
+
+\section{Lengths of curves}
+A curve defined by a function \(y=f\pqty{x}\) between \(a\) and \(b\) has the length
+\begin{equation}
+\lim\limits_{\Delta x\to 0^+}\sum_{k=0}^{\floor{\pqty{b-a}/\Delta x}}
+\sqrt[p]{\pqty{\Delta x}^p+\abs{f\pqty{a+\pqty{k+1}\Delta x}-f\pqty{a+k\Delta x}}^p}
+\end{equation}
+where the limit exists. This is equivalent to
+\begin{equation}
+\dint{a}{b}
+{\sqrt[p]{1+\abs{f'\pqty{x}}^p}}{x}
+\end{equation}
+
+In polar coordinates,
+\begin{equation}
+\dint{a}{b}
+{\sqrt[p]{\abs{\cos\pqty{\theta}r'\pqty{\theta}-\sin\pqty{\theta}r\pqty{\theta}}^p
+	+\abs{\sin\pqty{\theta}r'\pqty{\theta}+\cos\pqty{\theta}r\pqty{\theta}}^p
+}}{\theta}
+\end{equation}
+\begin{equation}
+\label{CurveLengthPolar2}
+\dint{a}{b}
+{\abs{r\pqty{\theta}}
+\sqrt[p]{\abs{\cos\pqty{\theta}\frac{r'\pqty{\theta}}{r\pqty{\theta}}-\sin\pqty{\theta}}^p
+	+\abs{\sin\pqty{\theta}\frac{r'\pqty{\theta}}{r\pqty{\theta}}+\cos\pqty{\theta}}^p
+}}{\theta}
+\end{equation}
+
+\section{Area}
+If for all disjoint regions \(R_0,R_1\), if \(\text{Area}\pqty{R_0}+\text{Area}\pqty{R_1}=\text{Area}\pqty{R_0\cup R_1}\) and for all \(R_2\) which is a Euclidean translation of \(R_0\), \(\text{Area}\pqty{R_0}=\text{Area}\pqty{R_2}\), then Area needs to be proportional to Euclidean area. Thus Euclidean area is used.
+
+\section{Circles}
+In the \(L^p\) norm, a circle which is the set of points distance \(r_p\) from the point \(\pqty{x_0,y_0}\) is.
+\begin{equation}
+\abs{x-x_0}^p+\abs{y-y_0}^p=r_p^p
+\end{equation}
+
+The shape of circles is scale invariant:
+\begin{equation}
+\abs{\frac{x}{r_p}}^p+\abs{\frac{y}{r_p}}^p=1
+\end{equation}
+
+Thus this work concentrates the unit circle in the first quadrant \(x,y\in\mathbb{R}^+\), the other quadrants are reflections and not needing absolute value signs is nice during calculation. Thus what will be used is:
+\begin{equation}
+x^p+y^p=1
+\end{equation}
+
+An important point for symmetry: \(x=y=2^\pqty{-1/p}\).
+
+
+Let \(\tau_p\) be the circumference of a unit circle in \(L^p\). \(\theta_p\pqty{\theta}\) is the function that translate the Euclidean angle to the \(L^p\) angle. 
+\begin{equation}
+\theta_p\pqty{\theta}=-\theta_p\pqty{-\theta}=\theta_p\pqty{\theta+\frac{\pi}{2}}-\frac{\tau_p}{4}
+\end{equation}
+
+In the first quadrant of the unit circle, 
+\begin{equation}
+1\geq x^p\Rightarrow y=\sqrt[p]{1-x^p}
+\end{equation}
+
+Area is important. Ratios between area and distance keep constant as do angles for scaling centered at the origin and rotations in \(L^p\) space. For \(p>0\),
+\begin{equation}
+\dint{0}{1}{\pqty{1-x^p}^{1/p}}{x}
+=
+\frac{\Gamma\pqty{1+\frac{1}{p}}^2}{\Gamma\pqty{1+\frac{2}{p}}}
+\end{equation}
+
+and polar coordinates with respect to the Euclidean angle and Euclidean norm can be found via substituting \(x=r_p\cos\pqty{\theta},y=r_p\sin\pqty{\theta}\)
+\begin{equation}
+1=r_p^p\pqty{\abs{\cos\pqty{\theta}}^p+\abs{\sin\pqty{\theta}}^p}
+\land
+r_p=\pqty{\abs{\cos\pqty{\theta}}^p+\abs{\sin\pqty{\theta}}^p}^{-1/p}
+\end{equation}
+
+In the first quadrant:
+\begin{equation}
+0\leq \theta \leq \frac{\pi}{2}
+\Rightarrow
+r_p\pqty{\theta}=\pqty{{\cos\pqty{\theta}}^p+{\sin\pqty{\theta}}^p}^{-1/p}
+\end{equation}
+\begin{equation}
+\frac{r'\pqty{\theta}}{r\pqty{\theta}}=\frac{{\tan\pqty{\theta}\cos\pqty{\theta}^p-\cot\pqty{\theta}\sin\pqty{\theta}^p}}
+{\cos\pqty{\theta}^p+\sin\pqty{\theta}^p}
+\end{equation}
+
+An important function is a scaling function based on the Euclidean angle.
+\begin{equation}
+s_p\pqty{\theta}=\pqty{\abs{\cos\pqty{\theta}}^p+\abs{\sin\pqty{\theta}}^p}^{1/p}
+\end{equation}
+
+In the \(L^p\) norm, a formula for arc length is
+\begin{equation}
+\dint{a}{b}{s_p\pqty{\arctan\pqty{\frac{\partial y}{\partial x}}} \sqrt{1+\pqty{\frac{\partial y}{\partial x}}^2}}{x}
+\end{equation}
+
+In the \(L^p\) norm, a formula for arc length in Euclidean polar coordinates is
+\begin{equation}
+\dint{a}{b}
+{s_p\pqty{\arctan\pqty{\frac{\sin\pqty{\theta}\frac{\partial r}{\partial \theta}+r\cos\pqty{\theta}}{\cos\pqty{\theta}\frac{\partial r}{\partial \theta}-r\sin\pqty{\theta}}}}
+\sqrt{r^2+\pqty{\frac{\partial r}{\partial \theta}}^2}}{\theta}
+\end{equation}
+
+The circumference can be calculated:
+\begin{equation}
+\frac{\partial y}{\partial x}=\pdiff{x}{}\sqrt[p]{1-x^p}
+=\frac{1}{p}\pqty{1-x^p}^{\frac{1}{p}-1}*-px^{p-1}
+=-\pqty{1-x^p}^{\frac{1}{p}-1}x^{p-1}
+\end{equation}
+\begin{equation}
+\tau_p=4\dint{0}{1}{\sqrt[p]{1+\abs{\pqty{1-x^p}^{\frac{1}{p}-1}x^{p-1}}^p}}{x}
+=
+4\dint{0}{1}{\sqrt[p]{1+{\pqty{1-x^p}^{1-p}x^{p^2-p}}}}{x}
+\end{equation}
+
+\begin{equation}
+\tau_p=
+4\dint{0}{1}{\frac{\sqrt[p]{\pqty{1-x^p}\pqty{\pqty{1-x^p}^{p-1}+x^{p^2-p}}}}{1-x^p}}{x}
+=
+\frac{4}{p}\dint{0}{1}{\frac{\sqrt[p]{z\pqty{1-z}\pqty{\pqty{1-z}^{p-1}+z^{p-1}}}}{\pqty{1-z}z}}{z}
+\end{equation}
+\begin{equation}
+\tau_p=
+\frac{8}{p}\dint{0}{1/2}{\frac{\sqrt[p]{z\pqty{1-z}\pqty{\pqty{1-z}^{p-1}+z^{p-1}}}}{\pqty{1-z}z}}{z}
+\end{equation}
+
+Case \(p=3\): Choose \(\pqty{1-z}^2+z^2=y\), \(\pdiff{z}{}y=4z-2\), \(z\pqty{1-z}=\frac{1-y}{2}\)
+\begin{equation}
+\tau_3=
+\frac{16\sqrt[3]{4}}{3}
+\dint{1/2}{1}{y \pqty{y\pqty{1-y}}^{-2/3} \sqrt{2y-1}}{y}
+\end{equation}
+
+Choose \(z=\frac{1}{1+e^{-x}}\), \(\frac{\partial x}{\partial z}=\frac{1}{z\pqty{1-z}}\)
+\begin{equation}
+\tau_p=
+\frac{8}{p}\dint{0}{\infty}{\sqrt[p]{ \frac{e^{x}+e^{p {x}}}{\pqty{1+e^{x}}^{p+1}} }}{x}
+\end{equation}
+
+Choose \(z=e^{x}\), \(\frac{\partial x}{\partial z}=\frac{1}{z}\)
+\begin{equation}
+\tau_p=
+\frac{8}{p}\dint{1}{\infty}{\frac{1}{z\pqty{1+z}}\sqrt[p]{ \frac{z+z^{p}}{1+z} }}{z}
+\end{equation}
+
+Choose \(x=1+z^{p-1}\), \(\pqty{x-1}^{1/\pqty{p-1}}=z\), \(\frac{\partial x}{\partial z}=\frac{1}{z}\)
+\begin{equation}
+\tau_p=
+\frac{8}{p}\dint{1}{\infty}{\frac{1}{z\pqty{1+z}}\sqrt[p]{ \frac{z+z^{p}}{1+z} }}{z}
+\end{equation}
+
+Some exact values:
+\begin{equation}
+\tau_3=\frac{2}{3} \Gamma \pqty{\frac{1}{3}} \pqty{\frac{\Gamma \pqty{\frac{1}{4}}}{\Gamma \pqty{\frac{7}{12}}}+\frac{\Gamma \pqty{\frac{3}{4}}}{\Gamma \pqty{\frac{13}{12}}}}, \tau_2=2\pi,\tau_1=8
+\end{equation}
+
+
+\section{Regular polygons and circles around circles}
+Given a point at Euclidean angle \(\theta\) a function is desired which gives the angle for the point distance \(0\leq d\leq 2\) counter-clockwise from the point at angle \(\theta\), and nesting of this function is desired to construct regular polygons.
+\begin{equation}
+\theta\leq\dcc\pqty{\theta,d,p,1}\leq\theta+\pi
+\end{equation}
+\begin{align}
+\pqty{\Delta x}= &&
+r_p\pqty{\dcc\pqty{\theta,d,p,1}}\cos\pqty{\dcc\pqty{\theta,d,p,1}}-r_p\pqty{\theta}\cos\pqty{\theta}\\
+\pqty{\Delta y}= &&
+r_p\pqty{\dcc\pqty{\theta,d,p,1}}\sin\pqty{\dcc\pqty{\theta,d,p,1}}-r_p\pqty{\theta}\sin\pqty{\theta}\\
+d= &&
+\sqrt[p]{\pqty{\Delta x}^p+\pqty{\Delta y}^p}\\
+\dcc\pqty{\theta,d,p,0}
+&& =\theta
+\\
+\dcc\pqty{\theta,d,p,n}
+&& =\theta -\md\pqty{\theta,\frac{\pi}{2}}+\dcc\pqty{\md\pqty{\theta,\frac{\pi}{2}},d,p,n}
+\\
+&& =\dcc\pqty{\dcc\pqty{\theta,d,p,n-m},d,p,m}
+\\
+&& =-\dcc\pqty{-\theta,d,p,-n}
+\end{align}
+
+Interestingly, regular hexagons have a constant side regardless of angle and \(p\).
+\begin{align}
+\dcc\pqty{\theta,1,p,6}
+&& =\theta + 2\pi
+\\
+\dcc\pqty{\theta,2,p,2}
+&& =\theta + 2\pi
+\end{align}
+
+
+\section{\texorpdfstring{Parabola for \(p>1\)}{Parabola for p>1}}
+Each point on a parabola has the same distance from the focus as from the directrix. With a directrix of \(y=0\) and a focus at \(\pqty{0,2a}, a\in\mathbb{R}^+\), we have \(f\pqty{x}=f\pqty{-x},f\pqty{0}=a,f\pqty{2a}=2a\). Also,
+\begin{equation}
+\abs{x}^p+\abs{f\pqty{x}-2a}^p=\abs{f\pqty{x}}^p
+\end{equation}
+
+\(x\geq 0\) WLOG. 2 cases exist. \(f\pqty{x}\geq 2a\):
+\begin{equation}
+x^p+\pqty{f\pqty{x}-2a}^p={f\pqty{x}}^p
+\end{equation}
+
+and \(f\pqty{x}\leq 2a\):
+\begin{equation}
+x^p+\pqty{2a-f\pqty{x}}^p={f\pqty{x}}^p
+\end{equation}
+
+Both cases are equivalent when \(\exists k\in\mathbb{Z}, 2k = p\).
+
+\end{document}

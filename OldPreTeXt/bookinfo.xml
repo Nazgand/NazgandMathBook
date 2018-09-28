@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<docinfo>
+  <!-- the other option is "long" which will produce an -->
+  <!-- entire front matter section with more headings   -->
+  <author-biographies length="short"/>
+  <!-- Prefix to enhance Sage notebook contents -->
+  <initialism>NMT</initialism>
+  <macros>
+    \newcommand{\lcm}{\operatorname{lcm}}
+    \newcommand{\md}{\operatorname{mod}}
+    \newcommand{\pow}{\operatorname{Power}}
+
+    \newcommand{\pqty}[1]{{\left(#1\right)}}
+    \newcommand{\bqty}[1]{{\left[#1\right]}}
+    \newcommand{\Bqty}[1]{{\left\{#1\right\}}}
+    \newcommand{\abs}[1]{{\left\lvert#1\right\rvert}}
+    \newcommand{\floor}[1]{{\left\lfloor#1\right\rfloor}}
+    \newcommand{\ceil}[1]{{\left\lceil#1\right\rceil}}
+
+    \newcommand{\laplace}[1]{\mathscr{L}\Bqty{#1}\pqty{s}}
+    \newcommand{\laplaceInv}[1]{\mathscr{L}^{-1}\Bqty{#1}\pqty{t}}
+
+    \newcommand{\pdiff}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
+    </macros>
+  <!-- this is the default, but supresses a warning -->
+  <cross-references text="type-global"/>
+  <!-- more invasive option is "structural" -->
+  <numbering>
+    <division part="decorative"/>
+  </numbering>
+</docinfo>

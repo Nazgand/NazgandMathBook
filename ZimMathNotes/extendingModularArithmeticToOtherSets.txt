@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-08T06:22:04+00:00
+
+====== extendingModularArithmeticToOtherSets ======
+Created Thursday 08 November 2018
+
+This method splits some set such as the rationals, the reals, the complex numbers, the quaternions, the octonions into 3 sets: those that must be 0 mod 1, the numbers which must not be 0 mod 1, and the rest. Induction is used to ensure consistency.
+The set with the equivalence class 0 mod 1 on the real numbers will be denoted {{./equation002.png?type=equation}}, and the set of inconsistent numbers mod 1 will be denoted {{./equation003.png?type=equation}}.
+{{./equation004.png?type=equation}}.
+{{./equation005.png?type=equation}}.
+{{./equation006.png?type=equation}}.
+The geometric similarity of the Euclidean algorithm implies {{./equation007.png?type=equation}}.
+
+Let {{./equation008.png?type=equation}}, and {{./equation009.png?type=equation}}.
+Note {{./equation010.png?type=equation}} is the largest integer such that {{./equation011.png?type=equation}} and {{./equation012.png?type=equation}}.
+
+===== Generalized =====
+Let an invertable operator exist on {{./equation.png?type=equation}}. {{./equation001.png?type=equation}}

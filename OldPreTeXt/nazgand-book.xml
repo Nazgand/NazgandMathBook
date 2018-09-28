@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mathbook xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
+  <xi:include href="./bookinfo.xml"/>
+  <!-- ISBN, website, other metadata -->
+  <book xml:id="nazgand-book">
+    <title>Nazgand's Math Book</title>
+    <subtitle>Aiming to contain all mathematics Nazgand learned</subtitle>
+    <xi:include href="./frontmatter.xml"/>
+    <!-- Title Page, Preface, etc. -->
+    <!-- Parts are optional, included here for testing            -->
+    <!-- In "bookinfo.xml" set to "structural" for maximum effect -->
+    <part xml:id="part-basics">
+      <title>Basics</title>
+      <xi:include href="./sigma-sum-pi-product.xml"/>
+      <xi:include href="./exponentiation.xml"/>
+      <xi:include href="./arithmetic-mean-geometric-mean.xml"/>
+    </part>
+    <part xml:id="part-integral-calculus">
+      <title>Integral Calculus</title>
+      <xi:include href="./wave-multiple-of-monovariant-decreasing-nonnegative.xml"/>
+    </part>
+    <xi:include href="./backmatter.xml"/>
+    <!-- GFDL, Hints, Notation -->
+  </book>
+</mathbook>

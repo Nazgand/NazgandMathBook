@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-03T12:16:31+00:00
+
+====== thePythagoreanTheorem ======
+Created Saturday 03 November 2018
+
+Euclidean geometry has an L2 norm. Scaling 2 dimensional non-zero vectors to unit vectors results in{{./equation.png?type=equation}}.
+A visual argument by similar area is below, where {{./equation001.png?type=equation}}.
+{{./pasted_image.png}}
+An argument using [[similarTriangles|similar triangles]] is:
+{{~/Pictures/Screenshot from 2018-11-03 14-29-30.png}}
+

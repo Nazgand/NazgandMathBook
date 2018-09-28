@@ -1,0 +1,107 @@
+\input{NazgandStyle}
+\title{
+	Argument Sum Rules From
+	
+	Homogeneous Linear Differential Equations Of Constant Coefficients
+}
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to describe a theorem (previously a conjecture).
+	\end{abstract}
+	
+	\section{Assumptions and definitions}
+	A [homogeneous linear differential equation of constant coefficients] has the form
+	\begin{equation}
+		0=\sum_{k=0}^{n}a_k\pdiff{z}{k}f\pqty{z}
+		=\sum_{k=0}^{n}a_k f^\pqty{k}\pqty{z}
+	\end{equation}
+	where \(\forall k, a_k\in\mathbb{C}\inlineeqnum\), \(n\in\mathbb{Z}_{\geq 0}\inlineeqnum\), \(a_n \neq 0\inlineeqnum\). Let \(f : \mathbb{C}\to\mathbb{C}\inlineeqnum\) be differentiable at least \(n\) times everywhere.
+	
+	Every [homogeneous linear differential equation of constant coefficients] has at least 1 basis for the vector space of its solutions.
+	
+	Let \(g_0\pqty{z},\dots,g_{n-1}\pqty{z}\) be such a basis. To be clear:
+	\begin{equation}
+		\label{BasisExistsForSolutionSet}
+		\text{Solutions}=
+		\Bqty{h\pqty{z} \mid 0=\sum_{k=0}^{n}a_k h^\pqty{k}\pqty{z}}
+		=\Bqty{\sum_{k=0}^{n-1}b_k g_k\pqty{z} \mid b_k\in\mathbb{C}}
+	\end{equation}
+	Let us define a column vector and clarify its transpose (a row vector):
+	\begin{equation}
+		v\pqty{z_0}=
+		\begin{pmatrix}
+			g_0\pqty{z_0} \\
+			\vdots \\
+			g_{n-1}\pqty{z_0} \\
+		\end{pmatrix}
+		,
+		v\pqty{z_1}\transpose=
+		\begin{pmatrix}
+			g_0\pqty{z_1} &
+			\dots &
+			g_{n-1}\pqty{z_1}
+		\end{pmatrix}
+	\end{equation}
+	
+	\section{Main theorem with 2 arguments}
+	There exists a unique symmetric \(n\) by \(n\) matrix \(A\) (\(A=A\transpose\)) such that
+	\begin{equation}
+		\label{ArgumentSumRuleMatrix}
+		f\pqty{z_0+z_1}=v\pqty{z_1}\transpose A v\pqty{z_0}=v\pqty{z_0}\transpose A v\pqty{z_1}
+	\end{equation}
+	
+	\subsection{A reason \(A\) is symmetric}
+	Suppose instead of a symmetric matrix \(A\), we find a matrix \(B\) such that
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}\transpose B v\pqty{z_0}
+	\end{equation}
+	Then take the transpose of the equation and substitute \(z_0\to z_1,z_1\to z_0\), resulting in the following equation:
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}\transpose B\transpose v\pqty{z_0}
+	\end{equation}
+	Average both equations:
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}\transpose \frac{B+B\transpose}{2} v\pqty{z_0}
+	\end{equation}
+	Note that we can set \(A=\frac{B+B\transpose}{2}\) because it is symmetric. \qed
+	
+	\section{Theorem generalized to positive integer amounts of arguments in addition to 2}
+	The following statements use the same assumptions and definitions as the main theorem.
+	\subsection{1 argument}
+	The following statement, which I call \(\text{ArgSumCon}\pqty{1}\), is trivial by assumption the \(\eqref{BasisExistsForSolutionSet}\).
+	\begin{equation}
+		\exists! c\pqty{k_0}\in\mathbb{C}, f\pqty{z_0} = \sum_{k_0=0}^{n-1}c\pqty{k_0} g_{k_0}\pqty{z_0}
+	\end{equation}
+	
+	\subsection{2 arguments}
+	The following statement, which I call \(\text{ArgSumCon}\pqty{2}\), is equivalent to \(\eqref{ArgumentSumRuleMatrix}\).
+	\begin{equation}
+		\exists! c\pqty{k_0,k_1}\in\mathbb{C}, f\pqty{z_0+z_1} = \sum_{k_0=0}^{n-1}\sum_{k_1=0}^{n-1}c\pqty{k_0,k_1} g_{k_0}\pqty{z_0} g_{k_1}\pqty{z_1}
+	\end{equation}
+	
+	\subsection{3 arguments}
+	The following statement, I call \(\text{ArgSumCon}\pqty{3}\).
+	\begin{equation}
+		\exists! c\pqty{k_0,k_1,k_2}\in\mathbb{C}, f\pqty{z_0+z_1+z_2} =
+		\sum_{k_0=0}^{n-1}\sum_{k_1=0}^{n-1}\sum_{k_2=0}^{n-1}c\pqty{k_0,k_1,k_2} g_{k_0}\pqty{z_0} g_{k_1}\pqty{z_1} g_{k_2}\pqty{z_2}
+	\end{equation}
+	
+	\subsection{\(m\) arguments for \(m\in\mathbb{Z}_{>0}\)}
+	The following statement, I call \(\text{ArgSumCon}\pqty{m}\).
+	\begin{equation}
+		\exists! c\pqty{k_0,k_1,\dots,k_{m-1}}\in\mathbb{C}, f\pqty{\sum_{j=0}^{m-1}z_j} =
+		\sum_{k_0=0}^{n-1}\sum_{k_1=0}^{n-1}\dots\sum_{k_{m-1}=0}^{n-1}c\pqty{k_0,k_1,\dots,k_{m-1}} \prod_{j=0}^{m-1}g_{k_j}\pqty{z_j}
+	\end{equation}
+	Note \(\text{ArgSumCon}\pqty{m+1}\Rightarrow\text{ArgSumCon}\pqty{m}\), as can be seen by replacing 1 of the variables with 0.
+	
+	\section{Lean 4 code}
+	\(\text{ArgSumCon}\pqty{m}\) has been formally proved in and verified by Lean 4:
+	
+	\href{https://GitHub.Com/Nazgand/NazgandLean4/blob/master/NazgandLean4/HomogeneousLinearDifferentialEquationsOfConstantCoefficients/ArgumentSumRule.lean}
+	{https://GitHub.Com/Nazgand/NazgandLean4/blob/master/NazgandLean4/\\HomogeneousLinearDifferentialEquationsOfConstantCoefficients/ArgumentSumRule.lean}
+	
+	Also verified by Lean 4: the relevant tensor is unique and symmetric.
+\end{document}

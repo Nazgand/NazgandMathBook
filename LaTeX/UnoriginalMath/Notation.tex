@@ -1,0 +1,187 @@
+\input{../NazgandStyle}
+\title{
+	Notation
+}
+\begin{document}
+	
+	\maketitle
+	
+	\section{Substitution}
+	This works similarly to Mathematica's Replace function. Example:
+	\begin{equation}
+	\pdiff{3}{} 3^2 \ne \pdiff{x}{} x^2 \replace{x}{3} = 2x \replace{x}{3} = 6
+	\end{equation}
+	
+	\url{https://reference.wolfram.com/language/ref/Replace.html}
+	
+	\section{Logic}
+	
+	And: Given statements \(A\) and \(B\). The statement \(A\land B\) means that both statements \(A\) and \(B\) are true.
+	
+	Or: Given statements \(A\) and \(B\). The statement \(A\lor B\) means that at least 1 of the statements \(A\) or \(B\) is true.
+	
+	Implies: The statement \(A\Rightarrow B\) is a conditional statement stating that if A is true, then B is true. 
+	
+	\(A\Leftrightarrow B\) means \(\bqty{\bqty{A\Rightarrow B}\land \bqty{B\Rightarrow A}}\).
+	
+	Brackets: Normally, logic is read from left to right, yet sometimes brackets are used to change the order or add clarification. Example: \(A\lor\bqty{B\land C}\).
+	
+	Exists: \(\exists a\) means that some a exists.
+	\(\bqty{\exists a, P\pqty{a}} \iff \Bqty{}\neq\{a\mid P\pqty{a}\}\).
+	
+	\url{https://en.wikipedia.org/wiki/List_of_logic_symbols}
+	
+	Kronecker delta function:
+	\begin{equation}
+	\delta\pqty{0}=1
+	\land
+	\bqty{x\neq 0 \Rightarrow \delta\pqty{x}=0}
+	\end{equation}
+	\url{https://en.wikipedia.org/wiki/Kronecker_delta}
+	
+	\section{Order and Equality}
+	Equals: \(a=b\) means that \(a\) is equal to \(b\).
+	
+	\url{https://en.wikipedia.org/wiki/Equality_(mathematics)}
+	
+	Greater than: \(a>b\) means that \(a\) is greater than \(b\).
+	\(a\geq b\) means that \(a\) is greater than or equal to \(b\).
+	
+	Less than: \(a<b\) means that \(a\) is less than \(b\).
+	\(a\leq b\) means that \(a\) is less than or equal to \(b\).
+	
+	\url{https://en.wikipedia.org/wiki/Inequality_(mathematics)}
+	
+	\section{Sets}
+	Sets: Sets either have an element or they do not have the element; no element is listed more than 1 time. Example sets are: \(\Bqty{1,2,3}, \Bqty{1,\Bqty{1,a,b}}\).
+	
+	Element of: \(\in\) means "is an element of". Examples: \(1\in\Bqty{1,2,3}\) and \(\Bqty{1,a,b}\in\Bqty{1,\Bqty{1,a,b}}\).
+	
+	Subset: \(\subseteq\) means "is a subset of". Examples: \(\Bqty{1,2,3}\subseteq\Bqty{1,2,3}\) and \(\Bqty{3}\subseteq\Bqty{1,2,3}\) and \(\Bqty{}\subseteq\Bqty{1,2,3}\).
+	
+	Union: \(A\cup B\) is the minimal set which contains all elements either \(A\) or \(B\) contain.
+	
+	Intersection: \(A\cap B\) is the set which contains all elements both \(A\) and \(B\) contain.
+	
+	\url{https://en.wikipedia.org/wiki/Set_(mathematics)}
+	
+	Set builder notation:
+	
+	The set of all things \(a\) which satisfy the constraining statement \(P\pqty{a}\):
+	\begin{equation}
+	\Bqty{a\mid P\pqty{a}}
+	\end{equation}
+	
+	The set of all things \(a\) in the set \(A\) which satisfy the statement \(P\pqty{a}\):
+	\begin{equation}
+	\Bqty{a\in A\mid P\pqty{a}}
+	\end{equation}
+	
+	\url{https://en.wikipedia.org/wiki/Set-builder_notation}
+	
+	Integers:
+	\begin{equation}
+	0\in\mathbb{Z}\land\bqty{a\in\mathbb{Z}\Leftrightarrow \pqty{a+1}\in\mathbb{Z}}
+	\end{equation}
+	\begin{equation}
+	\mathbb{Z}_{>0}=\Bqty{n\in\mathbb{Z}\mid n>0}
+	\end{equation}
+	\begin{equation}
+	\mathbb{Z}_{\geq 0}=\Bqty{n\in\mathbb{Z}\mid n\geq 0}
+	\end{equation}
+	
+	\url{https://en.wikipedia.org/wiki/Integer}
+	
+	\url{https://en.wikipedia.org/wiki/Natural_number#Notation}
+	
+	Rational numbers:
+	\begin{equation}
+	\mathbb{Q}=\Bqty{\frac{a}{b}\mid a\in\mathbb{Z}\land b\in\mathbb{Z}_{>0}}
+	\end{equation}
+	\begin{equation}
+	\mathbb{Q}^+=\Bqty{q\in\mathbb{Q}\mid q>0}
+	\end{equation}
+	\begin{equation}
+	\mathbb{Q}^{\geq 0}=\Bqty{q\in\mathbb{Q}\mid q\geq 0}
+	\end{equation}
+	
+	\url{https://en.wikipedia.org/wiki/Rational_number}
+	
+	Real numbers:
+	\begin{equation}
+	\mathbb{R}^{\geq 0}=\Bqty{\inf A\mid A\subseteq\mathbb{Q}^+\land A\neq \Bqty{}}
+	\end{equation}
+	\begin{equation}
+	\mathbb{R}=\Bqty{a-b\mid \Bqty{a,b}\subseteq\mathbb{R}^{\geq 0}}
+	\end{equation}
+	\begin{equation}
+	\mathbb{R}^+=\Bqty{a\in\mathbb{R}^{\geq 0}\mid a>0}
+	\end{equation}
+	
+	\url{https://en.wikipedia.org/wiki/Real_number}
+	
+	\section{Sigma summation}
+	\begin{equation}
+	\sum_{k\in\Bqty{}}f\pqty{k}=0
+	\end{equation}
+	\begin{equation}
+	\sum_{k\in\Bqty{a}}f\pqty{k}=f\pqty{a}
+	\end{equation}
+	\begin{equation}
+	\sum_{k\in\pqty{S_1\cup S_2}}f\pqty{k}
+	=
+	\pqty{\sum_{k\in{S_1}}f\pqty{k}}
+	+
+	\pqty{\sum_{k\in{S_2}}f\pqty{k}}
+	-
+	\pqty{\sum_{k\in\pqty{S_1\cap S_2}}f\pqty{k}}
+	\end{equation}
+	Shorthand
+	\begin{equation}
+	\sum_{k={a}}^{a-1} f\pqty{k}=0
+	\end{equation}
+	\begin{equation}
+	\sum_{k={a}}^{b+1} f\pqty{k}=
+	\pqty{\sum_{k={a}}^{b} f\pqty{k}}+f\pqty{b+1}=
+	f\pqty{a}+{\sum_{k={a+1}}^{b+1} f\pqty{k}}
+	\end{equation}
+	
+	\section{Calculus}
+	A limit \(\lim\limits_{a\to b}f\pqty{a}\) is the value usually approaching \(f\pqty{b}\)
+	
+	\(n\)th derivative, not to be confused with \(f^{n}\pqty{x}\):
+	\begin{equation}
+	f^{\pqty{n}}\pqty{x}
+	=
+	\pdiff{x}{n}f\pqty{x}
+	\end{equation}
+	
+	\url{https://en.wikipedia.org/wiki/Derivative#Leibniz's_notation}
+	
+	Integrals can be thought as the area under a curve. The integral from \(a\) to \(b\) of function \(f\pqty{x}\) with respect to \(x\) is:
+	
+	\begin{equation}
+	\dint{a}{b}{f\pqty{x}}{x}
+	\end{equation}
+	
+	Laplace transform:
+	\begin{equation}
+	\laplace{f\pqty{t}}=
+	\dint{0}{\infty}{f\pqty{t}e^{-st}}{t}
+	\end{equation}
+	
+	Laplace transform inverse:
+	\begin{equation}
+	\laplaceInv{\laplace{f\pqty{t}}}=f\pqty{t}
+	\end{equation}
+	
+	\url{https://en.wikipedia.org/wiki/Laplace_transform#Formal_definition}
+	
+	Modular arithmetic function, \(\md:\pqty{\mathbb{C},\mathbb{C}}\to\mathbb{C}\)
+	\begin{equation}
+	0\leq\Re\pqty{\frac{\md\pqty{a,b}}{b}}<1
+	\land
+	\md\pqty{a,b}=\md\pqty{a+b,b}
+	\end{equation}
+	
+\end{document}

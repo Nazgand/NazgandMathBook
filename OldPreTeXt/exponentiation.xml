@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="exponentiation">
+  <title>Exponentiation</title>
+  <introduction>
+    <p>This section examines functions of the form <m>f\pqty{x+y}=f\pqty{x}f\pqty{y}</m>.</p>
+  </introduction>
+  <section xml:id="section-exponentiation">
+    <title>Exponentiation</title>
+    <definition xml:id="definition-power-function">
+      <me>\pow\pqty{x,y}=x^y</me>
+      <me>\pow\pqty{x,0}=1</me>
+      <me>\exists\pow\pqty{x,y-1}\implies\pow\pqty{x,y}=\pow\pqty{x,y-1}x</me>
+      <me>\bqty{\exists\pow\pqty{x,a}\land\exists\pow\pqty{x,b}}\implies\pow\pqty{x,a+b}=\pow\pqty{x,a}\pow\pqty{x,b}</me>
+      <me>\bqty{\exists\pow\pqty{x,a}\land\exists\pow\pqty{x,b}^{-1}}\implies\pow\pqty{x,a-b}=\pow\pqty{x,a}\pow\pqty{x,b}^{-1}</me>
+      <me>\bqty{x\in\mathbb{R}^+ \land y\in\mathbb{R}}\implies\exists\pow\pqty{x,y}\in\mathbb{R}</me>
+      <me>x\in\mathbb{R}^+\implies\exists\pdiff{y}{}\pow\pqty{x,y}</me>
+    </definition>
+    <lemma xml:id="lemma-positive-real-to-positive-real">
+      <statement>
+        <me>\bqty{x\in\mathbb{R}^+ \land y\in\mathbb{R}}\implies\pow\pqty{x,y}\geq 0</me>
+      </statement>
+      <proof>
+        <p>By <xref ref="definition-power-function"/>, <m>\bqty{x\in\mathbb{R}^+ \land y\in\mathbb{R}}\implies\pow\pqty{x,y}\in\mathbb{R}</m>.</p>
+        <me>\pow\pqty{x,y}\lt 0\implies\lnot\pow\pqty{x,y/2}\in\mathbb{R}</me>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-exponential-induction">
+      <statement>
+        <me>k\in\mathbb{Z}^+\implies\pow\pqty{x,ky}=\pow\pqty{x,y}^k</me>
+      </statement>
+      <proof>
+        <p>Base case where <m>k=1</m> is true.</p>
+        <p>The inductive step:</p>
+        <me>\pow\pqty{x,ky}=\pow\pqty{x,y}^k</me>
+        <p>Multiply both sides by <m>\pow\pqty{x,y}</m>.</p>
+        <me>\pow\pqty{x,ky}\pow\pqty{x,y}=\pow\pqty{x,y}^k\pow\pqty{x,y}</me>
+        <p>Use the additive property in <xref ref="definition-power-function"/>.</p>
+        <me>\pow\pqty{x,\pqty{k+1}y}=\pow\pqty{x,y}^\pqty{k+1}</me>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-exponential-unique">
+      <statement>
+        <p>A unique solution of <m>\pow\pqty{x,y}</m> exists on the domain <m>x\in\mathbb{R}^+ \land y\in\mathbb{R}</m></p>
+      </statement>
+      <proof>
+        <p>Let <m>x\in\mathbb{R}^+</m>.</p>
+        <p>Note, for <m>k\in\mathbb{Z}^+</m>, the function <m>x^k:\mathbb{R}^+\to\mathbb{R}^+</m> is a bijection.</p>
+        <p>Along with <xref ref="lemma-exponential-induction"/> implies a unique solution for <m>\pow\pqty{x,q}</m> where <m>q\in\mathbb{Q}</m>.</p>
+        <p><m>\pow\pqty{x,q}</m> where <m>q\in\mathbb{Q}^+</m> may be deduced from <m>\pow\pqty{x,1}=x</m>.</p>
+        <p><m>\pow\pqty{x,-q}</m> where <m>q\in\mathbb{Q}^+</m> may be deduced from <m>\pow\pqty{x,-1}=x^{-1}</m>.</p>
+        <p>By <xref ref="definition-power-function"/>, <m>\pdiff{y}{}\pow\pqty{x,y}</m> exists, thus requiring <m>\pow\pqty{x,y}</m> to be continuous with respect to <m>y</m>. Continuous functions <m>\mathbb{R}\to\mathbb{R}</m> are uniquely defined by the function on the subdomain <m>\mathbb{Q}</m>.</p>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-derivative-self-multiple">
+      <statement>
+        <m>\pdiff{y}{}\pow\pqty{x,y}=\pqty{\pdiff{z}{}\pow\pqty{x,z}:z\to 0}\pow\pqty{x,y}</m>
+      </statement>
+      <proof>
+        <md>
+          <mrow>\pdiff{y}{}\pow\pqty{x,y}=\pqty{\pdiff{z}{}\pow\pqty{x,z+a}:z\to y-a}</mrow>
+          <mrow>=\pqty{\pdiff{z}{}\pow\pqty{x,z}\pow\pqty{x,a}:z\to y-a}</mrow>
+          <mrow>=\pow\pqty{x,a}\pqty{\pdiff{z}{}\pow\pqty{x,z}:z\to y-a}</mrow>
+        </md>
+        <p>Substitute <m>a\to y</m>.</p>
+      </proof>
+    </lemma>
+  </section>
+  <section xml:id="section-geometric-sum">
+    <title>Geometric sums</title>
+    <lemma xml:id="lemma-geometric-sum">
+      <statement>
+        <me>\bqty{\pqty{b-a}\in\mathbb{Z}\land\exists\pqty{1-x}^{-1}}\implies\sum_{k=a}^b x^k=\frac{x^a-x^{b+1}}{1-x}</me>
+      </statement>
+      <proof>
+        <me>\sum_{k=a}^b x^k=x\pqty{\sum_{k=a}^b x^k}+x^a-x^{b+1}</me>
+        <me>\pqty{1-x}\sum_{k=a}^b x^k=x^a-x^{b+1}</me>
+        <me>\sum_{k=a}^b x^k=\frac{x^a-x^{b+1}}{1-x}</me>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-geometric-sum-non-unit">
+      <statement>
+        <me>\bqty{{\lim_{k\to\infty,k\in\mathbb{Z}}x^{k+a}=\lim_{k\to\infty,k\in\mathbb{Z}}x^{k+b}=0}\land\exists\pqty{1-x}^{-1}}\implies\sum_{k=a}^b x^k=\frac{x^a-x^{b+1}}{1-x}</me>
+      </statement>
+      <proof>
+        <me>\sum_{k=a}^b x^k=x\pqty{\sum_{k=a}^b x^k}+x^a-x^{b+1}</me>
+        <me>\pqty{1-x}\sum_{k=a}^b x^k=x^a-x^{b+1}</me>
+        <me>\sum_{k=a}^b x^k=\frac{x^a-x^{b+1}}{1-x}</me>
+      </proof>
+    </lemma>
+  </section>
+  <references>
+    <title>References and Suggested Readings</title>
+    <biblio type="raw"><url href="http://mathworld.wolfram.com/ExponentialFunction.html">Mathworld</url></biblio>
+    <biblio type="raw"><url href="https://en.wikipedia.org/wiki/Exponential_function">Wikipedia</url></biblio>
+  </references>
+</chapter>

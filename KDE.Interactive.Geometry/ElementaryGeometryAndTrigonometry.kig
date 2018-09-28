@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE KigDocument>
+<KigDocument grid="1" axes="1" Version="1.0" CompatibilityVersion="0.7.0">
+ <CoordinateSystem>Euclidean</CoordinateSystem>
+ <Hierarchy>
+  <Data id="1" type="double">-0.000799131</Data>
+  <Data id="2" type="double">0.00750714</Data>
+  <Data id="3" type="double">-0.00275539</Data>
+  <Data id="4" type="double">0.00284466</Data>
+  <Data id="5" type="double">0.00770692</Data>
+  <Data id="6" type="double">0.00836998</Data>
+  <Data id="7" type="double">0</Data>
+  <Data id="8" type="int">0</Data>
+  <Data id="9" type="double">-0.00890562</Data>
+  <Data id="10" type="string">%1</Data>
+  <Data id="11" type="double">-0.00350129</Data>
+  <Data id="12" type="int">0</Data>
+  <Data id="13" type="string">(-1,0)</Data>
+  <Data id="14" type="string">%1</Data>
+  <Data id="15" type="int">0</Data>
+  <Data id="16" type="double">0</Data>
+  <Data id="17" type="int">0</Data>
+  <Data id="18" type="double">0.032426</Data>
+  <Data id="19" type="int">0</Data>
+  <Data id="20" type="double">0.00406415</Data>
+  <Data id="21" type="double">0.0102093</Data>
+  <Data id="22" type="int">0</Data>
+  <Data id="23" type="string">(0,1)</Data>
+  <Data id="24" type="int">0</Data>
+  <Data id="25" type="string">%1</Data>
+  <Data id="26" type="string">%1</Data>
+  <Data id="27" type="double">-0.00330151</Data>
+  <Data id="28" type="double">3.67141</Data>
+  <Data id="29" type="double">0.00460519</Data>
+  <Data id="30" type="string">%1</Data>
+  <Data id="31" type="double">-0.00773447</Data>
+  <Data id="32" type="int">0</Data>
+  <Data id="33" type="double">-0.000599348</Data>
+  <Data id="34" type="int">0</Data>
+  <Data id="35" type="string">%1</Data>
+  <Data id="36" type="string">(1,0)</Data>
+  <Data id="37" type="int">0</Data>
+  <Data id="38" type="string">%1</Data>
+  <Data id="39" type="int">0</Data>
+  <Data id="40" type="int">0</Data>
+  <Data id="41" type="string">(0,-1)</Data>
+  <Data id="42" type="double">0</Data>
+  <Data id="43" type="double">-0.0216173</Data>
+  <Data id="44" type="int">0</Data>
+  <Data id="45" type="int">-1</Data>
+  <Data id="46" type="double">0.879446</Data>
+  <Data id="47" type="double">3.75365</Data>
+  <Data id="48" type="string">angle t</Data>
+  <Data id="49" type="int">1</Data>
+  <Data id="50" type="string">%1</Data>
+  <Data id="51" type="int">0</Data>
+  <Data id="52" type="int">1</Data>
+  <Data id="53" type="double">-0.000599348</Data>
+  <Data id="54" type="double">0.00480498</Data>
+  <Data id="55" type="string">(cos(t),sin(t))</Data>
+  <Data id="56" type="string">(1, tan(t/2))</Data>
+  <Data id="57" type="string">%1</Data>
+  <Data id="58" type="int">0</Data>
+  <Data id="59" type="string">(tan(pi/4-t/2), 1)</Data>
+  <Data id="60" type="string">(cos(t), 0)</Data>
+  <Data id="61" type="string">(cot(t), 1)</Data>
+  <Data id="62" type="int">-1</Data>
+  <Data id="63" type="string">unit circle</Data>
+  <Data id="64" type="string">%1</Data>
+  <Data id="65" type="int">0</Data>
+  <Data id="66" type="string">%1</Data>
+  <Data id="67" type="double">0.00770692</Data>
+  <Data id="68" type="string">%1</Data>
+  <Data id="69" type="double">-0.000599348</Data>
+  <Data id="70" type="string">%1</Data>
+  <Data id="71" type="double">2.9973</Data>
+  <Data id="72" type="double">0</Data>
+  <Data id="73" type="int">0</Data>
+  <Data id="74" type="string">%1</Data>
+  <Data id="75" type="double">3</Data>
+  <Data id="76" type="string">angle control point</Data>
+  <Data id="77" type="string">(cos(t), 1)</Data>
+  <Data id="78" type="string">%1</Data>
+  <Data id="79" type="double">0</Data>
+  <Data id="80" type="int">0</Data>
+  <Data id="81" type="string">%1</Data>
+  <Data id="82" type="double">-0.00911932</Data>
+  <Data id="83" type="double">-0.00108368</Data>
+  <Data id="84" type="string">(-cos(t),,-sin(t))</Data>
+  <Data id="85" type="double">0.00460519</Data>
+  <Data id="86" type="string">distance cos(t)^2 form (0,0) via similar triangles</Data>
+  <Data id="87" type="double">0.00730736</Data>
+  <Data id="88" type="double">-0.00444699</Data>
+  <Data id="89" type="double">0.00163409</Data>
+  <Data id="90" type="string">(sec(t), 0)</Data>
+  <Data id="91" type="string">(1,1)</Data>
+  <Data id="92" type="int">0</Data>
+  <Data id="93" type="string">(0,0)</Data>
+  <Data id="94" type="double">0.0216173</Data>
+  <Data id="95" type="string">(0, sin(t))</Data>
+  <Data id="96" type="double">4.39992</Data>
+  <Data id="97" type="double">2.98649</Data>
+  <Data id="98" type="double">-0.00890562</Data>
+  <Data id="99" type="string">(1, sin(t))</Data>
+  <Data id="100" type="double">-0.00620346</Data>
+  <Data id="101" type="string">%1</Data>
+  <Data id="102" type="double">-0.0104772</Data>
+  <Data id="103" type="string">(0, csc(t))</Data>
+  <Data id="104" type="string">(0, tan(t/2)</Data>
+  <Data id="105" type="double">-0.000990899</Data>
+  <Object id="106" type="FixedPoint">
+   <Parent id="47"/>
+   <Parent id="28"/>
+  </Object>
+  <Object id="107" type="RelativePoint">
+   <Parent id="7"/>
+   <Parent id="72"/>
+   <Parent id="106"/>
+  </Object>
+  <Object id="108" type="Label">
+   <Parent id="44"/>
+   <Parent id="107"/>
+   <Parent id="10"/>
+   <Parent id="76"/>
+  </Object>
+  <Data id="109" type="double">0.0102093</Data>
+  <Data id="110" type="double">-0.0118731</Data>
+  <Data id="111" type="int">0</Data>
+  <Data id="112" type="string">%1</Data>
+  <Data id="113" type="double">0.00230765</Data>
+  <Data id="114" type="double">-0.0028721</Data>
+  <Data id="115" type="string">%1</Data>
+  <Data id="116" type="double">0.00293071</Data>
+  <Data id="117" type="string">%1</Data>
+  <Data id="118" type="double">-0.00761243</Data>
+  <Data id="119" type="string">%1</Data>
+  <Data id="120" type="double">0.00652975</Data>
+  <Data id="121" type="string">%1</Data>
+  <Data id="122" type="string">distance sin(t)^2 form (0,0) via similar triangles</Data>
+  <Data id="123" type="string">%1</Data>
+  <Data id="124" type="double">-0.00480746</Data>
+  <Data id="125" type="int">0</Data>
+  <Data id="126" type="string">(tan(pi/4-t/2), 0)</Data>
+  <Data id="127" type="double">0.00242671</Data>
+  <Data id="128" type="double">-0.00350129</Data>
+  <Data id="129" type="int">0</Data>
+  <Data id="130" type="double">0.00224657</Data>
+  <Data id="131" type="int">0</Data>
+  <Object id="132" type="FixedPoint">
+   <Parent id="97"/>
+   <Parent id="71"/>
+  </Object>
+  <Object id="133" type="LineAB">
+   <Parent id="132"/>
+   <Parent id="106"/>
+  </Object>
+  <Object id="134" type="RelativePoint">
+   <Parent id="79"/>
+   <Parent id="94"/>
+   <Parent id="132"/>
+  </Object>
+  <Object id="135" type="Label">
+   <Parent id="39"/>
+   <Parent id="134"/>
+   <Parent id="66"/>
+   <Parent id="93"/>
+  </Object>
+  <Data id="136" type="string">(1, tan(t))</Data>
+  <Data id="137" type="int">0</Data>
+  <Data id="138" type="double">-0.00330151</Data>
+  <Data id="139" type="string">%1</Data>
+  <Object id="140" type="FixedPoint">
+   <Parent id="96"/>
+   <Parent id="75"/>
+  </Object>
+  <Object id="141" type="RelativePoint">
+   <Parent id="18"/>
+   <Parent id="43"/>
+   <Parent id="140"/>
+  </Object>
+  <Object id="142" type="Label">
+   <Parent id="32"/>
+   <Parent id="141"/>
+   <Parent id="35"/>
+   <Parent id="36"/>
+  </Object>
+  <Object id="143" type="CircleBCP">
+   <Parent id="132"/>
+   <Parent id="140"/>
+  </Object>
+  <Object id="144" type="ConicLineIntersection">
+   <Parent id="143"/>
+   <Parent id="133"/>
+   <Parent id="62"/>
+  </Object>
+  <Object id="145" type="RelativePoint">
+   <Parent id="130"/>
+   <Parent id="102"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="146" type="Label">
+   <Parent id="131"/>
+   <Parent id="145"/>
+   <Parent id="101"/>
+   <Parent id="55"/>
+  </Object>
+  <Object id="147" type="LinePerpend">
+   <Parent id="133"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="148" type="Angle">
+   <Parent id="140"/>
+   <Parent id="132"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="149" type="ConicLineIntersection">
+   <Parent id="143"/>
+   <Parent id="133"/>
+   <Parent id="52"/>
+  </Object>
+  <Object id="150" type="RelativePoint">
+   <Parent id="4"/>
+   <Parent id="6"/>
+   <Parent id="149"/>
+  </Object>
+  <Object id="151" type="Label">
+   <Parent id="8"/>
+   <Parent id="150"/>
+   <Parent id="38"/>
+   <Parent id="84"/>
+  </Object>
+  <Object id="152" type="ConstrainedRelativePoint">
+   <Parent id="16"/>
+   <Parent id="42"/>
+   <Parent id="46"/>
+   <Parent id="143"/>
+  </Object>
+  <Object id="153" type="Label">
+   <Parent id="19"/>
+   <Parent id="152"/>
+   <Parent id="70"/>
+   <Parent id="63"/>
+  </Object>
+  <Object id="154" type="LineAB">
+   <Parent id="132"/>
+   <Parent id="140"/>
+  </Object>
+  <Object id="155" type="LineLineIntersection">
+   <Parent id="147"/>
+   <Parent id="154"/>
+  </Object>
+  <Object id="156" type="RelativePoint">
+   <Parent id="127"/>
+   <Parent id="138"/>
+   <Parent id="155"/>
+  </Object>
+  <Object id="157" type="Label">
+   <Parent id="34"/>
+   <Parent id="156"/>
+   <Parent id="112"/>
+   <Parent id="90"/>
+  </Object>
+  <Object id="158" type="LinePerpend">
+   <Parent id="154"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="159" type="LineLineIntersection">
+   <Parent id="158"/>
+   <Parent id="154"/>
+  </Object>
+  <Object id="160" type="LinePerpend">
+   <Parent id="133"/>
+   <Parent id="159"/>
+  </Object>
+  <Object id="161" type="LineLineIntersection">
+   <Parent id="133"/>
+   <Parent id="160"/>
+  </Object>
+  <Object id="162" type="RelativePoint">
+   <Parent id="114"/>
+   <Parent id="120"/>
+   <Parent id="161"/>
+  </Object>
+  <Object id="163" type="Label">
+   <Parent id="73"/>
+   <Parent id="162"/>
+   <Parent id="25"/>
+   <Parent id="86"/>
+  </Object>
+  <Object id="164" type="RelativePoint">
+   <Parent id="20"/>
+   <Parent id="2"/>
+   <Parent id="159"/>
+  </Object>
+  <Object id="165" type="Label">
+   <Parent id="58"/>
+   <Parent id="164"/>
+   <Parent id="81"/>
+   <Parent id="60"/>
+  </Object>
+  <Object id="166" type="ConicLineOtherIntersection">
+   <Parent id="143"/>
+   <Parent id="154"/>
+   <Parent id="140"/>
+  </Object>
+  <Object id="167" type="LineAB">
+   <Parent id="166"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="168" type="RelativePoint">
+   <Parent id="5"/>
+   <Parent id="53"/>
+   <Parent id="166"/>
+  </Object>
+  <Object id="169" type="Label">
+   <Parent id="15"/>
+   <Parent id="168"/>
+   <Parent id="50"/>
+   <Parent id="13"/>
+  </Object>
+  <Object id="170" type="LinePerpend">
+   <Parent id="154"/>
+   <Parent id="132"/>
+  </Object>
+  <Object id="171" type="LineLineIntersection">
+   <Parent id="170"/>
+   <Parent id="147"/>
+  </Object>
+  <Object id="172" type="RelativePoint">
+   <Parent id="27"/>
+   <Parent id="88"/>
+   <Parent id="171"/>
+  </Object>
+  <Object id="173" type="Label">
+   <Parent id="40"/>
+   <Parent id="172"/>
+   <Parent id="68"/>
+   <Parent id="103"/>
+  </Object>
+  <Object id="174" type="LinePerpend">
+   <Parent id="170"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="175" type="LineLineIntersection">
+   <Parent id="170"/>
+   <Parent id="174"/>
+  </Object>
+  <Object id="176" type="LinePerpend">
+   <Parent id="133"/>
+   <Parent id="175"/>
+  </Object>
+  <Object id="177" type="LineLineIntersection">
+   <Parent id="133"/>
+   <Parent id="176"/>
+  </Object>
+  <Object id="178" type="RelativePoint">
+   <Parent id="113"/>
+   <Parent id="118"/>
+   <Parent id="177"/>
+  </Object>
+  <Object id="179" type="Label">
+   <Parent id="24"/>
+   <Parent id="178"/>
+   <Parent id="26"/>
+   <Parent id="122"/>
+  </Object>
+  <Object id="180" type="RelativePoint">
+   <Parent id="33"/>
+   <Parent id="82"/>
+   <Parent id="175"/>
+  </Object>
+  <Object id="181" type="Label">
+   <Parent id="12"/>
+   <Parent id="180"/>
+   <Parent id="121"/>
+   <Parent id="95"/>
+  </Object>
+  <Object id="182" type="LinePerpend">
+   <Parent id="174"/>
+   <Parent id="140"/>
+  </Object>
+  <Object id="183" type="LineLineIntersection">
+   <Parent id="182"/>
+   <Parent id="147"/>
+  </Object>
+  <Object id="184" type="LineAB">
+   <Parent id="183"/>
+   <Parent id="132"/>
+  </Object>
+  <Object id="185" type="RelativePoint">
+   <Parent id="85"/>
+   <Parent id="124"/>
+   <Parent id="183"/>
+  </Object>
+  <Object id="186" type="Label">
+   <Parent id="137"/>
+   <Parent id="185"/>
+   <Parent id="117"/>
+   <Parent id="56"/>
+  </Object>
+  <Object id="187" type="LineLineIntersection">
+   <Parent id="133"/>
+   <Parent id="182"/>
+  </Object>
+  <Object id="188" type="RelativePoint">
+   <Parent id="128"/>
+   <Parent id="31"/>
+   <Parent id="187"/>
+  </Object>
+  <Object id="189" type="Label">
+   <Parent id="17"/>
+   <Parent id="188"/>
+   <Parent id="57"/>
+   <Parent id="136"/>
+  </Object>
+  <Object id="190" type="LineLineIntersection">
+   <Parent id="174"/>
+   <Parent id="182"/>
+  </Object>
+  <Object id="191" type="RelativePoint">
+   <Parent id="29"/>
+   <Parent id="83"/>
+   <Parent id="190"/>
+  </Object>
+  <Object id="192" type="Label">
+   <Parent id="125"/>
+   <Parent id="191"/>
+   <Parent id="139"/>
+   <Parent id="99"/>
+  </Object>
+  <Object id="193" type="LineLineIntersection">
+   <Parent id="170"/>
+   <Parent id="167"/>
+  </Object>
+  <Object id="194" type="RelativePoint">
+   <Parent id="54"/>
+   <Parent id="110"/>
+   <Parent id="193"/>
+  </Object>
+  <Object id="195" type="Label">
+   <Parent id="111"/>
+   <Parent id="194"/>
+   <Parent id="115"/>
+   <Parent id="104"/>
+  </Object>
+  <Object id="196" type="ConicLineIntersection">
+   <Parent id="143"/>
+   <Parent id="170"/>
+   <Parent id="45"/>
+  </Object>
+  <Object id="197" type="LinePerpend">
+   <Parent id="158"/>
+   <Parent id="196"/>
+  </Object>
+  <Object id="198" type="LineLineIntersection">
+   <Parent id="197"/>
+   <Parent id="147"/>
+  </Object>
+  <Object id="199" type="LineAB">
+   <Parent id="198"/>
+   <Parent id="132"/>
+  </Object>
+  <Object id="200" type="RelativePoint">
+   <Parent id="116"/>
+   <Parent id="1"/>
+   <Parent id="198"/>
+  </Object>
+  <Object id="201" type="Label">
+   <Parent id="129"/>
+   <Parent id="200"/>
+   <Parent id="119"/>
+   <Parent id="59"/>
+  </Object>
+  <Object id="202" type="LineLineIntersection">
+   <Parent id="133"/>
+   <Parent id="197"/>
+  </Object>
+  <Object id="203" type="RelativePoint">
+   <Parent id="105"/>
+   <Parent id="100"/>
+   <Parent id="202"/>
+  </Object>
+  <Object id="204" type="Label">
+   <Parent id="80"/>
+   <Parent id="203"/>
+   <Parent id="74"/>
+   <Parent id="61"/>
+  </Object>
+  <Object id="205" type="LineLineIntersection">
+   <Parent id="197"/>
+   <Parent id="158"/>
+  </Object>
+  <Object id="206" type="RelativePoint">
+   <Parent id="3"/>
+   <Parent id="98"/>
+   <Parent id="205"/>
+  </Object>
+  <Object id="207" type="Label">
+   <Parent id="51"/>
+   <Parent id="206"/>
+   <Parent id="14"/>
+   <Parent id="77"/>
+  </Object>
+  <Object id="208" type="LineLineIntersection">
+   <Parent id="197"/>
+   <Parent id="182"/>
+  </Object>
+  <Object id="209" type="RelativePoint">
+   <Parent id="87"/>
+   <Parent id="9"/>
+   <Parent id="208"/>
+  </Object>
+  <Object id="210" type="Label">
+   <Parent id="92"/>
+   <Parent id="209"/>
+   <Parent id="78"/>
+   <Parent id="91"/>
+  </Object>
+  <Object id="211" type="RelativePoint">
+   <Parent id="21"/>
+   <Parent id="11"/>
+   <Parent id="196"/>
+  </Object>
+  <Object id="212" type="Label">
+   <Parent id="22"/>
+   <Parent id="211"/>
+   <Parent id="64"/>
+   <Parent id="23"/>
+  </Object>
+  <Object id="213" type="ConicLineIntersection">
+   <Parent id="143"/>
+   <Parent id="170"/>
+   <Parent id="49"/>
+  </Object>
+  <Object id="214" type="LineAB">
+   <Parent id="213"/>
+   <Parent id="144"/>
+  </Object>
+  <Object id="215" type="LineLineIntersection">
+   <Parent id="214"/>
+   <Parent id="154"/>
+  </Object>
+  <Object id="216" type="RelativePoint">
+   <Parent id="89"/>
+   <Parent id="109"/>
+   <Parent id="215"/>
+  </Object>
+  <Object id="217" type="Label">
+   <Parent id="37"/>
+   <Parent id="216"/>
+   <Parent id="123"/>
+   <Parent id="126"/>
+  </Object>
+  <Object id="218" type="RelativePoint">
+   <Parent id="69"/>
+   <Parent id="67"/>
+   <Parent id="213"/>
+  </Object>
+  <Object id="219" type="Label">
+   <Parent id="65"/>
+   <Parent id="218"/>
+   <Parent id="30"/>
+   <Parent id="41"/>
+  </Object>
+ </Hierarchy>
+ <View>
+  <Draw color="#0000ff" shown="true" object="212" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="165" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="170" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="133" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="213" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="41"/>
+  <Draw color="#0000ff" shown="true" object="202" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="61"/>
+  <Draw color="#0000ff" shown="true" object="135" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="155" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="90"/>
+  <Draw color="#0000ff" shown="true" object="181" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="169" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="193" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="104"/>
+  <Draw color="#0000ff" shown="true" object="197" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="174" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="166" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="13"/>
+  <Draw color="#0000ff" shown="true" object="196" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="23"/>
+  <Draw color="#0000ff" shown="true" object="173" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="182" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#00ff00" shown="true" object="163" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="153" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="198" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="59"/>
+  <Draw color="#0000ff" shown="true" object="217" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#00ff00" shown="true" object="161" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="86"/>
+  <Draw color="#0000ff" shown="true" object="210" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="147" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="171" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="103"/>
+  <Draw color="#0000ff" shown="true" object="190" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="99"/>
+  <Draw color="#0000ff" shown="true" object="142" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="205" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="77"/>
+  <Draw color="#0000ff" shown="true" object="159" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="60"/>
+  <Draw color="#00ff00" shown="true" object="177" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="122"/>
+  <Draw color="#0000ff" shown="true" object="158" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="214" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="175" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="95"/>
+  <Draw color="#0000ff" shown="true" object="108" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="154" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="149" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="84"/>
+  <Draw color="#0000ff" shown="true" object="160" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="144" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="55"/>
+  <Draw color="#0000ff" shown="true" object="215" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="126"/>
+  <Draw color="#0000ff" shown="true" object="183" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="56"/>
+  <Draw color="#0000ff" shown="true" object="167" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="151" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="176" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="219" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="192" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="207" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="199" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="189" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="184" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="195" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="157" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="204" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#00ff00" shown="true" object="179" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="186" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="201" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+  <Draw color="#0000ff" shown="true" object="187" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="136"/>
+  <Draw color="#0000ff" shown="true" object="132" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="93"/>
+  <Draw color="#aa55ff" shown="true" object="106" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="76"/>
+  <Draw color="#0000ff" shown="true" object="140" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="36"/>
+  <Draw color="#0000ff" shown="true" object="143" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="63"/>
+  <Draw color="#0000ff" shown="true" object="208" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="91"/>
+  <Draw color="#aa55ff" shown="true" object="148" width="-1" font="Cantarell,10,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="48"/>
+  <Draw color="#0000ff" shown="true" object="146" width="-1" font="Ubuntu,11,-1,5,50,0,0,0,0,0" style="SolidLine" point-style="Round" namecalcer="none"/>
+ </View>
+</KigDocument>

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-19T17:29:52+00:00
+
+====== discreteLogarithm ======
+Created Monday 19 November 2018
+
+{{./equation.png?type=equation}} implies x is the discrete logarithm(base b) of y, modulo m.
+The discrete logarithm does not always exist. For example, if b=-1, y=2, m>3.
+b is a primative root modulo m iff {{./equation003.png?type=equation}}.
+ {{./equation001.png?type=equation}}.
+{{./equation002.png?type=equation}}.
+{{./equation004.png?type=equation}}
+{{./equation005.png?type=equation}}

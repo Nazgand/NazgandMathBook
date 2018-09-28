@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="backmatter">
+  <title>Back Matter</title>
+  <!-- mostly for HTML sectioning -->
+  <appendix>
+    <title>Notation</title>
+    <p>The following table defines the notation used in this book. Page numbers or references refer to the first appearance of each symbol.</p>
+  </appendix>
+  <xi:include href="./gfdl-mathbook.xml"/>
+  <!-- GFDL License text -->
+  <!-- Index follows appendices, preceded only colophon -->
+  <index>
+    <index-list/>
+  </index>
+  <colophon xml:id="back-colophon">
+    <p>This book was authored in MathBook XML.</p>
+  </colophon>
+</backmatter>

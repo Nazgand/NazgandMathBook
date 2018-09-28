@@ -1,0 +1,54 @@
+\input{../NazgandStyle}
+\title{
+	Kettenbruch Continued Fractions
+}
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to have fun reviewing Kettenbruch notation for continued fractions.
+	\end{abstract}
+	
+	\section{Introduction}
+	The 2 defining equations are:
+	\begin{equation}
+		\ketten{k=n}{n}{a_k}{b_k}=\cfrac{a_n}{b_n}
+	\end{equation}
+	\begin{equation}
+		\ketten{k=n}{m}{a_k}{b_k}=\cfrac{a_n}{b_n+\ketten{k=n+1}{m}{a_k}{b_k}}
+	\end{equation}
+
+	The most interesting continued fractions are infinite continued fractions, like so, yet careful consideration must be taken in this case, e.g. because the limit might not exist:
+	\begin{equation}
+		\ketten{k=1}{\infty}{a_k}{b_k}=
+		\lim_{m\to\infty}\ketten{k=1}{m}{a_k}{b_k}=
+		\cfrac{a_1}{b_1+\cfrac{a_2}{b_2+\cfrac{a_3}{b_3+\ddots}}}
+	\end{equation}
+
+	\section{Examples}
+	One of the simplest cases to consider is \(a_k=a\in\mathbb{C},b_k=b\in\mathbb{C},b\neq 0\).
+	\begin{equation}
+		x=\ketten{k=1}{\infty}{a}{b}=\frac{a}{b+\ketten{k=1}{\infty}{a}{b}}
+		\Rightarrow
+		x^2+bx-a=0
+	\end{equation}
+	Here we run into a problem. The limit exists, but there are 2 values it might be. The simplest way to get around this problem is to choose \(\Bqty{a,b}\subset\mathbb{R}^+\) such that 1 of the solutions is not in \(\mathbb{R}^+\), thus proving the limit is the other solution which would be in \(\mathbb{R}^+\). E.g.:
+
+	\begin{equation}
+		x=\ketten{k=1}{\infty}{1}{1}
+		\Rightarrow
+		x^2+x-1=0
+		\Rightarrow
+		x=\frac{-1\pm\sqrt{5}}{2}
+		\Rightarrow
+		\ketten{k=1}{\infty}{1}{1}=\frac{-1+\sqrt{5}}{2}
+	\end{equation}
+
+	A continued fraction I discovered without proof is:
+	\begin{equation}
+		x+\ketten{k=1}{\infty}{k}{x+k}=\frac{1}{e \gamma \pqty{x+1,1}}
+		=\frac{1}{\dint{0}{1}{t^x e^{1-t}}{t}}
+	\end{equation}
+	where \(\gamma\) is the lower incomplete gamma function.
+\end{document}

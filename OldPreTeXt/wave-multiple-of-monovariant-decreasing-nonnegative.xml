@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="wave-multiple-of-monovariant-decreasing-nonnegative">
+  <title>Integrals of pseudo-wave multiple of monovariant decreasing nonnegative functions.</title>
+  <introduction>
+    <p>This chapter is inspired by the integral <m>\int_0^\infty \frac{\sin\pqty{x}}{x}\,dx</m>.</p>
+    <me>x\in\mathbb{R}^+\Rightarrow\bqty{\operatorname{mdfz}\pqty{x}\in\mathbb{R} \land\bqty{y\in\mathbb{R}^+\Rightarrow \operatorname{mdfz}\pqty{x}\geq\operatorname{mdfz}\pqty{x+y}}}</me>
+    <me>0=\lim_{x\to\infty}\operatorname{mdfz}\pqty{x}</me>
+  </introduction>
+  <section xml:id="section-proof-of-convergence">
+    <title>Proof of convergence</title>
+    <definition xml:id="definition-pseudo-wave">
+      <p>A function <m>\operatorname{pw}\pqty{t}</m> is a pseudo-wave with a pseudo-period <m>p</m> if, for every time <m>a</m> in the domain, there exists a time <m>b</m> such that</p>
+      <me>a\lt b\leq a+p \land \operatorname{pw}\pqty{a}=\operatorname{pw}\pqty{a+b}</me>
+      <p>This section uses a real-valued differentiable bounded pseudo-wave defined on the positive reals.</p>
+      <me>\exists \Bqty{u,l}\subset\mathbb{R} \mid t\in\mathbb{R}^+\implies\bqty{u\geq\operatorname{pw}\pqty{t}\geq l \land \pdiff{t}{}\operatorname{pw}\pqty{t}\in\mathbb{R}}</me>
+    </definition>
+    <definition xml:id="definition-wave-integral-supremum-infimum">
+      <p>The times where the pseudo-wave equals the supremum of the wave are important for establishing upper bounds.</p>
+      <me>wisp=\Bqty{b\in\mathbb{R} \vert \operatorname{pw}\pqty{b} = \bqty{\max_{r\in\mathbb{R}^+} \operatorname{pw}\pqty{r}} }</me>
+      <p>The times where the pseudo-wave equals the infimum of the wave are important for establishing upper bounds.</p>
+      <me>wisp=\Bqty{b\in\mathbb{R} \vert \operatorname{pw}\pqty{b} = \bqty{\min_{r\in\mathbb{R}^+} \operatorname{pw}\pqty{r}} }</me>
+    </definition>
+    <lemma xml:id="lemma-wisp-upper-bound">
+      <statement>
+        <p>Wave integral supremum points establish upper bounds.</p>
+        <me>\bqty{\Bqty{a,b}\subset wisp \land b>a} \Rightarrow \int_a^b \operatorname{mdfz}\pqty{t}\pqty{\pdiff{t}{}\operatorname{pw}\pqty{t}}\,dt \leq 0</me>
+      </statement>
+      <proof>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-wiip-lower-bound">
+      <statement>
+        <p>Wave integral supremum points establish upper bounds.</p>
+        <me>\bqty{\Bqty{a,b}\subset wiip \land b>a} \Rightarrow \int_a^b \operatorname{mdfz}\pqty{t}\pqty{\pdiff{t}{}\operatorname{pw}\pqty{t}}\,dt \geq 0</me>
+      </statement>
+      <proof>
+      </proof>
+    </lemma>
+    <lemma xml:id="lemma-upper-lower-bounds-squeeze">
+      <statement>
+        <p>For <m>a\in\mathbb{R}^+</m>, the integral <m>\int_a^\infty \operatorname{mdfz}\pqty{t}\pqty{\pdiff{t}{}\operatorname{pw}\pqty{t}}\,dt</m> converges because the upper and lower bounds become arbitrarily close.</p>
+      </statement>
+      <proof>
+      </proof>
+    </lemma>
+  </section>
+  <references>
+    <title>References and Suggested Readings</title>
+    <biblio type="raw"><url href="https://math.stackexchange.com/questions/891812/integration-of-sinc-function">Mathematics Stack Exchange: Integration of Sinc function</url></biblio>
+    <biblio type="raw"><url href="https://www.youtube.com/watch?v=ggFYBssFTkU">Youtube: Flammable Maths</url></biblio>
+  </references>
+</chapter>

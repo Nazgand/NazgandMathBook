@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-03T09:37:07+00:00
+
+====== Tangent half angle formula ======
+Created Saturday 03 November 2018
+
+{{~/Pictures/Screenshot from 2018-11-03 09-36-21.png}}
+On the complex plane, the circle red dot is {{./equation.png?type=equation}}.
+The line red dot is (via similar triangles) {{./equation002.png?type=equation}}{{./equation003.png?type=equation}} (via [[thePythagoreanTheorem]]){{./equation004.png?type=equation}}.
