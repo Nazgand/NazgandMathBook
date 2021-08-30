@@ -68,5 +68,26 @@
 	1-\prod_{m=1}^{j}a_m^{-1}=
 	\sum_{k=1}^{j}\frac{a_k-1}{\prod_{m=1}^{k}a_m}
 	\end{equation}
+	
+	Proof of previous equation by induction: For the base case, $j=0$, we have $1-1=0$.
+	For the inductive step, we can simply prove
+	\begin{equation}
+		\pqty{1-\prod_{m=1}^{j+1}a_m^{-1}}-\pqty{1-\prod_{m=1}^{j}a_m^{-1}}=
+		\pqty{\sum_{k=1}^{j+1}\frac{a_k-1}{\prod_{m=1}^{k}a_m}}-
+		\pqty{\sum_{k=1}^{j}\frac{a_k-1}{\prod_{m=1}^{k}a_m}}
+	\end{equation}
+	
+	Simplify both sides to get:
+	\begin{equation}
+		\prod_{m=1}^{j}a_m^{-1}-\prod_{m=1}^{j+1}a_m^{-1}
+		=\sum_{k=j+1}^{j+1}\frac{a_k-1}{\prod_{m=1}^{k}a_m}
+		=\frac{a_{j+1}-1}{\prod_{m=1}^{j+1}a_m}
+	\end{equation}
+
+	Multiply both sides by $\prod_{m=1}^{j+1}a_m$:
+	\begin{equation}
+		a_{j+1}-1=a_{j+1}-1
+	\end{equation}
+	\qed
 
 \end{document}
