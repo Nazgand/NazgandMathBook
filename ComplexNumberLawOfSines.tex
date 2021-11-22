@@ -81,7 +81,14 @@
 	\subsection{The distinct 3 variable case where $\Bqty{z_0,z_1,z_2}\subset\mathbb{C},z_0\neq z_1,z_1\neq z_2,z_2\neq z_0$:}
 	\begin{equation}
 		\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_2-z_0}{z_1-z_0}}}}}{\abs{z_2-z_1}}
+		=\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_0-z_1}{z_2-z_1}}}}}{\abs{z_0-z_2}}
+		=\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_1-z_2}{z_0-z_2}}}}}{\abs{z_1-z_0}}
 	\end{equation}
-	is a formula with a symmetry under any permutation of the 3 variables.
+	is a formula with a symmetry rotating of the 3 variables, that is, substituting
+	$z_0\to z_1,z_1\to z_2,z_2\to z_0$. Furthermore, swapping 2 variables negates the value, so
+	\begin{equation}
+		\abs{\frac{\sin\pqty{\Im\pqty{\ln\pqty{\frac{z_2-z_0}{z_1-z_0}}}}}{z_2-z_1}}
+	\end{equation}
+	is invariant under any permutation of the 3 variables.
 
 \end{document}
