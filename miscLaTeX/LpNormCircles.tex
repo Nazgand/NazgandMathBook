@@ -1,4 +1,17 @@
 \documentclass[]{article}
+%document colors
+\usepackage{xcolor}
+\definecolor{favoritecolor1}{HTML}{607CB2}
+\definecolor{favoritecolor2}{HTML}{303E59}
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+	\color{#1}\global\let\default@color\current@color
+}
+\makeatother
+
+\AtBeginDocument{\globalcolor{favoritecolor2}}
+\pagecolor{favoritecolor1}
+
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
