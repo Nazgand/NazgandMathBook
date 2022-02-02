@@ -1,0 +1,85 @@
+\documentclass[]{article}
+%document colors
+\usepackage{xcolor}
+\definecolor{favoritecolor1}{HTML}{607CB2}
+\definecolor{favoritecolor2}{HTML}{303E59}
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+	\color{#1}\global\let\default@color\current@color
+}
+\makeatother
+
+\AtBeginDocument{\globalcolor{favoritecolor2}}
+\pagecolor{favoritecolor1}
+
+%made from template named MathArticleTemplate
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{graphics}
+
+%Fix \eqref in section title
+\pdfstringdefDisableCommands{\def\eqref#1{(\ref{#1})}}
+
+\DeclareMathOperator{\es}{Es}
+\DeclareMathOperator{\ez}{Ez}
+\DeclareMathOperator{\gs}{gs}
+\DeclareMathOperator{\md}{mod}
+\DeclareMathOperator{\pow}{Pow}
+%Parenthesis, Braces, Brackets usepackage{physics}
+\newcommand{\pqty}[1]{{\left(#1\right)}}
+\newcommand{\Bqty}[1]{{\left\{#1\right\}}}
+\newcommand{\bqty}[1]{{\left[#1\right]}}
+\newcommand{\abs}[1]{{\left\lvert#1\right\rvert}}
+%other stuff
+\newcommand{\floor}[1]{{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{{\left\lceil#1\right\rceil}}
+%Laplace transform and inverse
+\newcommand{\laplace}[1]{\mathcal{L}\Bqty{#1}\pqty{s}}
+\newcommand{\laplaceInv}[1]{\mathcal{L}^{-1}\Bqty{#1}\pqty{t}}
+%Derivatives
+\newcommand{\pdiff}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
+
+%lemma,theorem, proof
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\numberwithin{equation}{section}
+
+%\usepackage{minted}
+%opening
+\author{Mark Andrew Gerads: \href{MailTo:MarkAndrewGerads.Nazgand@Gmail.Com}{MarkAndrewGerads.Nazgand@Gmail.Com}}
+
+\title{
+	Cauchy Sequence Permutations
+	
+	\href{https://github.com/Nazgand/nazgandMathBook}{https://github.com/Nazgand/nazgandMathBook}
+}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to notice that [every reordering of a Cauchy Sequence] is a Cauchy Sequence.
+	\end{abstract}
+	
+	Let a bijection exist on $\mathbb{N}_0$ (The set of natural numbers including 0), $perm:\mathbb{N}_0\to\mathbb{N}_0$. $perm$ is short for 'permutation', because every bijection from a set to itself is a permutation.
+	
+	Let a Cauchy Sequence exist, $cs:\mathbb{N}_0\to\mathbb{C}$, with the limit
+	\begin{equation}
+		l=\lim\limits_{k\to\infty}cs\pqty{k}\in\mathbb{C}
+	\end{equation}
+
+	Then
+	\begin{equation}
+		l=\lim\limits_{k\to\infty}cs\pqty{perm\pqty{k}}\in\mathbb{C}
+	\end{equation}
+
+	Also, note $\mathcal{O}\pqty{k}=\mathcal{O}\pqty{perm\pqty{k}}$.
+\end{document}
