@@ -1,0 +1,106 @@
+\documentclass[]{article}
+%document colors
+\usepackage{xcolor}
+\definecolor{favoritecolor1}{HTML}{607CB2}
+\definecolor{favoritecolor2}{HTML}{303E59}
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+	\color{#1}\global\let\default@color\current@color
+}
+\makeatother
+
+\AtBeginDocument{\globalcolor{favoritecolor2}}
+\pagecolor{favoritecolor1}
+
+%made from template named MathArticleTemplate
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{graphics}
+
+%Fix \eqref in section title
+\pdfstringdefDisableCommands{\def\eqref#1{(\ref{#1})}}
+
+\DeclareMathOperator{\es}{Es}
+\DeclareMathOperator{\ez}{Ez}
+\DeclareMathOperator{\gs}{gs}
+\DeclareMathOperator{\md}{mod}
+\DeclareMathOperator{\pow}{Pow}
+%Parenthesis, Braces, Brackets usepackage{physics}
+\newcommand{\pqty}[1]{{\left(#1\right)}}
+\newcommand{\Bqty}[1]{{\left\{#1\right\}}}
+\newcommand{\bqty}[1]{{\left[#1\right]}}
+\newcommand{\abs}[1]{{\left\lvert#1\right\rvert}}
+%other stuff
+\newcommand{\floor}[1]{{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{{\left\lceil#1\right\rceil}}
+%Laplace transform and inverse
+\newcommand{\laplace}[1]{\mathcal{L}\Bqty{#1}\pqty{s}}
+\newcommand{\laplaceInv}[1]{\mathcal{L}^{-1}\Bqty{#1}\pqty{t}}
+%Derivatives
+\newcommand{\pdiff}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
+%Kettenbruch
+\newcommand{\ketten}[4]{\underset{#1}{\overset{#2}{\LARGE\mathrm K}}\frac{#3}{#4}}
+
+%lemma,theorem, proof
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\numberwithin{equation}{section}
+
+%\usepackage{minted}
+%opening
+\author{Mark Andrew Gerads: \href{MailTo:MarkAndrewGerads.Nazgand@Gmail.Com}{MarkAndrewGerads.Nazgand@Gmail.Com}}
+
+\title{
+	Argument Sum Rules From Homogeneous Linear Differential Equations Of Constant Coefficients Conjecture
+	
+	\href{https://github.com/Nazgand/nazgandMathBook}{https://github.com/Nazgand/nazgandMathBook}
+}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to conjecture a seemingly fundamental calculus fact.
+	\end{abstract}
+	
+	A [homogeneous linear differential equation of constant coefficients] has the form
+	\begin{equation}
+		0=\sum_{k=0}^{n}a_k\pdiff{z}{k}f\pqty{z}
+		=\sum_{k=0}^{n}a_k f^\pqty{k}\pqty{z}
+	\end{equation}
+	where $a_k\in\mathbb{C}, f:\mathbb{C}\to\mathbb{C}$.
+	Let $f_1\pqty{z},\dots,f_n\pqty{z}$ be solutions that span the vector space of solutions of the [homogeneous linear differential equation of constant coefficients]. To be clear:
+	\begin{equation}
+		\Bqty{f\pqty{z} \mid 0=\sum_{k=0}^{n}a_k f^\pqty{k}\pqty{z}}
+		=\Bqty{\sum_{k=1}^{n}b_k f_k\pqty{z} \mid b_k\in\mathbb{C}}
+	\end{equation}
+	Let us define a column vector and clarify its transpose (a row vector):
+	\begin{equation}
+		v\pqty{z_0}=
+		\begin{pmatrix}
+			f_1\pqty{z_0} \\
+			\vdots \\
+			f_n\pqty{z_0} \\
+		\end{pmatrix}
+		,
+		v\pqty{z_1}^T=
+		\begin{pmatrix}
+			f_1\pqty{z_1} &
+			\dots &
+			f_n\pqty{z_1}
+		\end{pmatrix}
+	\end{equation}
+	I conjecture there exists a complex-valued constant $n$ by $n$ symmetric matrix $A$ ($A=A^T$) such that
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}^T A v\pqty{z_0}=v\pqty{z_0}^T A v\pqty{z_1}
+	\end{equation}
+
+\end{document}
