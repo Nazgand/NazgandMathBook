@@ -17,7 +17,7 @@ noncomputable
 def rues (n:ℕ) (z:ℂ) : ℂ :=
   tsum (λ (k:ℕ), z ^ (n*k) / (n*k).factorial)
 
-lemma ruesSummable (n:ℕ) (z:ℂ) : summable (λ (k:ℕ), z ^ (n*k) / (n*k).factorial):=
+lemma ruesSummable (n:ℕ) (h:n>0) (z:ℂ) : summable (λ (k:ℕ), z ^ (n*k) / (n*k).factorial):=
 begin
   rw [summable],
   sorry,
