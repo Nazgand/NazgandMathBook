@@ -6,6 +6,7 @@ import algebra.group_with_zero.defs
 open classical complex asymptotics real normed_space
 open_locale classical big_operators nat
 
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/definition.20of.20exp.20using.20tsum
 lemma expTsumForm (z:ℂ) : exp z = tsum (λ (k:ℕ), z ^ k / k.factorial):=
 begin
   rw [exp_eq_exp_ℂ, exp_eq_tsum_div],
@@ -17,11 +18,9 @@ noncomputable
 def rues (n:ℕ) (z:ℂ) : ℂ :=
   tsum (λ (k:ℕ), z ^ (n*k) / (n*k).factorial)
 
-lemma ruesSummable (n:ℕ) (h:n>0) (z:ℂ) : summable (λ (k:ℕ), z ^ (n*k) / (n*k).factorial):=
-begin
-  rw [summable],
-  sorry,
-end
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Showing.20a.20sum.20is.20summable
+lemma ruesSummable (n:ℕ) (h:0<n) (z:ℂ) : summable (λ (k:ℕ), z ^ (n*k) / (n*k).factorial):=
+(exp_series_div_summable ℂ z).comp_injective (strict_mono_mul_left_of_pos h).injective
 
 lemma imagPartsOfSumEqSumOfImagParts (f:ℕ→ℂ) (hf:summable f):
       im (∑' (k : ℕ), f k) = (∑' (k : ℕ), im (f k)):=
@@ -37,7 +36,7 @@ begin
   continuity,
 end
 
-lemma ruesRealToReal (n:ℕ) (h:n>0) (x:ℝ) : (rues n x).im = 0 :=
+lemma ruesRealToReal (n:ℕ) (h:0<n) (x:ℝ) : (rues n x).im = 0 :=
 begin
   rw [rues, imagPartsOfSumEqSumOfImagParts],
   {
@@ -47,65 +46,18 @@ begin
     ext1,
     sorry,
   },
-  exact ruesSummable n x,
+  exact ruesSummable n h x,
 end
 
-lemma cpowIntExponentSplitBase (z1 z2:ℂ) (n:ℕ) : (z1 * z2) ^ n = z1 ^ n * z2 ^ n:=
-begin
-  induction n with n ih,
-  simp only [pow_zero, mul_one],
-  rw [pow_succ,pow_succ,pow_succ],
-  have h: z1 * z1 ^ n * (z2 * z2 ^ n) = z1 * z2 * (z1 ^ n * z2 ^ n),
-    ring,
-  rw h,
-  congr' 1,
-end
-
-lemma cpowIntExponentSplitExponent (z1:ℂ) (n k:ℕ) : z1 ^ (n + k) = z1 ^ n * z1 ^ k:=
-begin
-  induction k with k ih,
-  simp only [add_zero, pow_zero, mul_one],
-  have h: k.succ =  k + 1,
-  simp only [eq_self_iff_true],
-  rw [pow_succ, h],
-  have h2: n + (k + 1) = (n+k)+1,
-  simp only [add_comm, add_assoc],
-  rw h2,
-  have h3: n + k + 1=(n + k).succ,
-  simp only [eq_self_iff_true],
-  rw [h3, pow_succ],
-  have h4: z1 ^ n * (z1 * z1 ^ k) = z1 * (z1 ^ n * z1 ^ k),
-  ring,
-  rw h4,
-  congr' 1,
-end
-
-lemma cpowIntTimesIntExponent (z1:ℂ) (n k:ℕ) : z1 ^ (n * k) = (z1 ^ n) ^ k:=
-begin
-  induction k with k ih,
-  simp only [mul_zero, pow_zero],
-  rw [pow_succ],
-  have h: n * k.succ = n*(k+1),
-    simp only [eq_self_iff_true],
-  rw h,
-  have h2: n * (k + 1) = n+n*k,
-    ring,
-  rw h2,
-  have h3:z1 ^ (n + n * k) = z1 ^ n * z1 ^ (n * k),
-    exact cpowIntExponentSplitExponent z1 n (n * k),
-    rw h3,
-  congr' 1,
-end
-
-lemma ruesRotationallySymmetric (n:ℕ) (h:n>0) (z rou:ℂ) (h:rou ^ n = 1):rues n z=rues n (z*rou):=
+lemma ruesRotationallySymmetric (n:ℕ) (h:0<n) (z rou:ℂ) (h:rou ^ n = 1):rues n z=rues n (z*rou):=
 begin
   rw [rues, rues],
   congr' 1,
   ext1,
   have h2: (z * rou) ^ (n * x) = z ^ (n * x) * rou ^ (n * x),
-    exact cpowIntExponentSplitBase z rou (n * x),
+    exact mul_pow z rou (n * x),
   have h3: rou ^ (n * x) = (rou ^ n) ^ x,
-    exact cpowIntTimesIntExponent rou n x,
+    exact pow_mul rou n x,
   simp [h2,h3,h],
 end
 
@@ -116,6 +68,7 @@ def ruesDiff (n:ℕ) (m:ℤ) (z:ℂ) : ℂ :=
   tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0)
 
 -- The sums need to be stretched with additional zero coefficients general form
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma tsum_mul_ite {α} [topological_space α] [t2_space α] [add_comm_monoid α]
   (f : ℕ → α) {n : ℕ} (h : 0 < n) :
   ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
@@ -126,10 +79,12 @@ begin
 end
 
 -- The sums need to be stretched with additional zero coefficients specific form
-lemma needZeroCoeff (f:ℕ→ℂ) (n:ℕ) (h : n>0) : ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
+lemma needZeroCoeff (f:ℕ→ℂ) (n:ℕ) (h : 0<n) : ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
 tsum_mul_ite _ h
 
-lemma ruesDiffM0EqRues_first_try (n:ℕ) (h:n>0) (z:ℂ) : rues n z = ruesDiff n 0 z :=
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
+lemma ruesDiffM0EqRues_first_try (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
 begin
   rw [rues, ruesDiff],
   simp, -- nontermal simps are bad; squeeze it to see the names of what you're using, you might learn something
@@ -144,7 +99,8 @@ begin
 end
 
 -- second go now we know the name of the lemma
-lemma ruesDiffM0EqRues (n:ℕ) (h:n>0) (z:ℂ) : rues n z = ruesDiff n 0 z :=
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
+lemma ruesDiffM0EqRues (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
 begin
   simp only [rues, ruesDiff, add_zero, euclidean_domain.mod_eq_zero,
     int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
@@ -170,7 +126,6 @@ begin
   intros c cGt0,
   rw [asymptotics.is_O_with, filter.eventually],
   simp only [algebra.id.smul_eq_mul, complex.norm_eq_abs],
-  
   sorry,
 end
 
@@ -181,6 +136,7 @@ end
 
 open finset
 
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/lemma.20exp_pi_mul_I_half.20.3A.20exp.20.28.E2.86.91real.2Epi.20*.20I.20.2F.202.29.20.3D.20I.20.3A.3D
 lemma exp_pi_mul_I_half : exp (↑real.pi * I / 2) = I :=
 begin
   -- would rather the /2 is real
@@ -226,7 +182,8 @@ begin
   exact ih,
 end
 
-lemma ruGeomSumEqIte (n k:ℕ) (h:n>0) (z:ℂ) :
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Help.20with.20geom_sum.20ite.20lemma
+lemma ruGeomSumEqIte (n k:ℕ) (h:0<n) (z:ℂ) :
     ∑ m in range n, (complex.exp (2 * real.pi * (k / n) * I)) ^ m = ite (n ∣ k) n 0 :=
 begin
   have h: n ∣ k ∨ ¬n ∣ k,
@@ -243,13 +200,13 @@ begin
     ring_nf,
     field_simp,
     rw mul_div_cancel,
-    exact_mod_cast h.lt.ne.symm,
+    exact_mod_cast h.ne.symm,
     rw h3,
     let h4:= expToPowersOfI (4*m),
     simp only [nat.cast_mul, nat.cast_bit0, nat.cast_one] at h4,
     rw (show ↑real.pi * I * (4 * ↑m) / 2 = 2 * ↑real.pi * ↑m * I, by ring) at h4,
     rw h4,
-    rw cpowIntTimesIntExponent I 4 m,
+    rw pow_mul I 4 m,
     simp only [I_pow_bit0, neg_one_sq, one_pow],
     rw h2,
     simp only [sum_const, card_range, nat.smul_one_eq_coe],
@@ -265,9 +222,9 @@ begin
     simp only [nat.cast_mul, nat.cast_bit0, nat.cast_one] at h5,
     rw (show ↑real.pi * I * (4 * ↑k) / 2 = 2 * ↑real.pi * ↑k * I, by ring) at h5,
     rw h5,
-    rw cpowIntTimesIntExponent I 4 k,
+    rw pow_mul I 4 k,
     simp only [I_pow_bit0, neg_one_sq, one_pow, sub_self, zero_div],
-    exact_mod_cast h.lt.ne.symm,
+    exact_mod_cast h.ne.symm,
     intro eq1,
     apply h_1,
     obtain ⟨m, he⟩ := complex.exp_eq_one_iff.1 eq1,
@@ -287,11 +244,11 @@ begin
     rw mul_div_cancel at h8,
     rw (show (m:ℂ) * (n:ℂ) = (n:ℂ) * (m:ℂ), by ring) at h8,
     exact_mod_cast h8,
-    exact_mod_cast h.lt.ne.symm,
+    exact_mod_cast h.ne.symm,
   },
 end
 
-lemma ruesNEqExpSum (n:ℕ) (h:n>0) (z:ℂ) :
+lemma ruesNEqExpSum (n:ℕ) (h:0<n) (z:ℂ) :
     rues n z = (∑ m in range n, exp (z * exp (2 * real.pi * (m / n) * I)))/n :=
 begin
   sorry,
