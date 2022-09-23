@@ -44,7 +44,7 @@ begin
     simp only [tsum_zero, h],
     congr' 1,
     ext1,
-    sorry,
+    norm_cast at *,
   },
   exact ruesSummable n h x,
 end
