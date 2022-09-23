@@ -170,18 +170,7 @@ begin
   exact exp_pi_mul_I_half,
 end
 
-lemma expPowEqExpMul (z:ℂ) (n : ℕ) : exp (z) ^ n = exp (z * n) :=
-begin
-  induction n with n ih,
-  simp only [pow_zero, nat.cast_zero, mul_zero, complex.exp_zero],
-  rw [pow_succ],
-  rw (show (n.succ:ℂ) = n + 1, by {simp} ),
-  rw (show (z * (n + 1)) = z + z * n, by {ring} ),
-  rw complex.exp_add z _,
-  congr,
-  exact ih,
-end
-
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/exponential.20function.20to.20a.20natural.20power
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Help.20with.20geom_sum.20ite.20lemma
 lemma ruGeomSumEqIte (n k:ℕ) (h:0<n) (z:ℂ) :
     ∑ m in range n, (complex.exp (2 * real.pi * (k / n) * I)) ^ m = ite (n ∣ k) n 0 :=
@@ -215,8 +204,8 @@ begin
   {
     rw geom_sum_eq,
     rw if_neg h_1,
-    rw expPowEqExpMul _ n,
-    rw (show 2 * ↑real.pi * (↑k / ↑n) * I * ↑n = 2 * ↑real.pi * ↑k * I  * ↑n / ↑n, by {field_simp}),
+    rw (complex.exp_nat_mul _ n).symm,
+    rw (show ↑n * (2 * ↑real.pi * (↑k / ↑n) * I) = 2 * ↑real.pi * ↑k * I  * ↑n / ↑n, by {ring_nf}),
     rw mul_div_cancel,
     let h5:= expToPowersOfI (4*k),
     simp only [nat.cast_mul, nat.cast_bit0, nat.cast_one] at h5,
