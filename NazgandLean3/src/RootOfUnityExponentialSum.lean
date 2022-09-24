@@ -119,7 +119,7 @@ begin
   ring_nf,
 end
 
-lemma ruesDiffHasDeriv (n:ℕ) (m:ℤ) (z:ℂ) : has_deriv_at (ruesDiff n m) (ruesDiff n (m+1) z) z :=
+lemma ruesDiffHasDeriv (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : has_deriv_at (ruesDiff n m) (ruesDiff n (m+1) z) z :=
 begin
   rw [has_deriv_at_iff_is_o_nhds_zero],
   refine is_o_iff_forall_is_O_with.mpr _,
@@ -129,9 +129,9 @@ begin
   sorry,
 end
 
-lemma ruesDiffDeriv (n:ℕ) (m:ℤ) (z:ℂ) : deriv (ruesDiff n m) z = ruesDiff n (m+1) z :=
+lemma ruesDiffDeriv (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : deriv (ruesDiff n m) z = ruesDiff n (m+1) z :=
 begin
-  rw (ruesDiffHasDeriv n m z).deriv,
+  rw (ruesDiffHasDeriv n h m z).deriv,
 end
 
 open finset
