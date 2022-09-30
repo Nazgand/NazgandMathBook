@@ -95,7 +95,7 @@ radius_le_radius_of_nnnorm_le (by simp [← norm_to_nnreal, h])
 
 ------------------------
 
-def rues_coeff (n : ℕ) (m : ℤ) (k :ℕ): ℂ := if ((k:ℤ) + m) % n = 0 then (1 : ℂ) / k.factorial else 0
+def rues_coeff (n : ℕ) (m : ℤ) (k : ℕ): ℂ := if ((k:ℤ) + m) % n = 0 then (1 : ℂ) / k.factorial else 0
 
 def rues_series (n : ℕ) (m : ℤ) := plain_old_series ℂ (rues_coeff n m)
 

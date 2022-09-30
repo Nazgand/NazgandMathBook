@@ -2,6 +2,7 @@ import analysis.special_functions.trigonometric.basic
 import analysis.special_functions.exponential
 import analysis.special_functions.complex.log
 import algebra.group_with_zero.defs
+import ruesDiffDeriv
 
 open classical complex asymptotics real normed_space
 open_locale classical big_operators nat
@@ -68,9 +69,27 @@ end
 
 -- The zero coefficients are needed for proof of ruesNEqExpSum
 -- m=0 is same as rues, ruesDiff is the mth derivative of rues
-noncomputable
-def ruesDiff (n:ℕ) (m:ℤ) (z:ℂ) : ℂ :=
-  tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0)
+lemma ruesDiffTsumForm (n:ℕ) (m:ℤ) (z:ℂ) : ruesDiff n m z = tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0) :=
+begin
+  have h0 : z ∈ emetric.ball (0:ℂ) (rues_series n m).radius,
+  rw rues_series_radius,
+  rw metric.emetric_ball_top,
+  simp only [set.mem_univ],
+  have h1 := formal_multilinear_series.has_sum (rues_series n m) h0,
+  have h2 := has_sum.tsum_eq h1,
+  rw ruesDiff,
+  rw h2.symm,
+  simp only [formal_multilinear_series.apply_eq_pow_smul_coeff, algebra.id.smul_eq_mul, euclidean_domain.mod_eq_zero],
+  rw rues_series,
+  rw plain_old_series,
+  congr' 1,
+  ext1,
+  rw formal_multilinear_series.coeff,
+  simp only [continuous_multilinear_map.mk_pi_field_apply, pi.one_apply, finset.prod_const_one, algebra.id.smul_eq_mul, one_mul],
+  rw rues_coeff,
+  simp only [euclidean_domain.mod_eq_zero, one_div, mul_ite, mul_zero],
+  congr' 1,
+end
 
 lemma ruesDiffSummable (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : summable (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0):=
 begin
@@ -96,7 +115,7 @@ tsum_mul_ite _ h
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma ruesDiffM0EqRues_first_try (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
 begin
-  rw [rues, ruesDiff],
+  rw [rues, ruesDiffTsumForm],
   simp, -- nontermal simps are bad; squeeze it to see the names of what you're using, you might learn something
   -- Let's isolate the problem
   convert needZeroCoeff (λ n, z ^ n / n!) n h,
@@ -112,13 +131,13 @@ end
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma ruesDiffM0EqRues (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
 begin
-  simp only [rues, ruesDiff, add_zero, euclidean_domain.mod_eq_zero,
+  simp only [rues, ruesDiffTsumForm, add_zero, euclidean_domain.mod_eq_zero,
     int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
 end
 
 lemma ruesDiffMPeriodic (n:ℕ) (m k:ℤ) (z:ℂ) : ruesDiff n m z = ruesDiff n (m+k*n) z :=
 begin
-  rw [ruesDiff, ruesDiff],
+  rw [ruesDiffTsumForm, ruesDiffTsumForm],
   congr' 1,
   ext1,
   congr' 1,
@@ -127,21 +146,6 @@ begin
     rw int.add_mul_mod_self,
   rw h,
   ring_nf,
-end
-
-lemma ruesDiffHasDeriv (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : has_deriv_at (ruesDiff n m) (ruesDiff n (m+1) z) z :=
-begin
-  rw [has_deriv_at_iff_is_o_nhds_zero],
-  refine is_o_iff_forall_is_O_with.mpr _,
-  intros c cGt0,
-  rw [asymptotics.is_O_with, filter.eventually],
-  simp only [algebra.id.smul_eq_mul, complex.norm_eq_abs],
-  sorry,
-end
-
-lemma ruesDiffDeriv (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : deriv (ruesDiff n m) z = ruesDiff n (m+1) z :=
-begin
-  rw (ruesDiffHasDeriv n h m z).deriv,
 end
 
 open finset
