@@ -149,13 +149,13 @@ begin
   rw inv_mul_other_mul_self_cancel (↑(k + 1)) ((↑(k.factorial))⁻¹) h1,
 end
 
-def rues_function (n : ℕ) (m : ℤ) : ℂ → ℂ := (rues_series n m).sum
+def ruesDiff (n : ℕ) (m : ℤ) : ℂ → ℂ := (rues_series n m).sum
 
 lemma ruesDiffHasDeriv (n : ℕ) (m : ℤ) (z : ℂ) :
-  has_deriv_at (rues_function n m) (rues_function n (m + 1) z) z :=
+  has_deriv_at (ruesDiff n m) (ruesDiff n (m + 1) z) z :=
 begin
   have h1 : ∀ {n m}, 0 < (rues_series n m).radius := by simp,
   have h2 := (rues_series n m).has_fpower_series_on_ball h1,
   have h3 : z ∈ emetric.ball (0 : ℂ) (rues_series n m).radius := by simp,
-  simpa [rues_function] using h2.has_deriv_at h3
+  simpa [ruesDiff] using h2.has_deriv_at h3
 end
