@@ -91,11 +91,6 @@ begin
   congr' 1,
 end
 
-lemma ruesDiffSummable (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : summable (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0):=
-begin
-  sorry,
-end
-
 -- The sums need to be stretched with additional zero coefficients general form
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma tsum_mul_ite {α} [topological_space α] [t2_space α] [add_comm_monoid α]
@@ -189,15 +184,14 @@ end
 lemma ruGeomSumEqIte (n k:ℕ) (h:0<n) (z:ℂ) :
     ∑ m in range n, (complex.exp (2 * real.pi * (k / n) * I)) ^ m = ite (n ∣ k) n 0 :=
 begin
-  have h: n ∣ k ∨ ¬n ∣ k,
-  exact classical.em (n ∣ k),
-  cases h,
+  have h0 := classical.em (n ∣ k),
+  cases h0,
   {
     have h2 : ∑ (m : ℕ) in range n, exp (2 * ↑real.pi * (↑k / ↑n) * I) ^ m = 
               ∑ (m : ℕ) in range n, 1,
     congr,
     ext1,
-    obtain ⟨m, rfl⟩ := h_1, -- need to replace k with a multiple of n to proceed
+    obtain ⟨m, rfl⟩ := h0, -- need to replace k with a multiple of n to proceed
     have h3: ↑(n * m) / ↑n = (m:ℂ),
     rw nat.cast_mul n m,
     ring_nf,
@@ -213,11 +207,11 @@ begin
     simp only [I_pow_bit0, neg_one_sq, one_pow],
     rw h2,
     simp only [sum_const, card_range, nat.smul_one_eq_coe],
-    rw if_pos h_1, -- need to evaluate ite with h_1
+    rw if_pos h0, -- need to evaluate ite with h0
   },
   {
     rw geom_sum_eq,
-    rw if_neg h_1,
+    rw if_neg h0,
     rw (complex.exp_nat_mul _ n).symm,
     rw (show ↑n * (2 * ↑real.pi * (↑k / ↑n) * I) = 2 * ↑real.pi * ↑k * I  * ↑n / ↑n, by {ring_nf}),
     rw mul_div_cancel,
@@ -229,7 +223,7 @@ begin
     simp only [I_pow_bit0, neg_one_sq, one_pow, sub_self, zero_div],
     exact_mod_cast h.ne.symm,
     intro eq1,
-    apply h_1,
+    apply h0,
     obtain ⟨m, he⟩ := complex.exp_eq_one_iff.1 eq1,
     rw ← int.coe_nat_dvd, use ↑m,
     rw (show 2 * ↑real.pi * (↑k / ↑n) * I = (↑k / ↑n) * (2 * ↑real.pi * I), by ring) at he,
