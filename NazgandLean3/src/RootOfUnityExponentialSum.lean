@@ -12,6 +12,11 @@ begin
   rw [exp_eq_exp_ℂ, exp_eq_tsum_div],
 end
 
+lemma expTaylorSeriesSummable (z:ℂ) : summable (λ (k:ℕ), z ^ k / k.factorial):=
+begin
+  exact (exp_series_div_summable ℂ z)
+end
+
 -- rues is the Root of Unity Exponential Sum function 
 -- inspired by the relationship between exp and cosh
 noncomputable
@@ -66,6 +71,11 @@ end
 noncomputable
 def ruesDiff (n:ℕ) (m:ℤ) (z:ℂ) : ℂ :=
   tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0)
+
+lemma ruesDiffSummable (n:ℕ) (h:0<n) (m:ℤ) (z:ℂ) : summable (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0):=
+begin
+  sorry,
+end
 
 -- The sums need to be stretched with additional zero coefficients general form
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
