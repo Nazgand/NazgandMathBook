@@ -95,11 +95,11 @@ radius_le_radius_of_nnnorm_le (by simp [← norm_to_nnreal, h])
 
 ------------------------
 
-def rues_coeff (n m k : ℕ) : ℂ := if (k + m) % n = 0 then (1 : ℂ) / k.factorial else 0
+def rues_coeff (n : ℕ) (m : ℤ) (k :ℕ): ℂ := if ((k:ℤ) + m) % n = 0 then (1 : ℂ) / k.factorial else 0
 
-def rues_series (n m : ℕ) := plain_old_series ℂ (rues_coeff n m)
+def rues_series (n : ℕ) (m : ℤ) := plain_old_series ℂ (rues_coeff n m)
 
-@[simp] lemma rues_series_radius {n m : ℕ} : (rues_series n m).radius = ⊤ := 
+@[simp] lemma rues_series_radius {n : ℕ} (m : ℤ) : (rues_series n m).radius = ⊤ := 
 begin
   have h:∀ (k:ℕ), ∥(rues_series n m).coeff k∥ ≤ ∥(exp_series ℂ ℂ).coeff k∥,
   {
@@ -111,7 +111,7 @@ begin
   complex.norm_eq_abs, continuous_multilinear_map.smul_apply, continuous_multilinear_map.mk_pi_algebra_fin_apply,
   absolute_value.map_mul, map_inv₀, complex.abs_cast_nat],
     rw rues_coeff,
-    have h3:=classical.em ((k + m) % n = 0),
+    have h3:=classical.em (((k:ℤ) + m) % n = 0),
     cases h3,
     {
       rw [if_pos h3],
@@ -134,13 +134,13 @@ end
 lemma inv_mul_other_mul_self_cancel (z1 z2:ℂ) (h:z1≠0): z1⁻¹ * z2 * z1 = z2:=
   by field_simp
 
-@[simp] lemma rues_series.deriv {n m : ℕ} : (rues_series n m).deriv = rues_series n (m + 1) :=
+@[simp] lemma rues_series.deriv {n : ℕ} (m : ℤ) : (rues_series n m).deriv = rues_series n (m + 1) :=
 begin
   refine eq_iff_coeff_eq.mpr (λ k, _),
   simp [coeff_deriv, rues_series, plain_old_series_coeff],
   rw [rues_coeff,rues_coeff],
   simp only [nat.factorial_succ, nat.cast_mul, nat.cast_add, nat.cast_one, one_div, mul_inv_rev, mul_ite, mul_zero],
-  rw (show k + (m + 1)=k + 1 + m, by ring),
+  rw (show ↑k + (m + 1) = ↑k + 1 + m, by ring),
   congr' 1,
   norm_cast at *,
   ring_nf,
@@ -149,9 +149,9 @@ begin
   rw inv_mul_other_mul_self_cancel (↑(k + 1)) ((↑(k.factorial))⁻¹) h1,
 end
 
-def rues_function (n m : ℕ) : ℂ → ℂ := (rues_series n m).sum
+def rues_function (n : ℕ) (m : ℤ) : ℂ → ℂ := (rues_series n m).sum
 
-lemma ruesDiffHasDeriv (n m : ℕ) (z : ℂ) :
+lemma ruesDiffHasDeriv (n : ℕ) (m : ℤ) (z : ℂ) :
   has_deriv_at (rues_function n m) (rues_function n (m + 1) z) z :=
 begin
   have h1 : ∀ {n m}, 0 < (rues_series n m).radius := by simp,
