@@ -18,6 +18,13 @@ begin
   exact (exp_series_div_summable ℂ z)
 end
 
+lemma expNegInv (z:ℂ) : exp z = (exp (-z))⁻¹:=
+begin
+  have h0 := (-z).exp_neg,
+  simp only [neg_neg] at h0,
+  exact h0,
+end
+
 -- rues is the Root of Unity Exponential Sum function 
 -- inspired by the relationship between exp and cosh
 noncomputable
@@ -157,7 +164,7 @@ begin
   -- it does!
 end
 
-lemma expToPowersOfI (k:ℕ): exp (↑real.pi * I * k / 2) = I^k :=
+lemma expToNatPowersOfI (k:ℕ): exp (↑real.pi * I * k / 2) = I^k :=
 begin
   induction k with k ih,
   simp only [nat.cast_zero, zero_div, mul_zero, complex.exp_zero, pow_zero],
@@ -179,12 +186,26 @@ begin
   exact exp_pi_mul_I_half,
 end
 
+lemma expToIntPowersOfI (k:ℤ): exp (↑real.pi * I * k / 2) = I^k :=
+begin
+  induction k,
+  exact expToNatPowersOfI _,
+  rw expNegInv _,
+  simp only [int.cast_neg_succ_of_nat, nat.cast_add, nat.cast_one, neg_add_rev, zpow_neg_succ_of_nat, inv_inj],
+  rw (show -(↑real.pi * I * (-1 + -↑k) / 2) = (↑real.pi * I * (1 + ↑k) / 2), by ring_nf),
+  have h0 : (1:ℂ) + ↑k = ↑(k + 1),
+  norm_cast at *,
+  exact add_comm 1 k,
+  rw h0,
+  rw expToNatPowersOfI (k + 1),
+end
+
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/exponential.20function.20to.20a.20natural.20power
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Help.20with.20geom_sum.20ite.20lemma
-lemma ruGeomSumEqIte (n k:ℕ) (h:0<n) (z:ℂ) :
-    ∑ m in range n, (complex.exp (2 * real.pi * (k / n) * I)) ^ m = ite (n ∣ k) n 0 :=
+lemma ruGeomSumEqIte (n:ℕ) (k:ℤ) (h:0<n) (z:ℂ) :
+    ∑ m in range n, (complex.exp (2 * real.pi * (k / n) * I)) ^ m = ite ((n:ℤ) ∣ k) n 0 :=
 begin
-  have h0 := classical.em (n ∣ k),
+  have h0 := classical.em ((n:ℤ) ∣ k),
   cases h0,
   {
     have h2 : ∑ (m : ℕ) in range n, exp (2 * ↑real.pi * (↑k / ↑n) * I) ^ m = 
@@ -192,19 +213,19 @@ begin
     congr,
     ext1,
     obtain ⟨m, rfl⟩ := h0, -- need to replace k with a multiple of n to proceed
-    have h3: ↑(n * m) / ↑n = (m:ℂ),
-    rw nat.cast_mul n m,
+    have h3: ↑(↑n * m) / ↑n = (m:ℂ),
+    rw int.cast_mul n m,
     ring_nf,
     field_simp,
     rw mul_div_cancel,
     exact_mod_cast h.ne.symm,
     rw h3,
-    let h4:= expToPowersOfI (4*m),
-    simp only [nat.cast_mul, nat.cast_bit0, nat.cast_one] at h4,
+    let h4:= expToIntPowersOfI (4*m),
+    simp only [int.cast_mul, int.cast_bit0, int.cast_one] at h4,
     rw (show ↑real.pi * I * (4 * ↑m) / 2 = 2 * ↑real.pi * ↑m * I, by ring) at h4,
     rw h4,
-    rw pow_mul I 4 m,
-    simp only [I_pow_bit0, neg_one_sq, one_pow],
+    rw zpow_mul I 4 m,
+    simp only [I_zpow_bit0, zpow_bit0_neg, one_zpow, one_pow],
     rw h2,
     simp only [sum_const, card_range, nat.smul_one_eq_coe],
     rw if_pos h0, -- need to evaluate ite with h0
@@ -215,17 +236,17 @@ begin
     rw (complex.exp_nat_mul _ n).symm,
     rw (show ↑n * (2 * ↑real.pi * (↑k / ↑n) * I) = 2 * ↑real.pi * ↑k * I  * ↑n / ↑n, by {ring_nf}),
     rw mul_div_cancel,
-    let h5:= expToPowersOfI (4*k),
-    simp only [nat.cast_mul, nat.cast_bit0, nat.cast_one] at h5,
+    let h5:= expToIntPowersOfI (4*k),
+    simp only [int.cast_mul, int.cast_bit0, int.cast_one] at h5,
     rw (show ↑real.pi * I * (4 * ↑k) / 2 = 2 * ↑real.pi * ↑k * I, by ring) at h5,
     rw h5,
-    rw pow_mul I 4 k,
-    simp only [I_pow_bit0, neg_one_sq, one_pow, sub_self, zero_div],
+    rw zpow_mul I 4 k,
+    simp only [I_zpow_bit0, zpow_bit0_neg, one_zpow, sub_self, zero_div],
     exact_mod_cast h.ne.symm,
     intro eq1,
     apply h0,
     obtain ⟨m, he⟩ := complex.exp_eq_one_iff.1 eq1,
-    rw ← int.coe_nat_dvd, use ↑m,
+    use ↑m,
     rw (show 2 * ↑real.pi * (↑k / ↑n) * I = (↑k / ↑n) * (2 * ↑real.pi * I), by ring) at he,
     have h6: 2 * ↑real.pi * I ≠ 0,
     apply mul_ne_zero,
@@ -287,7 +308,7 @@ begin
     simp only [complex.cos_pi, complex.sin_pi, zero_mul, add_zero, mul_neg, mul_one],
     rw (show 2 * ↑real.pi * (3 / 4) = (3/2*real.pi:ℂ), by ring),
     rw (exp_mul_I _).symm,
-    let h:=expToPowersOfI 3,
+    let h:=expToNatPowersOfI 3,
     rw (show (3:ℂ) / 2 * ↑real.pi * I = ↑real.pi * I * ↑3 / 2, by {simp, ring}),
     rw h,
     simp only [I_pow_bit1, pow_one, neg_mul, one_mul, mul_neg],
