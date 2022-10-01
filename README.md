@@ -1,5 +1,18 @@
-Plan 1: I decided to make this because of how nice the knowls are in PreTeXt HTML. Unfortunately, the HTML book is not properly viewable offline.
+# This is a collection of math notes.
 
-Plan 2: I planned to use Zim to create a wiki. I disliked that it made a new image file for each equation.
+I first tried using knowls in PreTeXt HTML. Unfortunately, the HTML book is not properly viewable offline.
 
-Plan 3: Write multiple LaTeX files which reference each other. They may also reference kig files or images for geometry.
+Later, I used Zim to create a wiki. I disliked that it made a new image file for each equation.
+
+Thus, multiple LaTeX files reference each other. They may also reference kig files or images for geometry.
+
+# I implemented some proofs in Lean.
+
+[Click here for Lean installation instructions](https://leanprover-community.github.io/get_started.html#regular-install)
+
+To initialize the Lean code and download mathlib, try:
+
+```
+cd NazgandLean3
+leanproject new
+```
