@@ -79,9 +79,11 @@ end
 lemma ruesDiffTsumForm (n:ℕ) (m:ℤ) (z:ℂ) : ruesDiff n m z = tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0) :=
 begin
   have h0 : z ∈ emetric.ball (0:ℂ) (rues_series n m).radius,
-  rw rues_series_radius,
-  rw metric.emetric_ball_top,
-  simp only [set.mem_univ],
+  {
+    rw rues_series_radius,
+    rw metric.emetric_ball_top,
+    simp only [set.mem_univ],
+  },
   have h1 := formal_multilinear_series.has_sum (rues_series n m) h0,
   have h2 := has_sum.tsum_eq h1,
   rw ruesDiff,
@@ -96,6 +98,31 @@ begin
   rw rues_coeff,
   simp only [euclidean_domain.mod_eq_zero, one_div, mul_ite, mul_zero],
   congr' 1,
+end
+
+lemma ruesDiffSummable (n:ℕ) (m:ℤ) (z:ℂ) : summable (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0) :=
+begin
+  have h0 : z ∈ emetric.ball (0:ℂ) (rues_series n m).radius,
+  {
+    rw rues_series_radius,
+    rw metric.emetric_ball_top,
+    simp only [set.mem_univ],
+  },
+  have h1 := formal_multilinear_series.summable (rues_series n m) h0,
+  simp only [formal_multilinear_series.apply_eq_pow_smul_coeff, algebra.id.smul_eq_mul] at h1,
+  have h2 : (λ (k : ℕ), ite ((↑k + m) % ↑n = 0) (z ^ k / ↑k!) 0) = (λ (n_1 : ℕ), z ^ n_1 * (rues_series n m).coeff n_1),
+  {
+    ext1,
+    rw rues_series,
+    rw plain_old_series,
+    rw formal_multilinear_series.coeff,
+    rw rues_coeff,
+    simp only [euclidean_domain.mod_eq_zero, one_div, continuous_multilinear_map.mk_pi_field_apply, pi.one_apply,
+  finset.prod_const_one, algebra.id.smul_eq_mul, mul_ite, one_mul, mul_zero],
+    congr' 1,
+  },
+  simp_rw h2,
+  exact h1,
 end
 
 -- The sums need to be stretched with additional zero coefficients general form
@@ -348,4 +375,9 @@ begin
     ring_nf,
   },
   norm_num,
+end
+
+lemma ruesDiffSumOfRuesDiff (n k:ℕ) (h:0<n*k) (m:ℤ) (z:ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n*k) (k*k₀+m) z:=
+begin
+  sorry,
 end
