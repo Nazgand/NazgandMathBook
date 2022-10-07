@@ -358,6 +358,17 @@ begin
   sorry,
 end
 
+lemma ruesN0Eq1 (n:ℕ) (h:0<n) : rues n 0 = 1:=
+begin
+  rw ruesNEqExpSum n h 0,
+  simp only [zero_mul, complex.exp_zero, sum_const, card_range, nat.smul_one_eq_coe],
+  have h0 : n ≠ 0,
+  exact (ne_of_lt h).symm,
+  have h1 : (n:ℂ) ≠ 0,
+  exact_mod_cast h0,
+  field_simp,
+end
+
 lemma rues1EqExp (z:ℂ) : rues 1 z = exp z :=
 begin
   rw [expTsumForm z, rues],
