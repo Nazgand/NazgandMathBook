@@ -272,7 +272,7 @@ begin
     simp only [I_zpow_bit0, zpow_bit0_neg, one_zpow, sub_self, zero_div],
     exact_mod_cast h.ne.symm,
     intro eq1,
-    apply h0,(tsum_sum h0).symm
+    apply h0,
     obtain ⟨m, he⟩ := complex.exp_eq_one_iff.1 eq1,
     use ↑m,
     rw (show 2 * ↑real.pi * (↑k / ↑n) * I = (↑k / ↑n) * (2 * ↑real.pi * I), by ring) at he,
