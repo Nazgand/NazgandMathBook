@@ -2,6 +2,7 @@ import analysis.special_functions.trigonometric.basic
 import analysis.special_functions.exponential
 import analysis.special_functions.complex.log
 import algebra.group_with_zero.defs
+import algebra.big_operators.basic
 import ruesDiffDeriv
 
 open classical complex asymptotics real normed_space
@@ -229,7 +230,7 @@ end
 
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/exponential.20function.20to.20a.20natural.20power
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Help.20with.20geom_sum.20ite.20lemma
-lemma ruGeomSumEqIte (n:ℕ) (k:ℤ) (h:0<n) (z:ℂ) :
+lemma ruGeomSumEqIte (n:ℕ) (k:ℤ) (h:0<n) :
     ∑ m in range n, (complex.exp (2 * real.pi * (k / n) * I)) ^ m = ite ((n:ℤ) ∣ k) n 0 :=
 begin
   have h0 := classical.em ((n:ℤ) ∣ k),
@@ -239,19 +240,19 @@ begin
               ∑ (m : ℕ) in range n, 1,
     congr,
     ext1,
-    obtain ⟨m, rfl⟩ := h0, -- need to replace k with a multiple of n to proceed
-    have h3: ↑(↑n * m) / ↑n = (m:ℂ),
-    rw int.cast_mul n m,
+    obtain ⟨m2, rfl⟩ := h0, -- need to replace k with a multiple of n to proceed
+    have h3: ↑(↑n * m2) / ↑n = (m2:ℂ),
+    rw int.cast_mul n m2,
     ring_nf,
     field_simp,
     rw mul_div_cancel,
     exact_mod_cast h.ne.symm,
     rw h3,
-    let h4:= expToIntPowersOfI (4*m),
+    let h4:= expToIntPowersOfI (4*m2),
     simp only [int.cast_mul, int.cast_bit0, int.cast_one] at h4,
-    rw (show ↑real.pi * I * (4 * ↑m) / 2 = 2 * ↑real.pi * ↑m * I, by ring) at h4,
+    rw (show ↑real.pi * I * (4 * ↑m2) / 2 = 2 * ↑real.pi * ↑m2 * I, by ring) at h4,
     rw h4,
-    rw zpow_mul I 4 m,
+    rw zpow_mul I 4 m2,
     simp only [I_zpow_bit0, zpow_bit0_neg, one_zpow, one_pow],
     rw h2,
     simp only [sum_const, card_range, nat.smul_one_eq_coe],
@@ -271,7 +272,7 @@ begin
     simp only [I_zpow_bit0, zpow_bit0_neg, one_zpow, sub_self, zero_div],
     exact_mod_cast h.ne.symm,
     intro eq1,
-    apply h0,
+    apply h0,(tsum_sum h0).symm
     obtain ⟨m, he⟩ := complex.exp_eq_one_iff.1 eq1,
     use ↑m,
     rw (show 2 * ↑real.pi * (↑k / ↑n) * I = (↑k / ↑n) * (2 * ↑real.pi * I), by ring) at he,
@@ -293,9 +294,67 @@ begin
   },
 end
 
+lemma ruGeomSumEqIte2 (n k:ℕ) (h:0<n) :
+    ∑ m in range n, (complex.exp (2 * real.pi * (m / n) * I)) ^ k = ite ((n:ℤ) ∣ k) n 0 :=
+begin
+  have h0 : ∀ (m:ℕ), complex.exp (2 * real.pi * (m / n) * I) ^ k = complex.exp ((k:ℂ) * (2 * real.pi * (m / n) * I)),
+  {
+    intros m,
+    exact (complex.exp_nat_mul (2 * real.pi * (m / n) * I) k).symm,
+  },
+  simp_rw h0,
+  have h1 : ∀ (x:ℕ), ↑k * (2 * ↑real.pi * (↑x / ↑n) * I) = ↑x * (2 * ↑real.pi * (↑k / ↑n) * I),
+  {
+    intros x,
+    ring_nf,
+  },
+  simp_rw h1,
+  have h2 : ∀ (x:ℕ), exp (↑x * (2 * ↑real.pi * (↑k / ↑n) * I)) = exp (2 * ↑real.pi * (↑k / ↑n) * I) ^ x,
+  {
+    intros x,
+    exact complex.exp_nat_mul _ x,
+  },
+  simp_rw h2,
+  -- exact ruGeomSumEqIte n (k:ℤ) h, -- fails but should work
+  sorry,
+end
+
 lemma ruesNEqExpSum (n:ℕ) (h:0<n) (z:ℂ) :
     rues n z = (∑ m in range n, exp (z * exp (2 * real.pi * (m / n) * I)))/n :=
 begin
+  simp_rw expTsumForm,
+  have h0 : (∀ m ∈ range n, summable (λ (k:ℕ), (z * exp (2 * real.pi * (m / n) * I)) ^ k / k.factorial)),
+  {
+    intros m h1,
+    exact expTaylorSeriesSummable (z * exp (2 * real.pi * (m / n) * I)),
+  },
+  have h2 := (tsum_sum h0).symm,
+  simp_rw expTsumForm at h2,
+  simp_rw h2,
+  simp_rw (expTsumForm _).symm,
+  simp_rw mul_pow z _ _,
+  have h3 : ∀ (b x : ℕ), z ^ b * exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ b / ↑b! = (z ^ b / ↑b!) * exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ b,
+  {
+    intros b x,
+    ring_nf,
+  },
+  simp_rw h3,
+  simp_rw mul_sum.symm,
+  have h4 : ∀ (b:ℕ), ∑ (x : ℕ) in range n, exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ b = ite ((n:ℤ) ∣ b) n 0,
+  {
+    intros b,
+    exact ruGeomSumEqIte2 n b h,
+  },
+  simp_rw h4,
+  have h5 : ∀ (b:ℕ), z ^ b / ↑b! * ite (↑n ∣ ↑b) ↑n 0 = (ite (↑n ∣ ↑b) (z ^ b / ↑b!) 0) * ↑n,
+  {
+    intros b,
+    have h6 := classical.em (↑n ∣ ↑b),
+    cases h6,
+    rw [if_pos h6,if_pos h6],
+    simp only [mul_ite, mul_zero, ite_mul, zero_mul],
+  },
+  -- simp_rw h5, -- fails but should work
   sorry,
 end
 
@@ -342,8 +401,8 @@ begin
     ring_nf,
     have hinv1: (-I + 1)⁻¹ = (I + 1)/2,
       rw [complex.inv_def, norm_sq],
-      simp only [map_add, conj_neg_I, map_one, monoid_with_zero_hom.coe_mk, add_re, neg_re, I_re, neg_zero', one_re, zero_add, mul_one,
-      add_im, neg_im, I_im, one_im, add_zero, mul_neg, neg_neg, of_real_inv, of_real_add, of_real_one],
+      simp only [map_add, conj_neg_I, map_one, monoid_with_zero_hom.coe_mk, add_re, neg_re, I_re, neg_zero, one_re, zero_add, mul_one,
+  add_im, neg_im, I_im, one_im, add_zero, mul_neg, neg_neg, of_real_inv, of_real_add, of_real_one],
       congr' 1,
     rw hinv1,
     have hinv2: (I + 1)⁻¹ = (-I + 1)/2,
@@ -379,5 +438,14 @@ end
 
 lemma ruesDiffSumOfRuesDiff (n k:ℕ) (h:0<n*k) (m:ℤ) (z:ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n*k) (k*k₀+m) z:=
 begin
+  simp_rw ruesDiffTsumForm,
+  have h0 : ∀ x ∈ range k, summable (λ (k_1:ℕ), ite ((↑k_1 + (↑k * ↑x + m)) % ↑(n * k) = 0) (z ^ k_1 / ↑k_1!) 0),
+  {
+    intros x h1,
+    exact ruesDiffSummable (n * k) _ z,
+  },
+  rw (tsum_sum h0).symm,
+  congr' 1,
+  ext1,
   sorry,
 end
