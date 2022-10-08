@@ -522,5 +522,21 @@ begin
   simp_rw h0,
   clear h0,
   simp_rw complex.exp_add,
+  have h1 : ∀ (x : ℕ), exp (z₀ * exp (2 * ↑real.pi * (↑x / ↑n) * I)) =
+    ∑ (k₀ : ℕ) in range n, ruesDiff n ↑k₀ (z₀ * exp (2 * ↑real.pi * (↑x / ↑n) * I)),
+  {
+    intros x,
+    exact expSumOfRuesDiff n h (z₀ * complex.exp ((2:ℂ) * (real.pi:ℂ) * ((x:ℂ) / (n:ℂ)) * I)),
+  },
+  simp_rw h1,
+  clear h1,
+  have h2 : ∀ (x : ℕ), exp (z₁ * exp (2 * ↑real.pi * (↑x / ↑n) * I)) =
+    ∑ (k₀ : ℕ) in range n, ruesDiff n ↑k₀ (z₁ * exp (2 * ↑real.pi * (↑x / ↑n) * I)),
+  {
+    intros x,
+    exact expSumOfRuesDiff n h (z₁ * complex.exp ((2:ℂ) * (real.pi:ℂ) * ((x:ℂ) / (n:ℂ)) * I)),
+  },
+  simp_rw h2,
+  clear h2,
   sorry,
 end
