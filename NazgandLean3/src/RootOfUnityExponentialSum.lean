@@ -294,13 +294,13 @@ begin
   },
 end
 
-lemma ruGeomSumEqIte2 (n k:ℕ) (h:0<n) :
+lemma ruGeomSumEqIte2 (n:ℕ) (k:ℤ) (h:0<n) :
     ∑ m in range n, (complex.exp (2 * real.pi * (m / n) * I)) ^ k = ite ((n:ℤ) ∣ k) n 0 :=
 begin
   have h0 : ∀ (m:ℕ), complex.exp (2 * real.pi * (m / n) * I) ^ k = complex.exp ((k:ℂ) * (2 * real.pi * (m / n) * I)),
   {
     intros m,
-    exact (complex.exp_nat_mul (2 * real.pi * (m / n) * I) k).symm,
+    exact (complex.exp_int_mul (2 * real.pi * (m / n) * I) k).symm,
   },
   simp_rw h0,
   have h1 : ∀ (x:ℕ), ↑k * (2 * ↑real.pi * (↑x / ↑n) * I) = ↑x * (2 * ↑real.pi * (↑k / ↑n) * I),
@@ -315,8 +315,7 @@ begin
     exact complex.exp_nat_mul _ x,
   },
   simp_rw h2,
-  -- exact ruGeomSumEqIte n (k:ℤ) h, -- fails but should work
-  sorry,
+  exact ruGeomSumEqIte n k h,
 end
 
 lemma ruesNEqExpSum (n:ℕ) (h:0<n) (z:ℂ) :
