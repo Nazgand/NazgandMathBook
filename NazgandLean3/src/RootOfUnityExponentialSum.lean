@@ -503,8 +503,9 @@ begin
     simp only [nat.lt_one_iff],
   },
   rw ruesDiffM0EqRues 1 h1 z,
-  -- have h2 : ruesDiffSumOfRuesDiff 1 k h0 0 z, -- mysterious error
-  sorry,
+  have h2 := ruesDiffSumOfRuesDiff 1 k h0 0 z,
+  simp only [one_mul, nat.cast_one, add_zero] at h2,
+  exact h2,
 end
 
 lemma ruesArgumentSumRule (n:ℕ) (h:0<n) (z₀ z₁:ℂ) :
