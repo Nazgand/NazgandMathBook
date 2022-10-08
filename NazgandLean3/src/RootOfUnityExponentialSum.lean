@@ -475,16 +475,51 @@ begin
   norm_num,
 end
 
-lemma ruesDiffSumOfRuesDiff (n k:ℕ) (h:0<n*k) (m:ℤ) (z:ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n*k) (k*k₀+m) z:=
+lemma ruesDiffSumOfRuesDiff (n k:ℕ) (h:0<n*k) (m:ℤ) (z:ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n*k) (n*k₀+m) z:=
 begin
   simp_rw ruesDiffTsumForm,
-  have h0 : ∀ x ∈ range k, summable (λ (k_1:ℕ), ite ((↑k_1 + (↑k * ↑x + m)) % ↑(n * k) = 0) (z ^ k_1 / ↑k_1!) 0),
+  have h0 : ∀ x ∈ range k, summable (λ (k_1:ℕ), ite ((↑k_1 + (↑n * ↑x + m)) % ↑(n * k) = 0) (z ^ k_1 / ↑k_1!) 0),
   {
     intros x h1,
     exact ruesDiffSummable (n * k) _ z,
   },
   rw (tsum_sum h0).symm,
+  clear h0,
   congr' 1,
   ext1,
+  sorry,
+end
+
+lemma expSumOfRuesDiff (k:ℕ) (h:0<k) (z:ℂ) : exp z = ∑ k₀ in range k, ruesDiff k k₀ z:=
+begin
+  have h0 : 0 < 1 * k,
+  {
+    simp only [one_mul],
+    exact h,
+  },
+  rw (rues1EqExp z).symm,
+  have h1 : 0<1,
+  {
+    simp only [nat.lt_one_iff],
+  },
+  rw ruesDiffM0EqRues 1 h1 z,
+  -- have h2 : ruesDiffSumOfRuesDiff 1 k h0 0 z, -- mysterious error
+  sorry,
+end
+
+lemma ruesArgumentSumRule (n:ℕ) (h:0<n) (z₀ z₁:ℂ) :
+        rues n (z₀ + z₁) = ∑ k in range n, (ruesDiff n k z₀ * ruesDiff n (n - k) z₁) :=
+begin
+  rw ruesNEqExpSum n h _,
+  have h0 : ∀ (m : ℕ), (z₀ + z₁) * exp (2 * ↑real.pi * (↑m / ↑n) * I) =
+    z₀ * exp (2 * ↑real.pi * (↑m / ↑n) * I) +
+    z₁ * exp (2 * ↑real.pi * (↑m / ↑n) * I),
+  {
+    intros m,
+    ring_nf,
+  },
+  simp_rw h0,
+  clear h0,
+  simp_rw complex.exp_add,
   sorry,
 end
