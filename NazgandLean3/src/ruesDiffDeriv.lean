@@ -5,6 +5,7 @@ import analysis.calculus.deriv
 import analysis.calculus.fderiv_analytic
 import analysis.analytic.radius_liminf
 import analysis.normed_space.exponential
+import analysis.calculus.iterated_deriv
 
 noncomputable theory
 
@@ -158,4 +159,29 @@ begin
   have h2 := (rues_series n m).has_fpower_series_on_ball h1,
   have h3 : z ∈ emetric.ball (0 : ℂ) (rues_series n m).radius := by simp,
   simpa [ruesDiff] using h2.has_deriv_at h3
+end
+
+lemma ruesDiffDeriv (n : ℕ) (m : ℤ) :
+  deriv (ruesDiff n m) = (ruesDiff n (m + 1)) :=
+begin
+  refine deriv_eq _,
+  intros z,
+  exact ruesDiffHasDeriv n m z,
+end
+
+lemma ruesDiffIteratedDeriv (k n : ℕ) (m : ℤ) (z : ℂ) : iterated_deriv k (ruesDiff n m) = ruesDiff n (k + m) :=
+begin
+  induction k with K K_ih,
+  simp only [iterated_deriv_zero, nat.cast_zero, zero_add],
+  have h0 := congr_arg deriv K_ih,
+  rw ruesDiffDeriv n ((K:ℤ) + m)at h0,
+  have h1 : ↑K + m + 1 = ↑(K.succ) + m,
+  {
+    simp only [nat.cast_succ],
+    ring_nf,
+  },
+  rw h1 at h0,
+  clear h1,
+  rw iterated_deriv_succ,
+  exact h0,
 end
