@@ -165,7 +165,7 @@ begin
     int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
 end
 
-lemma ruesDiffRotationallySymmetric (n:ℕ) (h:0<n) (m:ℤ) (z rou:ℂ) (h:rou ^ n = 1) : ruesDiff n m z = rou ^ m * ruesDiff n m (z * rou):=
+lemma ruesDiffRotationallySymmetric (n:ℕ) (h:0<n) (m:ℤ) (z rou:ℂ) (h:rou ^ n = 1) : ruesDiff n m (z * rou) = rou ^ -m * ruesDiff n m z :=
 begin
   sorry,
 end
@@ -543,5 +543,26 @@ begin
   },
   simp_rw h2,
   clear h2,
+  have h3 : ∀ (x:ℕ), exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ n = 1,
+  {
+    intros x,
+    rw (complex.exp_nat_mul _ n).symm,
+    rw complex.exp_eq_one_iff,
+    use (x:ℤ),
+    have h4 : 0 ≠ n,
+    exact ne_of_lt h,
+    have h5 : (n:ℂ) ≠ 0,
+    exact_mod_cast h4.symm,
+    field_simp,
+    ring_nf,
+  },
+  have h6 : ∀ (k₀ x : ℕ) (z : ℂ), ruesDiff n ↑k₀ (z * exp (2 * ↑real.pi * (↑x / ↑n) * I)) =
+    exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ -↑k₀ * ruesDiff n ↑k₀ z,
+  {
+    intros k₀ x z, 
+    exact ruesDiffRotationallySymmetric n h k₀ z (exp (2 * ↑real.pi * (↑x / ↑n) * I)) (h3 x),
+  },
+  simp_rw h6 _ _ _,
+  clear h6,
   sorry,
 end
