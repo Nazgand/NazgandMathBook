@@ -165,6 +165,11 @@ begin
     int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
 end
 
+lemma ruesDiffRotationallySymmetric (n:ℕ) (h:0<n) (m:ℤ) (z rou:ℂ) (h:rou ^ n = 1) : ruesDiff n m z = rou ^ m * ruesDiff n m (z * rou):=
+begin
+  sorry,
+end
+
 lemma ruesDiffMPeriodic (n:ℕ) (m k:ℤ) (z:ℂ) : ruesDiff n m z = ruesDiff n (m+k*n) z :=
 begin
   rw [ruesDiffTsumForm, ruesDiffTsumForm],
