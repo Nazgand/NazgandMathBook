@@ -559,7 +559,7 @@ begin
   have h6 : ∀ (k₀ x : ℕ) (z : ℂ), ruesDiff n ↑k₀ (z * exp (2 * ↑real.pi * (↑x / ↑n) * I)) =
     exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ -↑k₀ * ruesDiff n ↑k₀ z,
   {
-    intros k₀ x z, 
+    intros k₀ x z,
     exact ruesDiffRotationallySymmetric n h k₀ z (exp (2 * ↑real.pi * (↑x / ↑n) * I)) (h3 x),
   },
   simp_rw h6 _ _ _,

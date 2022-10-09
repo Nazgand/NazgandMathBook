@@ -10,8 +10,8 @@ import analysis.calculus.iterated_deriv
 noncomputable theory
 
 open formal_multilinear_series
-open filter
-open_locale nnreal ennreal
+open filter finset
+open_locale nnreal ennreal big_operators classical
 
 variables {𝕜 E : Type*} [nontrivially_normed_field 𝕜] [normed_add_comm_group E] [normed_space 𝕜 E]
   [complete_space E] {p q : formal_multilinear_series 𝕜 𝕜 E} {n : ℕ} {f : 𝕜 → E} {w : 𝕜} {r : ennreal}
@@ -184,4 +184,16 @@ begin
   clear h1,
   rw iterated_deriv_succ,
   exact h0,
+end
+
+lemma EqNthDerivRuesDiffSum (f:ℂ→ℂ) (n:ℕ) (h:0<n) : (f = iterated_deriv n f) ↔ (∃ (c : ℕ → ℂ), f = ∑ k in range n, (ruesDiff n k) * (λ(z:ℂ),c k)) :=
+begin
+  split,
+  {
+
+    sorry,
+  },
+  {
+    sorry,
+  },
 end
