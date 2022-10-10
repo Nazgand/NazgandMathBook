@@ -186,14 +186,16 @@ begin
   exact h0,
 end
 
-lemma EqNthDerivRuesDiffSum (f:ℂ→ℂ) (n:ℕ) (h:0<n) : (f = iterated_deriv n f) ↔ (∃ (c : ℕ → ℂ), f = ∑ k in range n, (ruesDiff n k) * (λ(z:ℂ),c k)) :=
+lemma EqNthDerivRuesDiffSum (f:ℂ→ℂ) (n:ℕ) (h:0<n) :
+      (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z:ℂ),iterated_deriv k f 0) * (ruesDiff n (-k))) :=
 begin
   split,
   {
-
     sorry,
   },
   {
+    intros h0,
+    rw h0,
     sorry,
   },
 end
