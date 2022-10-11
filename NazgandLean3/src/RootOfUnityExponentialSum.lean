@@ -63,7 +63,7 @@ begin
   exact ruesSummable n h x,
 end
 
-lemma ruesRotationallySymmetric (n:ℕ) (h:0<n) (z rou:ℂ) (h:rou ^ n = 1):rues n z=rues n (z*rou):=
+lemma ruesRotationallySymmetric (n:ℕ) (h₀:0<n) (z rou:ℂ) (h₁:rou ^ n = 1):rues n z=rues n (z*rou):=
 begin
   rw [rues, rues],
   congr' 1,
@@ -72,7 +72,7 @@ begin
     exact mul_pow z rou (n * x),
   have h3: rou ^ (n * x) = (rou ^ n) ^ x,
     exact pow_mul rou n x,
-  simp [h2,h3,h],
+  simp [h2,h3,h₁],
 end
 
 -- The zero coefficients are needed for proof of ruesNEqExpSum
@@ -165,9 +165,53 @@ begin
     int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
 end
 
-lemma ruesDiffRotationallySymmetric (n:ℕ) (h:0<n) (m:ℤ) (z rou:ℂ) (h:rou ^ n = 1) : ruesDiff n m (z * rou) = rou ^ -m * ruesDiff n m z :=
+lemma ruesDiffRotationallySymmetric (n:ℕ) (h₀:0<n) (m:ℤ) (z rou:ℂ) (h₁:rou ^ n = 1) : ruesDiff n m (z * rou) = rou ^ -m * ruesDiff n m z :=
 begin
-  sorry,
+  simp_rw ruesDiffTsumForm,
+  rw tsum_mul_left.symm,
+  {
+    congr' 1,
+    ext1,
+    simp only [euclidean_domain.mod_eq_zero, zpow_neg, mul_ite, mul_zero],
+    have h0 := classical.em (↑n ∣ ↑x + m),
+    cases h0,
+    {
+      rw [if_pos h0,if_pos h0],
+      rw mul_pow z rou x,
+      have h1 : rou ^ x = (rou ^ m)⁻¹,
+      {
+        let k := (x:ℤ) + m,
+        have h2 : (x:ℤ) + m = k,
+        exact rfl,
+        rw h2 at h0,
+        clear_value k,
+        obtain ⟨k1, rfl⟩ := h0,
+        have h3 : rou ^ ((x:ℤ) + m) = 1,
+        {
+          rw h2,
+          rw zpow_mul rou ↑n k1,
+          have h4 : rou ^ (n:ℤ) = 1,
+          {
+            exact_mod_cast h₁,
+          },
+          rw h4,
+          simp only [one_zpow],
+        },
+        have h5 := congr_arg (λ (z₀:ℂ),z₀*(rou ^ m)⁻¹) h3.symm,
+        simp only [one_mul] at h5,
+        rw h5,
+        -- rw zpow_add rou (x:ℤ) m, -- strange error
+        sorry,
+      },
+      rw h1,
+      ring_nf,
+    },
+    {
+      rw [if_neg h0,if_neg h0],
+    },
+  },
+  exact topological_ring.mk,
+  exact t2_5_space.t2_space,
 end
 
 lemma ruesDiffMPeriodic (n:ℕ) (m k:ℤ) (z:ℂ) : ruesDiff n m z = ruesDiff n (m+k*n) z :=
