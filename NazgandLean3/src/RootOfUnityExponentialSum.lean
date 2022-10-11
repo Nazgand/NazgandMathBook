@@ -165,6 +165,25 @@ begin
     int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
 end
 
+lemma rouNot0 (n:ℕ) (h₀:0<n) (rou:ℂ) (h₁:rou ^ n = 1) : rou ≠ 0 :=
+begin
+  have h0 := cpow_def rou n,
+  have h1 : n ≠ 0,
+  exact ne_of_gt h₀,
+  have h2 : ¬ (n:ℂ) = 0,
+  exact_mod_cast h1,
+  simp_rw if_neg h2 at h0,
+  rw_mod_cast h₁ at h0,
+  have h3 : (rou = 0) → false,
+  {
+    intros h4,
+    rw if_pos h4 at h0,
+    simp only [one_ne_zero] at h0,
+    exact h0,
+  },
+  contradiction,
+end
+
 lemma ruesDiffRotationallySymmetric (n:ℕ) (h₀:0<n) (m:ℤ) (z rou:ℂ) (h₁:rou ^ n = 1) : ruesDiff n m (z * rou) = rou ^ -m * ruesDiff n m z :=
 begin
   simp_rw ruesDiffTsumForm,
@@ -200,8 +219,12 @@ begin
         have h5 := congr_arg (λ (z₀:ℂ),z₀*(rou ^ m)⁻¹) h3.symm,
         simp only [one_mul] at h5,
         rw h5,
-        -- rw zpow_add rou (x:ℤ) m, -- strange error
-        sorry,
+        have h6 := rouNot0 n h₀ rou h₁,
+        rw zpow_add₀ h6 (x:ℤ) m,
+        simp only [zpow_coe_nat],
+        have h7 : rou ^ m ≠ 0,
+        exact zpow_ne_zero m h6,
+        field_simp,
       },
       rw h1,
       ring_nf,
