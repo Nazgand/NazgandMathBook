@@ -631,5 +631,6 @@ begin
   },
   simp_rw h6 _ _ _,
   clear h6,
+  simp_rw [finset.sum_mul, finset.mul_sum],
   sorry,
 end
