@@ -632,5 +632,28 @@ begin
   simp_rw h6 _ _ _,
   clear h6,
   simp_rw [finset.sum_mul, finset.mul_sum],
+  have h7 : ∀ (x x_1 x_2 : ℕ), exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ -(x_1:ℤ) * ruesDiff n x_1 z₀ *
+  (exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ -(x_2:ℤ) * ruesDiff n x_2 z₁) =
+  ruesDiff n x_1 z₀ * ruesDiff n x_2 z₁ * (exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ -(x_1:ℤ) *
+  exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ -(x_2:ℤ)),
+  {
+    intros x x_1 x_2,
+    ring_nf,
+  },
+  simp_rw h7,
+  clear h7,
+  have h8 : ∀ (x x_1 x_2 : ℕ), exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ -(x_1:ℤ) * exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ -(x_2:ℤ) =
+  exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ^ (-(x_1:ℤ) + -(x_2:ℤ)),
+  {
+    intros x x_1 x_2,
+    have h9 : exp (2 * ↑real.pi * ((x:ℂ) / (n:ℂ)) * I) ≠ 0,
+    {
+      exact rouNot0 n h (exp (2 * ↑real.pi * (↑x / ↑n) * I)) (h3 x),
+    },
+    exact (zpow_add₀ h9 (-(x_1:ℤ)) (-(x_2:ℤ))).symm,
+  },
+  simp_rw h8,
+  clear h8,
+  -- simp_rw finset.sum_comm, -- seems to be stuck in an infinite loop? Taking way to long.
   sorry,
 end
