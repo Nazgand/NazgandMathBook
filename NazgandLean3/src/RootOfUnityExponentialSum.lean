@@ -580,6 +580,33 @@ begin
   exact h2,
 end
 
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/.E2.9C.94.20Commuting.20sum.20sigmas.20with.20a.20sum.20of.20sum.20of.20sum
+lemma sum_three_cycle {M α β γ : Type*} [add_comm_monoid M] {s : finset α} {t : finset β}
+  {u : finset γ} {f : α → β → γ → M} : ∑ a in s, ∑ b in t, ∑ c in u, f a b c =
+    ∑ b in t, ∑ c in u, ∑ a in s, f a b c :=
+begin
+  rw finset.sum_comm,
+  simp_rw @finset.sum_comm _ γ,
+end
+
+lemma nNeqComplex0 (n:ℕ) (h:0<n) : (n:ℂ) ≠ 0 :=
+begin
+  have h0 : 0 ≠ n,
+  exact ne_of_lt h,
+  exact_mod_cast h0.symm,
+end
+
+lemma standardRouForm (n:ℕ) (h:0<n) : ∀ (x:ℕ), exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ n = 1 :=
+begin
+    intros x,
+  rw (complex.exp_nat_mul _ n).symm,
+  rw complex.exp_eq_one_iff,
+  use (x:ℤ),
+  have h0 := nNeqComplex0 n h,
+  field_simp,
+  ring_nf,
+end
+
 lemma ruesArgumentSumRule (n:ℕ) (h:0<n) (z₀ z₁:ℂ) :
         rues n (z₀ + z₁) = ∑ k in range n, (ruesDiff n k z₀ * ruesDiff n (n - k) z₁) :=
 begin
@@ -610,19 +637,7 @@ begin
   },
   simp_rw h2,
   clear h2,
-  have h3 : ∀ (x:ℕ), exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ n = 1,
-  {
-    intros x,
-    rw (complex.exp_nat_mul _ n).symm,
-    rw complex.exp_eq_one_iff,
-    use (x:ℤ),
-    have h4 : 0 ≠ n,
-    exact ne_of_lt h,
-    have h5 : (n:ℂ) ≠ 0,
-    exact_mod_cast h4.symm,
-    field_simp,
-    ring_nf,
-  },
+  have h3 := standardRouForm n h,
   have h6 : ∀ (k₀ x : ℕ) (z : ℂ), ruesDiff n ↑k₀ (z * exp (2 * ↑real.pi * (↑x / ↑n) * I)) =
     exp (2 * ↑real.pi * (↑x / ↑n) * I) ^ -↑k₀ * ruesDiff n ↑k₀ z,
   {
@@ -654,6 +669,20 @@ begin
   },
   simp_rw h8,
   clear h8,
-  -- simp_rw finset.sum_comm, -- seems to be stuck in an infinite loop? Taking way to long.
+  rw sum_three_cycle,
+  simp_rw finset.mul_sum.symm,
+  have h9 : ∀ (x x_1 : ℕ), ∑ (m : ℕ) in range n, exp (2 * ↑real.pi * ((m:ℂ) / (n:ℂ)) * I) ^ (-(x:ℤ) + -(x_1:ℤ)) =
+    ite (↑n ∣ -(x:ℤ) + -(x_1:ℤ)) ↑n 0,
+  {
+    intros x x_1,
+    exact ruGeomSumEqIte2 n (-↑x + -↑x_1) h,
+  },
+  simp_rw h9,
+  clear h9,
+  ring_nf,
+  simp_rw [finset.mul_sum],
+  simp only [mul_ite, mul_zero],
+  have h10 := nNeqComplex0 n h,
+  field_simp,
   sorry,
 end
