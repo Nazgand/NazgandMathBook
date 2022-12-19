@@ -16,3 +16,4 @@ To initialize the Lean code and download mathlib, try:
 cd NazgandLean3
 leanproject new
 ```
+Note: `leanproject new` downloads the latest version of mathlib, which is incompatible. The correct (old) version of mathlib is noted in the `.toml` file.
