@@ -1,8 +1,8 @@
 [package]
 name = "NazgandLean3"
 version = "0.1"
-lean_version = "leanprover-community/lean:3.48.0"
+lean_version = "leanprover-community/lean:3.50.3"
 path = "src"
 
 [dependencies]
-mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "b49d5686ebc6a118cacd06139ead6d055b8e3759"}
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "46a64b5b4268c594af770c44d9e502afc6a515cb"}

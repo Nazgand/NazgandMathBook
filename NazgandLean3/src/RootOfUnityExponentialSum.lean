@@ -5,7 +5,7 @@ import algebra.group_with_zero.defs
 import algebra.big_operators.basic
 import ruesDiffDeriv
 
-open classical complex asymptotics real normed_space
+open classical complex asymptotics real normed_space finset
 open_locale classical big_operators nat
 
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/definition.20of.20exp.20using.20tsum
@@ -77,92 +77,62 @@ end
 
 -- The zero coefficients are needed for proof of ruesNEqExpSum
 -- m=0 is same as rues, ruesDiff is the mth derivative of rues
-lemma ruesDiffTsumForm (n:ℕ) (m:ℤ) (z:ℂ) : ruesDiff n m z = tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0) :=
+noncomputable
+def ruesDiff (n:ℕ) (m:ℤ) (z:ℂ) := tsum (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0)
+
+lemma ruesDiffHasDeriv (n : ℕ) (m : ℤ) (z : ℂ) :
+  has_deriv_at (ruesDiff n m) (ruesDiff n (m + 1) z) z :=
 begin
-  have h0 : z ∈ emetric.ball (0:ℂ) (rues_series n m).radius,
+  sorry,
+end
+
+lemma ruesDiffDeriv (n : ℕ) (m : ℤ) :
+  deriv (ruesDiff n m) = (ruesDiff n (m + 1)) :=
+begin
+  refine deriv_eq _,
+  intros z,
+  exact ruesDiffHasDeriv n m z,
+end
+
+lemma ruesDiffIteratedDeriv (k n : ℕ) (m : ℤ) (z : ℂ) : iterated_deriv k (ruesDiff n m) = ruesDiff n (k + m) :=
+begin
+  induction k with K K_ih,
+  simp only [iterated_deriv_zero, nat.cast_zero, zero_add],
+  have h0 := congr_arg deriv K_ih,
+  rw ruesDiffDeriv n ((K:ℤ) + m)at h0,
+  have h1 : ↑K + m + 1 = ↑(K.succ) + m,
   {
-    rw rues_series_radius,
-    rw metric.emetric_ball_top,
-    simp only [set.mem_univ],
+    simp only [nat.cast_succ],
+    ring_nf,
   },
-  have h1 := formal_multilinear_series.has_sum (rues_series n m) h0,
-  have h2 := has_sum.tsum_eq h1,
-  rw ruesDiff,
-  rw h2.symm,
-  simp only [formal_multilinear_series.apply_eq_pow_smul_coeff, algebra.id.smul_eq_mul, euclidean_domain.mod_eq_zero],
-  rw rues_series,
-  rw plain_old_series,
-  congr' 1,
-  ext1,
-  rw formal_multilinear_series.coeff,
-  simp only [continuous_multilinear_map.mk_pi_field_apply, pi.one_apply, finset.prod_const_one, algebra.id.smul_eq_mul, one_mul],
-  rw rues_coeff,
-  simp only [euclidean_domain.mod_eq_zero, one_div, mul_ite, mul_zero],
-  congr' 1,
+  rw h1 at h0,
+  clear h1,
+  rw iterated_deriv_succ,
+  exact h0,
+end
+
+lemma EqNthDerivRuesDiffSum (f:ℂ→ℂ) (n:ℕ) (h:0<n) :
+      (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z:ℂ),iterated_deriv k f 0) * (ruesDiff n (-k))) :=
+begin
+  split,
+  {
+    sorry,
+  },
+  {
+    intros h0,
+    rw h0,
+    sorry,
+  },
 end
 
 lemma ruesDiffSummable (n:ℕ) (m:ℤ) (z:ℂ) : summable (λ (k:ℕ), if ((k:ℤ)+m)%n=0 then z ^ k / k.factorial else 0) :=
 begin
-  have h0 : z ∈ emetric.ball (0:ℂ) (rues_series n m).radius,
-  {
-    rw rues_series_radius,
-    rw metric.emetric_ball_top,
-    simp only [set.mem_univ],
-  },
-  have h1 := formal_multilinear_series.summable (rues_series n m) h0,
-  simp only [formal_multilinear_series.apply_eq_pow_smul_coeff, algebra.id.smul_eq_mul] at h1,
-  have h2 : (λ (k : ℕ), ite ((↑k + m) % ↑n = 0) (z ^ k / ↑k!) 0) = (λ (n_1 : ℕ), z ^ n_1 * (rues_series n m).coeff n_1),
-  {
-    ext1,
-    rw rues_series,
-    rw plain_old_series,
-    rw formal_multilinear_series.coeff,
-    rw rues_coeff,
-    simp only [euclidean_domain.mod_eq_zero, one_div, continuous_multilinear_map.mk_pi_field_apply, pi.one_apply,
-  finset.prod_const_one, algebra.id.smul_eq_mul, mul_ite, one_mul, mul_zero],
-    congr' 1,
-  },
-  simp_rw h2,
-  exact h1,
+  sorry,
 end
 
--- The sums need to be stretched with additional zero coefficients general form
--- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
-lemma tsum_mul_ite {α} [topological_space α] [t2_space α] [add_comm_monoid α]
-  (f : ℕ → α) {n : ℕ} (h : 0 < n) :
-  ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
-begin
-  rw [(show ∑' (c : ℕ), f (n * c) = ∑' (a : set.range ((*) n)), f ↑a, from
-    (equiv.of_injective ((*) n) (nat.mul_right_injective h)).tsum_eq (λ a, f a.val)), tsum_subtype],
-  exact tsum_congr (λ a, by simp [set.indicator, has_dvd.dvd, eq_comm]),
-end
-
--- The sums need to be stretched with additional zero coefficients specific form
--- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
-lemma needZeroCoeff (f:ℕ→ℂ) (n:ℕ) (h : 0<n) : ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
-tsum_mul_ite _ h
-
--- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
-lemma ruesDiffM0EqRues_first_try (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
-begin
-  rw [rues, ruesDiffTsumForm],
-  simp, -- nontermal simps are bad; squeeze it to see the names of what you're using, you might learn something
-  -- Let's isolate the problem
-  convert needZeroCoeff (λ n, z ^ n / n!) n h,
-  ext1, -- cancel lambdas
-  congr' 1, -- cancel ITEs
-  apply propext, -- make equality of propositions into an iff
-  -- the problem is now isolated. Now let's solve it
-  exact int.coe_nat_dvd, -- library_search found it (and might have found it quicker had
-  -- you not done `import all` but I'm not sure)
-end
-
--- second go now we know the name of the lemma
--- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma ruesDiffM0EqRues (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
 begin
-  simp only [rues, ruesDiffTsumForm, add_zero, euclidean_domain.mod_eq_zero,
-    int.coe_nat_dvd, needZeroCoeff (λ n, z ^ n / n!) n h],
+  sorry,
 end
 
 lemma rouNot0 (n:ℕ) (h₀:0<n) (rou:ℂ) (h₁:rou ^ n = 1) : rou ≠ 0 :=
@@ -186,7 +156,7 @@ end
 
 lemma ruesDiffRotationallySymmetric (n:ℕ) (h₀:0<n) (m:ℤ) (z rou:ℂ) (h₁:rou ^ n = 1) : ruesDiff n m (z * rou) = rou ^ -m * ruesDiff n m z :=
 begin
-  simp_rw ruesDiffTsumForm,
+  simp_rw ruesDiff,
   rw tsum_mul_left.symm,
   {
     congr' 1,
@@ -239,7 +209,7 @@ end
 
 lemma ruesDiffMPeriodic (n:ℕ) (m k:ℤ) (z:ℂ) : ruesDiff n m z = ruesDiff n (m+k*n) z :=
 begin
-  rw [ruesDiffTsumForm, ruesDiffTsumForm],
+  rw [ruesDiff, ruesDiff],
   congr' 1,
   ext1,
   congr' 1,
@@ -423,7 +393,7 @@ begin
   clear h4,
   have h5 : rues n z * ↑n = (∑' (b : ℕ), z ^ b / ↑b! * ite (↑n ∣ (b:ℤ)) ↑n 0),
   {
-    rw [ruesDiffM0EqRues,ruesDiffTsumForm],
+    rw [ruesDiffM0EqRues,ruesDiff],
     rw tsum_mul_right.symm,
     {
       congr,
@@ -549,7 +519,7 @@ end
 
 lemma ruesDiffSumOfRuesDiff (n k:ℕ) (h:0<n*k) (m:ℤ) (z:ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n*k) (n*k₀+m) z:=
 begin
-  simp_rw ruesDiffTsumForm,
+  simp_rw ruesDiff,
   have h0 : ∀ x ∈ range k, summable (λ (k_1:ℕ), ite ((↑k_1 + (↑n * ↑x + m)) % ↑(n * k) = 0) (z ^ k_1 / ↑k_1!) 0),
   {
     intros x h1,
