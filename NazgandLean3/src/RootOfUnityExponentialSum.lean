@@ -3,7 +3,8 @@ import analysis.special_functions.exponential
 import analysis.special_functions.complex.log
 import algebra.group_with_zero.defs
 import algebra.big_operators.basic
-import ruesDiffDeriv
+import analysis.calculus.iterated_deriv
+import analysis.special_functions.pow
 
 open classical complex asymptotics real normed_space finset
 open_locale classical big_operators nat
