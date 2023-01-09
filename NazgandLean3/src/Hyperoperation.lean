@@ -1,4 +1,5 @@
 import algebra.group_with_zero.defs
+import tactic
 
 def hyperoperation : ℕ → ℕ → ℕ → ℕ
 | 0 _ b := b + 1
@@ -23,7 +24,17 @@ end
 
 lemma hyperoperation_2_multiplication (a b : ℕ) : hyperoperation 2 a b = a * b :=
 begin
-  sorry,
+  induction b with bn bih,
+  {
+    rw hyperoperation,
+    exact (nat.mul_zero a).symm,
+  },
+  {
+    rw [hyperoperation,hyperoperation_1_addition],
+    rw (show 1 + 1 = 2, by refl),
+    rw bih,
+    ring,
+  },
 end
 
 lemma hyperoperation_succn_2_2_eq_4 (n : ℕ) : hyperoperation (n + 1) 2 2 = 4 :=
