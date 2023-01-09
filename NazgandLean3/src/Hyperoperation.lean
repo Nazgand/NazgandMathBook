@@ -1,10 +1,10 @@
 import algebra.group_with_zero.defs
 
 def hyperoperation : ℕ → ℕ → ℕ → ℕ
-| 0 _ b := 1 + b
+| 0 _ b := b + 1
 | 1 a 0 := a
 | 2 _ 0 := 0
-| _ _ 0 := 1
+| (n + 3) _ 0 := 1
 | (n + 1) a (b + 1) := hyperoperation n a (hyperoperation (n + 1) a b)
 
 lemma hyperoperation_1_addition (a b : ℕ) : hyperoperation 1 a b = a + b :=
@@ -16,8 +16,11 @@ begin
     have h1 : 0 + 1 = 1,
     exact rfl,
     rw [h1,bih],
-    -- rw hyperoperation, --should work; does not work
-    sorry,
+    rw hyperoperation,
+    have h2 : bn.succ = bn + 1,
+    exact rfl,
+    rw h2,
+    exact nat.add_assoc a bn 1,
   },
 end
 
