@@ -1,3 +1,5 @@
+import algebra.group_with_zero.defs
+
 def hyperoperation : ℕ → ℕ → ℕ → ℕ
 | 0 _ b := 1 + b
 | 1 a 0 := a
@@ -7,7 +9,16 @@ def hyperoperation : ℕ → ℕ → ℕ → ℕ
 
 lemma hyperoperation_1_addition (a b : ℕ) : hyperoperation 1 a b = a + b :=
 begin
-  sorry,
+  induction b with bn bih,
+  rw [nat_add_zero a, hyperoperation],
+  {
+    rw hyperoperation,
+    have h1 : 0 + 1 = 1,
+    exact rfl,
+    rw [h1,bih],
+    -- rw hyperoperation, --should work; does not work
+    sorry,
+  },
 end
 
 lemma hyperoperation_2_multiplication (a b : ℕ) : hyperoperation 2 a b = a * b :=
