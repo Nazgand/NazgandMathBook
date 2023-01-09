@@ -13,13 +13,10 @@ begin
   rw [nat_add_zero a, hyperoperation],
   {
     rw hyperoperation,
-    have h1 : 0 + 1 = 1,
-    exact rfl,
-    rw [h1,bih],
+    rw (show 0 + 1 = 1, by refl),
+    rw bih,
     rw hyperoperation,
-    have h2 : bn.succ = bn + 1,
-    exact rfl,
-    rw h2,
+    rw (show bn.succ = bn + 1, by refl),
     exact nat.add_assoc a bn 1,
   },
 end
