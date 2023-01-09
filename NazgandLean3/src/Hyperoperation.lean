@@ -39,5 +39,14 @@ end
 
 lemma hyperoperation_succn_2_2_eq_4 (n : ℕ) : hyperoperation (n + 1) 2 2 = 4 :=
 begin
-  sorry,
+  induction n with nn nih,
+  {
+    rw (show 0 + 1 = 1, by refl),
+    rw hyperoperation_1_addition,
+  },
+  {
+    rw (show nn.succ + 1 = nn + 2, by refl),
+    -- rw hyperoperation, --should work, fails to work
+    sorry,
+  },
 end
