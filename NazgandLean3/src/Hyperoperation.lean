@@ -65,6 +65,19 @@ begin
   },
 end
 
+lemma hyperoperation_3_exponentiation (a b : ℕ) : hyperoperation 3 a b = a ^ b :=
+begin
+  induction b with bn bih,
+  {
+    rw hyperoperation_n3a0_1,
+    exact (pow_zero a).symm,
+  },
+  {
+    rw [hyperoperation_n1ab1_recurse,hyperoperation_2_multiplication,bih],
+    exact (pow_succ a bn).symm,
+  },
+end
+
 lemma hyperoperation_n2a1_a (n a : ℕ) : hyperoperation (n + 2) a 1 = a :=
 begin
   induction n with nn nih,
