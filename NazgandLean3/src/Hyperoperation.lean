@@ -1,4 +1,3 @@
-import algebra.group_with_zero.defs
 import tactic
 
 def hyperoperation : ℕ → ℕ → ℕ → ℕ
@@ -33,8 +32,10 @@ end
 lemma hyperoperation_n1ab1_recurse (n a b : ℕ) :
   hyperoperation (n + 1) a (b + 1) = hyperoperation n a (hyperoperation (n + 1) a b) :=
 begin
-  -- rw hyperoperation, -- does not work; should work
-  sorry,
+  cases n,
+  rw hyperoperation,
+  cases n;
+  rw hyperoperation,
 end
 
 -- Interesting hyperoperation lemmas
@@ -42,13 +43,11 @@ end
 lemma hyperoperation_1_addition (a b : ℕ) : hyperoperation 1 a b = a + b :=
 begin
   induction b with bn bih,
-  rw [nat_add_zero a, hyperoperation_1a0_a],
   {
-    rw hyperoperation_n1ab1_recurse,
-    rw (show 0 + 1 = 1, by refl),
-    rw bih,
-    rw hyperoperation_0ab_b.succ,
-    rw (show bn.succ = bn + 1, by refl),
+    rw [nat_add_zero a, hyperoperation_1a0_a],
+  },
+  {
+    rw [hyperoperation_n1ab1_recurse,bih,hyperoperation_0ab_b.succ],
     exact nat.add_assoc a bn 1,
   },
 end
@@ -61,10 +60,20 @@ begin
     exact (nat.mul_zero a).symm,
   },
   {
-    rw [hyperoperation_n1ab1_recurse,hyperoperation_1_addition],
-    rw (show 1 + 1 = 2, by refl),
-    rw bih,
+    rw [hyperoperation_n1ab1_recurse,hyperoperation_1_addition,bih],
     ring,
+  },
+end
+
+lemma hyperoperation_n2a1_a (n a : ℕ) : hyperoperation (n + 2) a 1 = a :=
+begin
+  induction n with nn nih,
+  {
+    rw hyperoperation_2_multiplication,
+    ring,
+  },
+  {
+    rw [hyperoperation_n1ab1_recurse,hyperoperation_n3a0_1,nih],
   },
 end
 
@@ -72,12 +81,9 @@ lemma hyperoperation_succn_2_2_eq_4 (n : ℕ) : hyperoperation (n + 1) 2 2 = 4 :
 begin
   induction n with nn nih,
   {
-    rw (show 0 + 1 = 1, by refl),
     rw hyperoperation_1_addition,
   },
   {
-    rw (show nn.succ + 1 = nn + 2, by refl),
-    -- rw hyperoperation, --should work, fails to work
-    sorry,
+    rw [hyperoperation_n1ab1_recurse,hyperoperation_n2a1_a,nih],
   },
 end
