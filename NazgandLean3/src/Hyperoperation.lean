@@ -1,36 +1,36 @@
 import tactic
 
 def hyperoperation : ℕ → ℕ → ℕ → ℕ
-| 0 _ b := b + 1
-| 1 a 0 := a
+| 0 _ k := k + 1
+| 1 m 0 := m
 | 2 _ 0 := 0
 | (n + 3) _ 0 := 1
-| (n + 1) a (b + 1) := hyperoperation n a (hyperoperation (n + 1) a b)
+| (n + 1) m (k + 1) := hyperoperation n m (hyperoperation (n + 1) m k)
 
 -- Basic hyperoperation lemmas
 
-lemma hyperoperation_0ab_b.succ (a b : ℕ) : hyperoperation 0 a b = b + 1 :=
+lemma hyperoperation_0ab_b.succ (m k : ℕ) : hyperoperation 0 m k = k + 1 :=
 begin
   rw hyperoperation,
 end
 
-lemma hyperoperation_1a0_a (a : ℕ) : hyperoperation 1 a 0 = a :=
+lemma hyperoperation_1a0_a (m : ℕ) : hyperoperation 1 m 0 = m :=
 begin
   rw hyperoperation,
 end
 
-lemma hyperoperation_2a0_0 (a : ℕ) : hyperoperation 2 a 0 = 0 :=
+lemma hyperoperation_2a0_0 (m : ℕ) : hyperoperation 2 m 0 = 0 :=
 begin
   rw hyperoperation,
 end
 
-lemma hyperoperation_n3a0_1 (n a : ℕ) : hyperoperation (n + 3) a 0 = 1 :=
+lemma hyperoperation_n3a0_1 (n m : ℕ) : hyperoperation (n + 3) m 0 = 1 :=
 begin
   rw hyperoperation,
 end
 
-lemma hyperoperation_n1ab1_recurse (n a b : ℕ) :
-  hyperoperation (n + 1) a (b + 1) = hyperoperation n a (hyperoperation (n + 1) a b) :=
+lemma hyperoperation_n1ab1_recurse (n m k : ℕ) :
+  hyperoperation (n + 1) m (k + 1) = hyperoperation n m (hyperoperation (n + 1) m k) :=
 begin
   cases n,
   rw hyperoperation,
@@ -40,24 +40,24 @@ end
 
 -- Interesting hyperoperation lemmas
 
-lemma hyperoperation_1_addition (a b : ℕ) : hyperoperation 1 a b = a + b :=
+lemma hyperoperation_1_addition (m k : ℕ) : hyperoperation 1 m k = m + k :=
 begin
-  induction b with bn bih,
+  induction k with bn bih,
   {
-    rw [nat_add_zero a, hyperoperation_1a0_a],
+    rw [nat_add_zero m, hyperoperation_1a0_a],
   },
   {
     rw [hyperoperation_n1ab1_recurse,bih,hyperoperation_0ab_b.succ],
-    exact nat.add_assoc a bn 1,
+    exact nat.add_assoc m bn 1,
   },
 end
 
-lemma hyperoperation_2_multiplication (a b : ℕ) : hyperoperation 2 a b = a * b :=
+lemma hyperoperation_2_multiplication (m k : ℕ) : hyperoperation 2 m k = m * k :=
 begin
-  induction b with bn bih,
+  induction k with bn bih,
   {
     rw hyperoperation_2a0_0,
-    exact (nat.mul_zero a).symm,
+    exact (nat.mul_zero m).symm,
   },
   {
     rw [hyperoperation_n1ab1_recurse,hyperoperation_1_addition,bih],
@@ -65,20 +65,20 @@ begin
   },
 end
 
-lemma hyperoperation_3_exponentiation (a b : ℕ) : hyperoperation 3 a b = a ^ b :=
+lemma hyperoperation_3_exponentiation (m k : ℕ) : hyperoperation 3 m k = m ^ k :=
 begin
-  induction b with bn bih,
+  induction k with bn bih,
   {
     rw hyperoperation_n3a0_1,
-    exact (pow_zero a).symm,
+    exact (pow_zero m).symm,
   },
   {
     rw [hyperoperation_n1ab1_recurse,hyperoperation_2_multiplication,bih],
-    exact (pow_succ a bn).symm,
+    exact (pow_succ m bn).symm,
   },
 end
 
-lemma hyperoperation_n2a1_a (n a : ℕ) : hyperoperation (n + 2) a 1 = a :=
+lemma hyperoperation_n2a1_a (n m : ℕ) : hyperoperation (n + 2) m 1 = m :=
 begin
   induction n with nn nih,
   {
