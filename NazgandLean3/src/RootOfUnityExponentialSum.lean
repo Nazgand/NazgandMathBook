@@ -450,9 +450,9 @@ lemma rues2EqCosh (z:ℂ) : rues 2 z = cosh z :=
 begin
   rw [complex.cosh, ruesNEqExpSum],
   rw finset.sum,
-  simp only [range_coe, multiset.range_succ, multiset.range_zero, nat.cast_bit0, nat.cast_one, multiset.map_cons, one_div,
-  nat.cast_zero, zero_div, mul_zero, zero_mul, complex.exp_zero, mul_one, multiset.map_zero, multiset.sum_cons,
-  multiset.sum_zero, add_zero],
+  simp only [range_val, multiset.range_succ, multiset.range_zero, multiset.cons_zero, nat.cast_bit0, algebra_map.coe_one,
+  multiset.map_cons, one_div, multiset.map_singleton, algebra_map.coe_zero, zero_div, mul_zero, zero_mul,
+  complex.exp_zero, mul_one, multiset.sum_cons, multiset.sum_singleton],
   rw exp_mul_I,
   rw (show 2 * ↑real.pi * (2:ℂ)⁻¹ = ↑real.pi, by ring),
   simp only [complex.cos_pi, complex.sin_pi, zero_mul, add_zero, mul_neg, mul_one],
@@ -464,12 +464,11 @@ lemma rues4EqCoshCosh (z:ℂ) : rues 4 z = cosh (z/(1+I)) * cosh (z/(1-I)) :=
 begin
   rw [complex.cosh, complex.cosh, ruesNEqExpSum],
   rw finset.sum,
-  simp only [range_coe, multiset.range_succ, multiset.range_zero, nat.cast_bit0, nat.cast_one, multiset.map_cons, nat.cast_bit1,
-  one_div, nat.cast_zero, zero_div, mul_zero, complex.exp_zero, mul_one, multiset.map_zero, multiset.sum_cons,
-  multiset.sum_zero, add_zero],
+  simp only [range_val, multiset.range_succ, multiset.range_zero, multiset.cons_zero, nat.cast_bit0, algebra_map.coe_one,
+  multiset.map_cons, nat.cast_bit1, one_div, multiset.map_singleton, algebra_map.coe_zero, zero_div, mul_zero, zero_mul,
+  complex.exp_zero, mul_one, multiset.sum_cons, multiset.sum_singleton],
   {
     rw [exp_mul_I, exp_mul_I, exp_mul_I],
-    simp only [zero_mul, complex.exp_zero, mul_one],
     rw (show 2 * ↑real.pi * 4⁻¹ = (real.pi/2:ℂ), by ring),
     simp only [complex.cos_pi_div_two, complex.sin_pi_div_two, one_mul, zero_add],
     rw (show (2:ℂ) * ↑real.pi * (2 / 4) = ↑real.pi, by ring),
