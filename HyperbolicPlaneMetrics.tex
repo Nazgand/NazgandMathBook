@@ -147,7 +147,29 @@
 	
 	Just as one might suspect, where $s$ is the length of a hyperbolic geodesic, the Cartesian Hyperbolic Plane Metric is:
 	$$\pqty{ds}^2=\pqty{\cosh\pqty{y}*dx}^2+\pqty{1*dy}^2$$
+	Alternately,
+	$$\frac{ds}{dx}=\sqrt{\cosh\pqty{y}^2+\pqty{\frac{dy}{dx}}^2}$$
 	
+	\subsection{Cartesian Hyperbolic Plane Geodesics}
+	Let $g\pqty{x}$ be a function of a geodesic. Then the length of a line segment is:
+	$$\int_{a}^{b}\sqrt{\cosh\pqty{g\pqty{x}}^2+g'\pqty{x}^2}dx$$
+	The Euler-Lagrange equations guarantee
+	$$\frac{\cosh\pqty{g\pqty{x}}\sinh\pqty{g\pqty{x}}}{\sqrt{\cosh\pqty{g\pqty{x}}^2+g'\pqty{x}^2}}
+	=\pdiff{x}{}\pqty{\frac{g'\pqty{x}}{\sqrt{\cosh\pqty{g\pqty{x}}^2+g'\pqty{x}^2}}}
+	$$
+	$$\frac{\cosh\pqty{g\pqty{x}}\sinh\pqty{g\pqty{x}}}{\sqrt{\cosh\pqty{g\pqty{x}}^2+g'\pqty{x}^2}}
+	=\frac{\cosh\pqty{g\pqty{x}}\pqty{\cosh\pqty{g\pqty{x}}g''\pqty{x}-\sinh\pqty{g\pqty{x}}g'\pqty{x}^2}}
+	{\pqty{\cosh\pqty{g\pqty{x}}^2+g'\pqty{x}^2}^{3/2}}
+	$$
+	$$\sinh\pqty{g\pqty{x}}\pqty{\cosh\pqty{g\pqty{x}}^2+g'\pqty{x}^2}
+	=\cosh\pqty{g\pqty{x}}g''\pqty{x}-\sinh\pqty{g\pqty{x}}g'\pqty{x}^2
+	$$
+	$$\sinh\pqty{g\pqty{x}}\pqty{\cosh\pqty{g\pqty{x}}^2+2g'\pqty{x}^2}
+	=\cosh\pqty{g\pqty{x}}g''\pqty{x}
+	$$
+	$$\tanh\pqty{g\pqty{x}}\pqty{\cosh\pqty{g\pqty{x}}^2+2g'\pqty{x}^2}=g''\pqty{x}$$
+	I am currently stuck, so this will be left for the future.
+		
 	\section{Future work}
 	Future work would use the Euler-Lagrange Equations to determine formulae for geodesics. Geodesics of the Cartesian Hyperbolic Plane Metric are particularly interesting because geodesics look like (and might exactly be!) [$y=c_0\sec\pqty{c_2\pqty{x-c_1}}$ if the geodesic does not cross the line $y=0$] and [$y=c_0\tan\pqty{c_2\pqty{x-c_1}}$ if the geodesic crosses the line $y=0$].
 \end{document}
