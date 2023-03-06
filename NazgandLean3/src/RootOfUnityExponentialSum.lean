@@ -204,7 +204,7 @@ begin
       rw [if_neg h0,if_neg h0],
     },
   },
-  exact topological_ring.mk,
+  exact topological_semiring.mk,
   exact t2_5_space.t2_space,
 end
 
@@ -401,7 +401,7 @@ begin
       ext1,
       simp only [add_zero, euclidean_domain.mod_eq_zero, ite_mul, zero_mul, mul_ite, mul_zero],
     },
-    exact topological_ring.mk,
+    exact topological_semiring.mk,
     exact t2_5_space.t2_space,
     exact h,
   },
