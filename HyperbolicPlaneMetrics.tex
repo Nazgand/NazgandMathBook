@@ -173,7 +173,7 @@
 	
 	All geodesics can be divided into 4 types of geodesics:
 	
-	The trivial case $y=0$.
+	The trivial cases $y=0$ and $x=c$ for $c\in\mathbb{R}$.
 	
 	Those that do not cross the x-axis.
 	$$g_0(0)\in\mathbb{R}^+,g_0'(0)=0,g_0(x)=g_0(-x),y=\pm g_0(x-c_0),c_0\in\mathbb{R}$$
@@ -186,5 +186,20 @@
 	Those that touch the x-axis once infinitely far from the origin.
 	$$\lim_{x\to -\infty}g_2(x)=0,\lim_{h\to\infty}g_2(-1/h)=\infty,y=\pm g_2(\pm x-c_2),c_2\in\mathbb{R}$$
 	$$g_2(x)=\artanh(\exp(x)),x<0$$
+	
+	All the geodesics $y=g\pqty{x}$ (the geodesics excluding $x=c$) can be written in the form
+	$$g\pqty{x}\in\Bqty{\artanh(a_0\exp(x)+a_1\exp(-x))|\Bqty{a_0,a_1}\subset\mathbb{R}}$$
+	
+	This form makes it easy to verify that if we have 2 geodesics ($y=g_3\pqty{x}$ and $y=g_4\pqty{x}$) then we get the following geodesics free:
+	$$\Bqty{\artanh(a_2\tanh\pqty{g_3\pqty{x}}+a_3\tanh\pqty{g_4\pqty{x}}|\Bqty{a_2,a_3}\subset\mathbb{R}}$$
 
+	\subsection{Complex Cartesian Hyperbolic Plane Geodesics}
+	If complex numbers are used instead of real numbers for $x$ and $y$, then new types of geodesics are discovered. Furthermore, there may be unknown complex geodesics.
+	$$\Bqty{\artanh(a_0\exp(x)+a_1\exp(-x))|\Bqty{a_0,a_1}\subset\mathbb{C}}\subseteq\text{ComplexGeodesics}$$
+	$$\Bqty{i\arcsin\pqty{\frac{\tanh\pqty{x-a_1}\sqrt{a_0-1}}{\sqrt{\tanh\pqty{x-a_1}^2a_0-1}}}|\Bqty{a_0,a_1}\subset\mathbb{C}}\subseteq\text{ComplexGeodesics}$$
+	$$g\pqty{x}\in\text{ComplexGeodesics}\Leftrightarrow g\pqty{-x}\in\text{ComplexGeodesics}$$
+	$$g\pqty{x}\in\text{ComplexGeodesics}\Leftrightarrow -g\pqty{x}\in\text{ComplexGeodesics}$$
+	I conjecture that the following statement works because the analog worked with real numbers:
+	$$\Bqty{g_3\pqty{x},g_4\pqty{x}}\subseteq\text{ComplexGeodesics}\Rightarrow$$
+	$$\Bqty{\artanh(a_2\tanh\pqty{g_3\pqty{x}}+a_3\tanh\pqty{g_4\pqty{x}}|\Bqty{a_2,a_3}\subset\mathbb{C}}\subseteq\text{ComplexGeodesics}$$
 \end{document}
