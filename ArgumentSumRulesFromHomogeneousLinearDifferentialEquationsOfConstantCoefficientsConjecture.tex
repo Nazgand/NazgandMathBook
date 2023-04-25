@@ -103,4 +103,18 @@
 		f\pqty{z_0+z_1}=v\pqty{z_1}^T A v\pqty{z_0}=v\pqty{z_0}^T A v\pqty{z_1}
 	\end{equation}
 
+	\section{A reason $A$ is symmetric}
+	Suppose instead of a symmetric matrix $A$, we find a matrix $B$ such that
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}^T B v\pqty{z_0}
+	\end{equation}
+	Then take the transpose of the equation and substitute $z_0\to z_1,z_1\to z_0$, resulting in the following equation:
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}^T B^T v\pqty{z_0}
+	\end{equation}
+	Average both equations:
+	\begin{equation}
+		f\pqty{z_0+z_1}=v\pqty{z_1}^T \frac{B+B^T}{2} v\pqty{z_0}
+	\end{equation}
+	Note that we can set $A=\frac{B+B^T}{2}$ because it is symmetric. \qed
 \end{document}
