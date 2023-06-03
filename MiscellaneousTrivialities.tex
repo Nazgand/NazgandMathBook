@@ -1,0 +1,96 @@
+\documentclass[]{article}
+%document colors
+\usepackage{xcolor}
+\definecolor{favoritecolor1}{HTML}{607CB2}
+\definecolor{favoritecolor2}{HTML}{303E59}
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+	\color{#1}\global\let\default@color\current@color
+}
+\makeatother
+
+\AtBeginDocument{\globalcolor{favoritecolor2}}
+\pagecolor{favoritecolor1}
+
+%made from template named MathArticleTemplate
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{graphics}
+
+%Fix \eqref in section title
+\pdfstringdefDisableCommands{\def\eqref#1{(\ref{#1})}}
+
+\DeclareMathOperator{\es}{Es}
+\DeclareMathOperator{\ez}{Ez}
+\DeclareMathOperator{\gs}{gs}
+\DeclareMathOperator{\md}{mod}
+\DeclareMathOperator{\pow}{Pow}
+%Parenthesis, Braces, Brackets usepackage{physics}
+\newcommand{\pqty}[1]{{\left(#1\right)}}
+\newcommand{\Bqty}[1]{{\left\{#1\right\}}}
+\newcommand{\bqty}[1]{{\left[#1\right]}}
+\newcommand{\abs}[1]{{\left\lvert#1\right\rvert}}
+%other stuff
+\newcommand{\floor}[1]{{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{{\left\lceil#1\right\rceil}}
+%Laplace transform and inverse
+\newcommand{\laplace}[1]{\mathcal{L}\Bqty{#1}\pqty{s}}
+\newcommand{\laplaceInv}[1]{\mathcal{L}^{-1}\Bqty{#1}\pqty{t}}
+%Derivatives
+\newcommand{\pdiff}[2]{\frac{\partial^{#2}}{\partial #1^{#2}}}
+%Kettenbruch
+\newcommand{\ketten}[4]{\underset{#1}{\overset{#2}{\LARGE\mathrm K}}\frac{#3}{#4}}
+
+%lemma,theorem, proof
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\numberwithin{equation}{section}
+
+%\usepackage{minted}
+%opening
+\author{Mark Andrew Gerads: \href{MailTo:Nazgand@Gmail.Com}{Nazgand@Gmail.Com}}
+
+\title{
+	Miscellaneous Trivialities
+	
+	\href{https://github.com/Nazgand/nazgandMathBook}{https://github.com/Nazgand/nazgandMathBook}
+}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The goal of this paper is to have fun with trivial facts.
+	\end{abstract}
+	
+	
+	\begin{equation}
+		\mathbb{R} = \Bqty{x_0-x_1 \mid k\in\mathbb{Z}\Rightarrow x_k\in\mathbb{R}^+}
+	\end{equation}
+	
+	\begin{equation}
+		\bqty{k\in\mathbb{Z}^+\Rightarrow v_k-1\in\mathbb{Z}^+}
+		\Rightarrow
+		\Bqty{x \mid x\in\mathbb{R},0\leq x,x\leq 1}=
+		\Bqty{\sum_{k\in\mathbb{Z}^+} d_k \prod_{m=1}^{k} v_k^{-1} \mid \bqty{k\in\mathbb{Z}^+\Rightarrow d_k+1\in\mathbb{Z}^+},d_k<v_k}
+	\end{equation}
+
+	\begin{equation}
+		\mathbb{C} = \Bqty{x_0\exp\pqty{ix_1} + x_2\exp\pqty{ix_3} \mid \bqty{k\in\mathbb{Z}\Rightarrow x_k\in\mathbb{R}}, \frac{x_1-x_3}{\pi}\notin\mathbb{Z}}
+	\end{equation}
+	
+	\begin{equation}
+		\Bqty{m_0 + m_2\exp\pqty{\frac{i\pi}{3}} \mid \bqty{k\in\mathbb{Z}\Rightarrow m_k\in\mathbb{Z}}}
+		=
+		\Bqty{m_0 + m_2\exp\pqty{\frac{i2\pi}{3}} \mid \bqty{k\in\mathbb{Z}\Rightarrow m_k\in\mathbb{Z}}}
+	\end{equation}
+
+\end{document}
