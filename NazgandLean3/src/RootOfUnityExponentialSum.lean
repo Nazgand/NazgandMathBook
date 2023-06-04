@@ -122,9 +122,38 @@ begin
   exact h1,
 end
 
+-- The sums need to be stretched with additional zero coefficients general form
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
+lemma tsum_mul_ite {α} [topological_space α] [t2_space α] [add_comm_monoid α]
+  (f : ℕ → α) {n : ℕ} (h : 0 < n) :
+  ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
+begin
+  have h₀ : n ≠ 0,
+    { exact ne_of_gt h, },
+  rw (show ∑' (c : ℕ), f (n * c) = ∑' (a : set.range ((*) n)), f ↑a, from
+    (equiv.of_injective ((*) n) (mul_right_injective₀ h₀)).tsum_eq (λ a, f a.val)),
+  rw tsum_subtype (set.range ((*) n)) f,
+  exact tsum_congr (λ a, by simp [set.indicator, has_dvd.dvd, eq_comm]),
+end
+
+-- The sums need to be stretched with additional zero coefficients specific form
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
+lemma needZeroCoeff (f:ℕ→ℂ) (n:ℕ) (h : 0<n) : ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
+tsum_mul_ite _ h
+
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma ruesDiffM0EqRues (n:ℕ) (h:0<n) (z:ℂ) : rues n z = ruesDiff n 0 z :=
 begin
-  sorry,
+  rw [rues, ruesDiffTsumForm],
+  simp only [add_zero, euclidean_domain.mod_eq_zero], -- nontermal simps are bad; squeeze it to see the names of what you're using, you might learn something
+  -- Let's isolate the problem
+  convert needZeroCoeff (λ n, z ^ n / n!) n h,
+  ext1, -- cancel lambdas
+  congr' 1, -- cancel ITEs
+  apply propext, -- make equality of propositions into an iff
+  -- the problem is now isolated. Now let's solve it
+  exact int.coe_nat_dvd, -- library_search found it (and might have found it quicker had
+  -- you not done `import all` but I'm not sure)
 end
 
 lemma rouNot0 (n:ℕ) (h₀:0<n) (rou:ℂ) (h₁:rou ^ n = 1) : rou ≠ 0 :=
