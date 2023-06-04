@@ -1,10 +1,4 @@
-import analysis.special_functions.trigonometric.basic
-import analysis.special_functions.exponential
-import analysis.special_functions.complex.log
-import algebra.group_with_zero.defs
-import algebra.big_operators.basic
-import analysis.calculus.iterated_deriv
-import analysis.special_functions.pow
+import all
 
 open classical complex asymptotics real normed_space finset
 open_locale classical big_operators nat
@@ -205,7 +199,7 @@ begin
     },
   },
   exact topological_semiring.mk,
-  exact t2_5_space.t2_space,
+  exact polish_space.t2_space ℂ,
 end
 
 lemma ruesDiffMPeriodic (n:ℕ) (m k:ℤ) (z:ℂ) : ruesDiff n m z = ruesDiff n (m+k*n) z :=
@@ -402,7 +396,7 @@ begin
       simp only [add_zero, euclidean_domain.mod_eq_zero, ite_mul, zero_mul, mul_ite, mul_zero],
     },
     exact topological_semiring.mk,
-    exact t2_5_space.t2_space,
+    exact polish_space.t2_space ℂ,
     exact h,
   },
   have h6 := congr_arg (λ (z₀:ℂ),z₀/n) h5,

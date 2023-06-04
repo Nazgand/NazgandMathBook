@@ -15,5 +15,8 @@ To initialize the Lean code and download mathlib, try:
 ```
 cd NazgandLean3
 leanproject new
+./_target/deps/mathlib/scripts/mk_all.sh
 ```
+I needed to increase the memory limit from the default in the settings of the Lean3 VSCode extention.
 Note: `leanproject new` downloads the latest version of mathlib, which might be incompatible, because mathlib is constantly being updated and refactored. A compatible version of mathlib is noted in the `.toml` file.
+I do not know how to get the version in the `.toml` file. If you figure it out, consider contributing the solution to this project.
