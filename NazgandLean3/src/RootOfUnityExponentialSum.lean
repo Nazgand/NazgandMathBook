@@ -597,6 +597,13 @@ begin
   ring_nf,
 end
 
+lemma diagonalSumSimp (n:ℕ) (h:0<n) (z₀ z₁: ℂ): ∑ (x : ℕ) in range n,
+    ∑ (x_1 : ℕ) in range n, ite (↑n ∣ -(x:ℤ) - (x_1:ℤ)) (ruesDiff n ↑x z₀ * ruesDiff n ↑x_1 z₁) 0 =
+  ∑ (k : ℕ) in range n, ruesDiff n (↑n - ↑k) z₁ * ruesDiff n ↑k z₀ :=
+begin
+  sorry,
+end
+
 lemma ruesArgumentSumRule (n:ℕ) (h:0<n) (z₀ z₁:ℂ) :
         rues n (z₀ + z₁) = ∑ k in range n, (ruesDiff n k z₀ * ruesDiff n (n - k) z₁) :=
 begin
@@ -674,5 +681,5 @@ begin
   simp only [mul_ite, mul_zero],
   have h10 := nNeqComplex0 n h,
   field_simp,
-  sorry,
+  exact diagonalSumSimp n h z₀ z₁,
 end
