@@ -537,7 +537,98 @@ begin
   norm_num,
 end
 
-lemma ruesDiffSumOfRuesDiff (n k:ℕ) (h:0<n*k) (m:ℤ) (z:ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n*k) (n*k₀+m) z:=
+lemma helperLemma1 (n x₁ x₂ : ℤ) : n * x₁ - n * x₂ = n * (x₁ - x₂) :=
+begin
+  ring,
+end
+
+lemma helperLemma4 (k : ℕ) (hk0 : 0 < (k : ℤ)) (m : ℤ) (hkd: ↑k ∣ m) (hmr: m < ↑k) (hml: -↑k < m) : m = 0 :=
+begin
+  obtain ⟨y, rfl⟩ := hkd,
+  have hyr : y < 1,
+  exact (mul_lt_iff_lt_one_right hk0).mp hmr,
+  have hkn0 : -(k : ℤ) = ↑k * (-1),
+  simp only [mul_neg, mul_one],
+  rw hkn0 at hml,
+  have hyl : -1 < y,
+  exact (mul_lt_mul_left hk0).mp hml,
+  have hy0 : y = 0,
+  linarith,
+  rw hy0,
+  simp only [mul_zero],
+end
+
+lemma helperLemma3 (k x₁ x₂ : ℕ) (hk0 : 0 < (k : ℤ)) (hx₁ : x₁ ∈ (range k : set ℕ)) (hx₂ : x₂ ∈ (range k : set ℕ)) (hk : (k : ℤ) ∣ ↑x₁ - ↑x₂) :
+      (x₁ : ℤ) - (x₂ : ℤ) = 0 :=
+begin
+  have hx₁ : x₁ < k,
+  exact list.mem_range.mp hx₁,
+  have hx₁z : (x₁ : ℤ) < (k : ℤ),
+  exact nat.cast_lt.mpr hx₁,
+  clear hx₁,
+  have hx₂ : x₂ < k,
+  exact list.mem_range.mp hx₂,
+  have hx₂z : (x₂ : ℤ) < (k : ℤ),
+  exact nat.cast_lt.mpr hx₂,
+  clear hx₂,
+  have hx₁0 : 0 ≤ (x₁ : ℤ),
+  exact nat.cast_nonneg x₁,
+  have hx₂0 : 0 ≤ (x₂ : ℤ),
+  exact nat.cast_nonneg x₂,
+  have hx₁₂r : (x₁ : ℤ) - (x₂ : ℤ) < (k : ℤ),
+  linarith,
+  have hx₁₂l : -(k : ℤ) < (x₁ : ℤ) - (x₂ : ℤ),
+  linarith,
+  let m : ℤ := (x₁ : ℤ) - (x₂ : ℤ),
+  have hm : m = (x₁ : ℤ) - (x₂ : ℤ),
+  exact rfl,
+  simp_rw ← hm at *,
+  exact helperLemma4 k hk0 m hk hx₁₂r hx₁₂l,
+end
+
+lemma modArithDisjoint (n k x : ℕ) (hn0c : 0 < (k : ℤ)) (hn0b : (n : ℤ) ≠ 0) (m : ℤ) :
+      (range k : set ℕ).pairwise_disjoint (λ (i : ℕ), (↑x + (↑n * ↑i + m)) % ↑(n * k) = 0) :=
+begin
+  simp only [nat.cast_mul, euclidean_domain.mod_eq_zero],
+  simp_rw set.pairwise_disjoint,
+  simp_rw set.pairwise,
+  intros x₁ hx₁ x₂ hx₂ hx₁₂,
+  simp_rw (on),
+  simp_rw (disjoint),
+  intros h₃ h₃1 h₃2,
+  have h₃f: ¬h₃,
+  by_contra h₃t,
+  {
+    have h₃1t : ↑n * ↑k ∣ ↑x + (↑n * ↑x₁ + m),
+    exact h₃1 h₃t,
+    have h₃2t : ↑n * ↑k ∣ ↑x + (↑n * ↑x₂ + m),
+    exact h₃2 h₃t,
+    have h₃b := dvd_sub h₃1t h₃2t,
+    clear h₃1t h₃2t,
+    simp only [add_sub_add_left_eq_sub, add_sub_add_right_eq_sub, helperLemma1 (n : ℤ) (x₁ : ℤ) (x₂ : ℤ)] at h₃b,
+    have h₃c := (mul_dvd_mul_iff_left hn0b).mp h₃b,
+    have h₃d := helperLemma3 k x₁ x₂ hn0c hx₁ hx₂ h₃c,
+    clear hn0b h₃1 h₃2 h₃b m x h₃t h₃,
+    have hx₁₂f : x₁ = x₂,
+    exact int.coe_nat_inj (sub_eq_zero.mp h₃d),
+    show false, from hx₁₂ hx₁₂f,
+  },
+  rw eq_false_intro h₃f,
+  simp only [le_Prop_eq, is_empty.forall_iff],
+end
+
+lemma modArithIffExist (x n k : ℕ) (hn0 : 0 < n) (hk0 : 0 < k) (m : ℤ) : (↑x + m) % ↑n = 0 ↔ ∃ (i : ℕ) (h : i ∈ range k), (↑x + (↑n * ↑i + m)) % ↑(n * k) = 0 :=
+begin
+  split,
+  {
+    sorry,
+  },
+  {
+    sorry,
+  },
+end
+
+lemma ruesDiffSumOfRuesDiff (n k : ℕ) (hn0 : 0 < n) (hk0 : 0 < k) (m : ℤ) (z : ℂ) : ruesDiff n m z = ∑ k₀ in range k, ruesDiff (n * k) (n * k₀ + m) z :=
 begin
   simp_rw ruesDiffTsumForm,
   have h0 : ∀ x ∈ range k, summable (λ (k_1:ℕ), ite ((↑k_1 + (↑n * ↑x + m)) % ↑(n * k) = 0) (z ^ k_1 / ↑k_1!) 0),
@@ -549,23 +640,46 @@ begin
   clear h0,
   congr' 1,
   ext1,
-  sorry,
+  let f : ℕ → Prop := (λ i : ℕ, (↑x + (↑n * ↑i + m)) % ↑(n * k) = 0),
+  have hnNeq0 : n ≠ 0,
+  {
+    exact ne_of_gt hn0,
+  },
+  have hkNeq0 : k ≠ 0,
+  {
+    exact ne_of_gt hk0,
+  },
+  have hn0b := nat.cast_ne_zero.mpr hnNeq0,
+  have hk0c : 0 < (k : ℤ),
+  {
+    exact nat.cast_pos.mpr (zero_lt_iff.mpr hkNeq0),
+  },
+  have h₂ : (range k : set ℕ).pairwise_disjoint f,
+  {
+    simp_rw f,
+    exact modArithDisjoint n k x hk0c hn0b m,
+  },
+  have h₀ := @finset.sum_ite_zero ℂ ℕ (range k) _ f _ h₂ (z ^ x / ↑x!),
+  have h₁ : ((↑x + m) % ↑n = 0) ↔ (∃ (i : ℕ) (H : i ∈ range k), f i),
+  {
+    simp_rw f,
+    exact modArithIffExist x n k hn0 hk0 m,
+  },
+  simp_rw h₁,
+  clear h₁,
+  simp_rw ←h₀,
+  exact zmod.char_zero,
 end
 
-lemma expSumOfRuesDiff (k:ℕ) (h:0<k) (z:ℂ) : exp z = ∑ k₀ in range k, ruesDiff k k₀ z:=
+lemma expSumOfRuesDiff (k : ℕ) (h : 0 < k) (z : ℂ) : exp z = ∑ k₀ in range k, ruesDiff k k₀ z:=
 begin
-  have h0 : 0 < 1 * k,
-  {
-    simp only [one_mul],
-    exact h,
-  },
   rw (rues1EqExp z).symm,
-  have h1 : 0<1,
+  have h1 : 0 < 1,
   {
     simp only [nat.lt_one_iff],
   },
   rw ruesDiffM0EqRues 1 h1 z,
-  have h2 := ruesDiffSumOfRuesDiff 1 k h0 0 z,
+  have h2 := ruesDiffSumOfRuesDiff 1 k h1 h 0 z,
   simp only [one_mul, nat.cast_one, add_zero] at h2,
   exact h2,
 end
