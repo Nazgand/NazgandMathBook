@@ -597,11 +597,29 @@ begin
   ring_nf,
 end
 
-lemma diagonalSumSimp (n:ℕ) (h:0<n) (z₀ z₁: ℂ): ∑ (x : ℕ) in range n,
-    ∑ (x_1 : ℕ) in range n, ite (↑n ∣ -(x:ℤ) - (x_1:ℤ)) (ruesDiff n ↑x z₀ * ruesDiff n ↑x_1 z₁) 0 =
-  ∑ (k : ℕ) in range n, ruesDiff n (↑n - ↑k) z₁ * ruesDiff n ↑k z₀ :=
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Diagonal.20sum.20simplification.20request.2E
+lemma diagonalSumSimp
+  (n:ℕ) (h:0<n) (z₀ z₁: ℂ):
+  (∑ k in range n, ∑ l in range n,
+    if (n : ℤ) ∣ -k - l then (ruesDiff n k z₀ * ruesDiff n l z₁) else 0) =
+  ∑ k in range n, (ruesDiff n (n - k) z₁ * ruesDiff n k z₀) :=
 begin
-  sorry,
+  rcases nat.exists_eq_succ_of_ne_zero h.ne' with ⟨n, rfl⟩,
+  have : ∀ k l : fin (n + 1), (↑(n + 1) : ℤ) ∣ -(k : ℕ) -(l : ℕ) ↔ l = -k,
+  { change ∀ k l : zmod (n + 1), (↑(n + 1) : ℤ) ∣ -(k.val : ℕ) -(l.val : ℕ) ↔ l = -k,
+    intros k l,
+    rw [← zmod.int_coe_zmod_eq_zero_iff_dvd, ← neg_add', int.cast_neg, neg_eq_zero,
+      eq_neg_iff_add_eq_zero, add_comm l],
+    push_cast [zmod.nat_cast_zmod_val] },
+  simp only [sum_range, this, sum_ite_eq', mem_univ, if_true],
+  refine sum_congr rfl (λ k _, _),
+  rw [mul_comm],
+  congr' 1,
+  rcases eq_or_ne k 0 with rfl | hk,
+  { simpa using ruesDiffMPeriodic (n + 1) 0 1 z₁ },
+  { simp only [fin.coe_neg, nat.add],
+    rw [nat.mod_eq_of_lt, nat.cast_sub],
+    exacts [k.2.le, tsub_lt_self n.succ_pos (pos_iff_ne_zero.2 $ mt (fin.coe_eq_coe k 0).1 hk)] }
 end
 
 lemma ruesArgumentSumRule (n:ℕ) (h:0<n) (z₀ z₁:ℂ) :
