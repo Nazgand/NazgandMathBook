@@ -241,8 +241,9 @@ begin
 end
 
 
-lemma ruesDiffMPeriodic (n : ℕ) (m k : ℤ) (z : ℂ) : ruesDiff n m z = ruesDiff n (m + k * n) z :=
+lemma ruesDiffMPeriodic (n : ℕ) (m k : ℤ) : ruesDiff n m = ruesDiff n (m + k * n) :=
 begin
+  ext1 z,
   rw [ruesDiffTsumForm, ruesDiffTsumForm],
   congr' 1,
   ext1,
@@ -252,6 +253,12 @@ begin
     rw int.add_mul_mod_self,
   rw h,
   ring_nf,
+end
+
+
+lemma ruesDiffMPeriodic2 (n : ℕ) (m k : ℤ) (z : ℂ) : ruesDiff n m z = ruesDiff n (m + k * n) z :=
+begin
+  rw ruesDiffMPeriodic,
 end
 
 
@@ -819,18 +826,18 @@ lemma diagonalSumSimp (n : ℕ) (h : 0 < n) (z₀ z₁: ℂ) :
   ∑ k in range n, (ruesDiff n (n - k) z₁ * ruesDiff n k z₀) :=
 begin
   rcases nat.exists_eq_succ_of_ne_zero h.ne' with ⟨n, rfl⟩,
-  have : ∀ k l : fin (n + 1), (↑(n + 1) : ℤ) ∣ -(k : ℕ) -(l : ℕ) ↔ l = -k,
+  have h₀ : ∀ k l : fin (n + 1), (↑(n + 1) : ℤ) ∣ -(k : ℕ) -(l : ℕ) ↔ l = -k,
   { change ∀ k l : zmod (n + 1), (↑(n + 1) : ℤ) ∣ -(k.val : ℕ) -(l.val : ℕ) ↔ l = -k,
     intros k l,
     rw [← zmod.int_coe_zmod_eq_zero_iff_dvd, ← neg_add', int.cast_neg, neg_eq_zero,
       eq_neg_iff_add_eq_zero, add_comm l],
     push_cast [zmod.nat_cast_zmod_val] },
-  simp only [sum_range, this, sum_ite_eq', mem_univ, if_true],
+  simp only [sum_range, h₀, sum_ite_eq', mem_univ, if_true],
   refine sum_congr rfl (λ k _, _),
   rw [mul_comm],
   congr' 1,
   rcases eq_or_ne k 0 with rfl | hk,
-  { simpa using ruesDiffMPeriodic (n + 1) 0 1 z₁ },
+  { simpa using ruesDiffMPeriodic2 (n + 1) 0 1 z₁ },
   { simp only [fin.coe_neg, nat.add],
     rw [nat.mod_eq_of_lt, nat.cast_sub],
     exacts [k.2.le, tsub_lt_self n.succ_pos (pos_iff_ne_zero.2 $ mt (fin.coe_eq_coe k 0).1 hk)] }
@@ -916,3 +923,29 @@ begin
   field_simp,
   exact diagonalSumSimp n h z₀ z₁,
 end
+
+
+lemma ruesDiffNthIteratedDeriv (n : ℕ) (m : ℤ) : iterated_deriv n (ruesDiff n m) = ruesDiff n m :=
+begin
+  rw ruesDiffIteratedDeriv n n m,
+  have h₀ := ruesDiffMPeriodic n m 1,
+  simp only [one_mul] at h₀,
+  rw (show ↑n + m = m + ↑n, by ring),
+  rw ← h₀,
+end
+
+
+lemma EqNthDerivRuesDiffSum (f : ℂ → ℂ) (n : ℕ) (h : 0 < n) :
+      (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z : ℂ), iterated_deriv k f 0) * (ruesDiff n (-k))) :=
+begin
+  split,
+  {
+    sorry,
+  },
+  {
+    intros h0,
+    rw h0,
+    sorry,
+  },
+end
+

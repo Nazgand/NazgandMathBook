@@ -173,12 +173,12 @@ begin
 end
 
 
-lemma ruesDiffIteratedDeriv (k n : ℕ) (m : ℤ) (z : ℂ) : iterated_deriv k (ruesDiff n m) = ruesDiff n (k + m) :=
+lemma ruesDiffIteratedDeriv (k n : ℕ) (m : ℤ) : iterated_deriv k (ruesDiff n m) = ruesDiff n (k + m) :=
 begin
   induction k with K K_ih,
   simp only [iterated_deriv_zero, nat.cast_zero, zero_add],
   have h0 := congr_arg deriv K_ih,
-  rw ruesDiffDeriv n ((K : ℤ) + m)at h0,
+  rw ruesDiffDeriv n ((K : ℤ) + m) at h0,
   have h1 : ↑K + m + 1 = ↑(K.succ) + m,
   {
     simp only [nat.cast_succ],
@@ -190,17 +190,3 @@ begin
   exact h0,
 end
 
-
-lemma EqNthDerivRuesDiffSum (f : ℂ → ℂ) (n : ℕ) (h : 0 < n) :
-      (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z : ℂ), iterated_deriv k f 0) * (ruesDiff n (-k))) :=
-begin
-  split,
-  {
-    sorry,
-  },
-  {
-    intros h0,
-    rw h0,
-    sorry,
-  },
-end
