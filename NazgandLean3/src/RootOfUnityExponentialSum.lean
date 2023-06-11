@@ -565,6 +565,7 @@ begin
 end
 
 
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/.E2.9C.94.20m.3D0.20proof
 lemma helperLemma4 (k : ℕ) (hk0 : 0 < (k : ℤ)) (m : ℤ) (hkd: ↑k ∣ m) (hmr: m < ↑k) (hml: -↑k < m) : m = 0 :=
 begin
   obtain ⟨y, rfl⟩ := hkd,
@@ -643,6 +644,7 @@ begin
 end
 
 
+-- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/.E2.9C.94.20Modular.20arithmetic.20fact
 lemma divNearbyNumber (k : ℕ) (hk0 : 0 < k) (y : ℤ) : ∃ (i : ℕ) (h : i ∈ range k), ↑k ∣ y + ↑i :=
 begin
   rcases nat.exists_eq_succ_of_ne_zero hk0.ne' with ⟨k, rfl⟩,
