@@ -617,14 +617,76 @@ begin
   simp only [le_Prop_eq, is_empty.forall_iff],
 end
 
-lemma modArithIffExist (x n k : ℕ) (hn0 : 0 < n) (hk0 : 0 < k) (m : ℤ) : (↑x + m) % ↑n = 0 ↔ ∃ (i : ℕ) (h : i ∈ range k), (↑x + (↑n * ↑i + m)) % ↑(n * k) = 0 :=
+lemma divNearbyNumber (k : ℕ) (hk0 : 0 < k) (y : ℤ) : ∃ (i : ℕ) (h : i ∈ range k), ↑k ∣ y + ↑i :=
 begin
+  sorry,
+end
+
+lemma modArithIffExist (x n k : ℕ) (hn0 : 0 < n) (hk0 : 0 < k) (m : ℤ) :
+      (↑x + m) % ↑n = 0 ↔ ∃ (i : ℕ) (h : i ∈ range k), (↑x + (↑n * ↑i + m)) % ↑(n * k) = 0 :=
+begin
+  simp only [euclidean_domain.mod_eq_zero],
+  have h₁ : ↑(n * k) = (n : ℤ) * (k : ℤ),
+  exact rfl,
+  rw h₁,
+  clear h₁,
   split,
   {
-    sorry,
+    intros h₀,
+    let y₀ : ℤ := ↑x + m,
+    have hy₀ : y₀ = ↑x + m,
+    refl,
+    rw ← hy₀ at h₀,
+    clear_value y₀,
+    obtain ⟨y, rfl⟩ := h₀,
+    have h₁ : ∀ (i : ℕ), ↑x + (↑n * ↑i + m) = ↑x + m + (↑n * ↑i),
+    {
+      ring_nf,
+      intros i,
+      refl,
+    },
+    rw ← hy₀ at h₁,
+    simp_rw h₁,
+    have h₂ : ∀ (i : ℕ), (↑n * ↑k ∣ ↑n * y + ↑n * ↑i) ↔ (↑k ∣ y + ↑i),
+    {
+      intros i,
+      have h₃ : ↑n * y + ↑n * ↑i = ↑n * (y + ↑i),
+      {
+        ring,
+      },
+      rw h₃,
+      have hneq0 : 0 ≠ (n : ℤ),
+      {
+        exact ((int.coe_nat_ne_zero_iff_pos.mpr) hn0).symm,
+      },
+      split,
+      exact (mul_dvd_mul_iff_left (ne.symm hneq0)).mp,
+      exact mul_dvd_mul_left ↑n,
+    },
+    simp_rw h₂,
+    exact divNearbyNumber k hk0 _,
   },
   {
-    sorry,
+    intros h₀,
+    have h₁ : ∀ (i : ℕ), (∃ (h : i ∈ range k), ↑n * ↑k ∣ ↑x + (↑n * ↑i + m)) → ↑n ∣ ↑x + m,
+    intros i nkdirk,
+    {
+      have h₂ : ∀ (h : i ∈ range k), ↑n * ↑k ∣ ↑x + (↑n * ↑i + m) → ↑n ∣ ↑x + m,
+      {
+        intros irk nkd,
+        have h₃ : ↑n ∣ ↑x + (↑n * ↑i + m),
+        exact dvd_of_mul_right_dvd nkd,
+        have h₄ : ↑n ∣ ↑n * ↑i,
+        exact @dvd_mul_right ℤ _ (n : ℤ) ↑i,
+        have h₅ := dvd_sub h₃ h₄,
+        have h₆ : ↑x + (↑n * ↑i + m) - ↑n * ↑i = ↑x + m,
+        ring,
+        rw h₆ at h₅,
+        exact h₅,
+      },
+      exact exists.elim nkdirk h₂,
+    },
+    exact exists.elim h₀ h₁,
   },
 end
 
