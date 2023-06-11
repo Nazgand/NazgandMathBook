@@ -28,6 +28,7 @@ begin
     continuous_multilinear_map.curry_left_apply, pi.one_apply, finset.prod_const_one, mul_one],
 end
 
+
 lemma apply_eq_iff_coeff_eq : p n = q n ↔ p.coeff n = q.coeff n :=
 begin
   simp only [continuous_multilinear_map.ext_iff],
@@ -35,6 +36,7 @@ begin
   { simpa using h 1 },
   { simp [h] }
 end
+
 
 lemma eq_iff_coeff_eq : p = q ↔ ∀ n, p.coeff n = q.coeff n :=
 by simp [formal_multilinear_series.ext_iff, apply_eq_iff_coeff_eq]
@@ -49,6 +51,7 @@ begin
   simp [coeff_deriv, S, add_comm 1 n, finset.card_univ]
 end
 
+
 lemma has_fpower_series_on_ball.deriv (hp : has_fpower_series_on_ball f p w r) :
   has_fpower_series_on_ball (deriv f) p.deriv w r :=
 begin
@@ -60,6 +63,7 @@ begin
     function.comp_app, continuous_linear_map.comp_continuous_multilinear_map_coe,
     continuous_multilinear_curry_fin1_apply, continuous_linear_map.apply_apply, matrix.zero_empty]
 end
+
 
 lemma has_fpower_series_on_ball.has_deriv_at (hp : has_fpower_series_on_ball f p w r) {z : 𝕜}
   (hz : z ∈ emetric.ball w r) : has_deriv_at f (p.deriv.sum (z - w)) z :=
@@ -74,6 +78,7 @@ begin
   simpa [formal_multilinear_series.sum] using (h1.has_sum h4).tsum_eq,
 end
 
+
 lemma radius_le_radius_of_nnnorm_le (h : ∀ n, ‖p n‖₊ ≤ ‖q n‖₊) : q.radius ≤ p.radius :=
 begin
   simp [radius_eq_liminf],
@@ -85,18 +90,19 @@ begin
   { exact ⟨⊤, by simp⟩ }
 end
 
+
 lemma radius_le_radius_of_nnnorm_le' (h : ∀ n, ‖p.coeff n‖ ≤ ‖q.coeff n‖) : q.radius ≤ p.radius :=
 radius_le_radius_of_nnnorm_le (by simp [← norm_to_nnreal, h])
 
 ------------------------
 
-def rues_coeff (n : ℕ) (m : ℤ) (k : ℕ): ℂ := if ((k:ℤ) + m) % n = 0 then (1 : ℂ) / k.factorial else 0
+def rues_coeff (n : ℕ) (m : ℤ) (k : ℕ): ℂ := if ((k : ℤ) + m) % n = 0 then (1 : ℂ) / k.factorial else 0
 
 def rues_series (n : ℕ) (m : ℤ) := plain_old_series ℂ (rues_coeff n m)
 
 @[simp] lemma rues_series_radius {n : ℕ} (m : ℤ) : (rues_series n m).radius = ⊤ := 
 begin
-  have h:∀ (k:ℕ), ‖(rues_series n m).coeff k‖ ≤ ‖(exp_series ℂ ℂ).coeff k‖,
+  have h : ∀ (k:ℕ), ‖(rues_series n m).coeff k‖ ≤ ‖(exp_series ℂ ℂ).coeff k‖,
   {
     intro k,
     rw [coeff,coeff],
@@ -106,7 +112,7 @@ begin
   complex.norm_eq_abs, continuous_multilinear_map.smul_apply, continuous_multilinear_map.mk_pi_algebra_fin_apply,
   absolute_value.map_mul, map_inv₀, complex.abs_cast_nat],
     rw rues_coeff,
-    have h3:=classical.em (((k:ℤ) + m) % n = 0),
+    have h3 := classical.em (((k:ℤ) + m) % n = 0),
     cases h3,
     {
       rw [if_pos h3],
@@ -126,7 +132,8 @@ begin
   exact eq_top_iff.mpr h2,
 end
 
-lemma inv_mul_other_mul_self_cancel (z1 z2:ℂ) (h:z1≠0): z1⁻¹ * z2 * z1 = z2:=
+
+lemma inv_mul_other_mul_self_cancel (z1 z2 : ℂ) (h : z1 ≠ 0): z1⁻¹ * z2 * z1 = z2:=
   by field_simp
 
 @[simp] lemma rues_series.deriv {n : ℕ} (m : ℤ) : (rues_series n m).deriv = rues_series n (m + 1) :=
@@ -139,10 +146,11 @@ begin
   congr' 1,
   norm_cast at *,
   ring_nf,
-  have h1:↑(k + 1)≠(0:ℂ),
+  have h1 : ↑(k + 1) ≠ (0 : ℂ),
   norm_cast at *,
   rw inv_mul_other_mul_self_cancel (↑(k + 1)) ((↑(k.factorial))⁻¹) h1,
 end
+
 
 def ruesDiff (n : ℕ) (m : ℤ) : ℂ → ℂ := (rues_series n m).sum
 
@@ -155,6 +163,7 @@ begin
   simpa [ruesDiff] using h2.has_deriv_at h3
 end
 
+
 lemma ruesDiffDeriv (n : ℕ) (m : ℤ) :
   deriv (ruesDiff n m) = (ruesDiff n (m + 1)) :=
 begin
@@ -163,12 +172,13 @@ begin
   exact ruesDiffHasDeriv n m z,
 end
 
+
 lemma ruesDiffIteratedDeriv (k n : ℕ) (m : ℤ) (z : ℂ) : iterated_deriv k (ruesDiff n m) = ruesDiff n (k + m) :=
 begin
   induction k with K K_ih,
   simp only [iterated_deriv_zero, nat.cast_zero, zero_add],
   have h0 := congr_arg deriv K_ih,
-  rw ruesDiffDeriv n ((K:ℤ) + m)at h0,
+  rw ruesDiffDeriv n ((K : ℤ) + m)at h0,
   have h1 : ↑K + m + 1 = ↑(K.succ) + m,
   {
     simp only [nat.cast_succ],
@@ -180,8 +190,9 @@ begin
   exact h0,
 end
 
-lemma EqNthDerivRuesDiffSum (f:ℂ→ℂ) (n:ℕ) (h:0<n) :
-      (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z:ℂ),iterated_deriv k f 0) * (ruesDiff n (-k))) :=
+
+lemma EqNthDerivRuesDiffSum (f : ℂ → ℂ) (n : ℕ) (h : 0 < n) :
+      (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z : ℂ), iterated_deriv k f 0) * (ruesDiff n (-k))) :=
 begin
   split,
   {
