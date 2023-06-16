@@ -151,6 +151,7 @@ end
 lemma needZeroCoeff (f : ℕ → ℂ) (n : ℕ) (h : 0 < n) : ∑' (k : ℕ), f (n * k) = ∑' (k : ℕ), ite (n ∣ k) (f k) 0 :=
 tsum_mul_ite _ h
 
+
 -- Help received from https://leanprover.zulipchat.com/#narrow/stream/217875-Is-there-code-for-X.3F/topic/tsum.20stretcher.2C.20adding.20zeroes.20to.20sums.20like.20this
 lemma ruesDiffM0EqRues (n : ℕ) (h : 0 < n) (z : ℂ) : rues n z = ruesDiff n 0 z :=
 begin
@@ -166,6 +167,12 @@ begin
   -- you not done `import all` but I'm not sure)
 end
 
+
+lemma ruesDiffM0EqRues2 (n : ℕ) (h : 0 < n) : rues n = ruesDiff n 0 :=
+begin
+  ext1 z,
+  rw ruesDiffM0EqRues n h z,
+end
 
 lemma rouNot0 (n : ℕ) (h₀ : 0 < n) (rou : ℂ) (h₁ : rou ^ n = 1) : rou ≠ 0 :=
 begin
@@ -949,3 +956,60 @@ begin
   },
 end
 
+
+lemma ruesNMthIteratedDeriv (n m : ℕ) (h : 0 < n) : iterated_deriv m (rues n) = ruesDiff n m :=
+begin
+  have h₀ := funext (ruesDiffM0EqRues n h),
+  simp only at h₀,
+  rw h₀,
+  rw ruesDiffIteratedDeriv m n 0,
+  simp only [add_zero],
+end
+
+
+lemma ruesDiffMod (n : ℕ) (h : 0 < n) (m : ℤ) : ruesDiff n m = ruesDiff n (m % n) :=
+begin
+  rw ruesDiffMPeriodic n (m % n) (m / n),
+  congr,
+  have h₀ := int.div_add_mod' m n,
+  have h₁ : m % ↑n + m / ↑n * ↑n = m / ↑n * ↑n + m % ↑n,
+  {
+    ring,
+  },
+  rw [h₁, h₀],
+end
+
+
+lemma natModToMod (m n : ℤ) (h₀ : n ≠ 0): ↑(m.nat_mod n) = m % n :=
+begin
+  rw int.nat_mod,
+  let k := m % n,
+  have h₀ : 0 ≤ m % n,
+  {
+    exact int.mod_nonneg m h₀,
+  },
+  have h₁ : m % n = k,
+  {
+    exact rfl,
+  },
+  rw h₁ at *,
+  exact int.to_nat_of_nonneg h₀,
+end
+
+
+lemma ruesDiffArgumentSumRule (n : ℕ) (h : 0 < n) (m : ℤ) (z₀ z₁ : ℂ) :
+        ruesDiff n m (z₀ + z₁) = ∑ k in range n, (ruesDiff n (m + k) z₀ * ruesDiff n (n - k) z₁) :=
+begin
+  have h₀ : (∀ (z : ℂ), rues n (z + z₁) = ∑ (k : ℕ) in range n, ruesDiff n ↑k z * ruesDiff n (↑n - ↑k) z₁),
+  {
+    intros z,
+    exact ruesArgumentSumRule n h z z₁,
+  },
+  have h₁ := funext h₀,
+  clear h₀,
+  have h₂ := @congr_arg (ℂ → ℂ) (ℂ → ℂ) (λ (z : ℂ), rues n (z + z₁)) (λ (z : ℂ), ∑ (k : ℕ) in range n, ruesDiff n ↑k z * ruesDiff n (↑n - ↑k) z₁) (iterated_deriv (int.nat_mod m n)),
+  have h₃ := h₂ h₁,
+  clear h₂ h₁,
+  rw ruesDiffM0EqRues2 n h at *,
+  sorry,
+end
