@@ -1073,6 +1073,37 @@ begin
 end
 
 
+lemma ruesDiff0EqIte (n : ℕ) (h : 0 < n) (m : ℤ) :
+    ruesDiff n m 0 = ite ((n : ℤ) ∣ m) 1 0  :=
+    -- ruesDiff n m 0 = (∑ k₀ in range n, exp (m * 2 * real.pi * (k₀ / n) * I)) / n :=
+begin
+  rw ruesDiffEqExpSum n h m 0,
+  simp only [zero_mul, zero_add],
+  have h₀ := ruGeomSumEqIte3 n m h,
+  have h₁ : ∑ (x : ℕ) in range n, cexp (2 * ↑real.pi * (↑x / ↑n) * I * ↑m) =
+      ∑ (x : ℕ) in range n, cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I),
+  {
+    congr,
+    ext1 k,
+    congr' 1,
+    ring_nf,
+  },
+  rw h₁ at h₀,
+  rw h₀,
+  clear h₁ h₀,
+  have hnneq0 := nNeqComplex0 n h,
+  cases classical.em (↑n ∣ m) with h₂t h₂f,
+  {
+    rw [if_pos h₂t, if_pos h₂t],
+    exact div_self hnneq0,
+  },
+  {
+    rw [if_neg h₂f, if_neg h₂f],
+    simp only [zero_div],
+  },
+end
+
+
 lemma EqNthDerivRuesDiffSum (f : ℂ → ℂ) (n : ℕ) (h : 0 < n) :
       (f = iterated_deriv n f) ↔ (f = ∑ k in range n, (λ(z : ℂ), iterated_deriv k f 0) * (ruesDiff n (-k))) :=
 begin
