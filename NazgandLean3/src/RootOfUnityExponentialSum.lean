@@ -388,7 +388,7 @@ end
 
 
 lemma ruGeomSumEqIte2 (n : ℕ) (k : ℤ) (h : 0 < n) :
-    ∑ m in range n, (complex.exp (2 * real.pi * (m / n) * I)) ^ k = ite ((n:ℤ) ∣ k) n 0 :=
+    ∑ m in range n, (complex.exp (2 * real.pi * (m / n) * I)) ^ k = ite ((n : ℤ) ∣ k) n 0 :=
 begin
   have h0 : ∀ (m : ℕ), complex.exp (2 * real.pi * (m / n) * I) ^ k = complex.exp ((k : ℂ) * (2 * real.pi * (m / n) * I)),
   {
@@ -939,6 +939,137 @@ begin
   simp only [one_mul] at h₀,
   rw (show ↑n + m = m + ↑n, by ring),
   rw ← h₀,
+end
+
+
+lemma ruGeomSumEqIte3 (n : ℕ) (k : ℤ) (h : 0 < n) :
+  ∑ (x : ℕ) in range n, cexp (2 * ↑real.pi * (↑x / ↑n) * I * k) = ite ((n : ℤ) ∣ k) n 0 :=
+begin
+  have h₀ : ∀ (x : ℕ), cexp (2 * ↑real.pi * (↑x / ↑n) * I * k) = cexp (2 * ↑real.pi * (k / ↑n) * I) ^ x,
+  {
+    intros x,
+    have h₀a := complex.exp_int_mul (2 * ↑real.pi * (↑k / ↑n) * I) x,
+    have h₀b : cexp (2 * ↑real.pi * (↑k / ↑n) * I) ^ (x : ℤ) = cexp (2 * ↑real.pi * (↑k / ↑n) * I) ^ x,
+    {
+      exact rfl,
+    },
+    rw h₀b at h₀a,
+    rw ← h₀a,
+    simp only [int.cast_coe_nat],
+    congr' 1,
+    ring_nf,
+  },
+  simp_rw h₀,
+  exact ruGeomSumEqIte n k h,
+end
+
+lemma ruesDiffEqExpSum (n : ℕ) (h : 0 < n) (m : ℤ) (z : ℂ) :
+    ruesDiff n m z = (∑ k₀ in range n, exp (z * exp (2 * real.pi * (k₀ / n) * I) + m * 2 * real.pi * (k₀ / n) * I)) / n :=
+begin
+  rw ruesDiffTsumForm,
+  have h₃ : ∀ k₀:ℕ, cexp (z * cexp (2 * ↑real.pi * (↑k₀ / ↑n) * I) + ↑m * 2 * ↑real.pi * (↑k₀ / ↑n) * I) =
+            cexp (z * cexp (2 * ↑real.pi * (↑k₀ / ↑n) * I)) * cexp(↑m * 2 * ↑real.pi * (↑k₀ / ↑n) * I),
+  {
+    intros k₀,
+    exact exp_add (z * cexp (2 * ↑real.pi * (↑k₀ / ↑n) * I)) (↑m * 2 * ↑real.pi * (↑k₀ / ↑n) * I),
+  },
+  simp_rw h₃,
+  clear h₃,
+  have h₀ : ∀ (x : ℕ), cexp (z * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) = tsum (λ (k₁ : ℕ), (z * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) ^ k₁ / k₁.factorial),
+  {
+    intros x,
+    rw expTsumForm,
+  },
+  simp_rw h₀,
+  clear h₀,
+  simp_rw ← tsum_mul_right,
+  have h₁ : ∀ (x : ℕ), x ∈ range n → summable (λ (x_1 : ℕ), (z * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) ^ x_1 / ↑x_1! * cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I)),
+  {
+    intros x h₁h,
+    have h₁b := expTaylorSeriesSummable (z * cexp (2 * ↑real.pi * (↑x / ↑n) * I)),
+    have h₁c := summable.const_smul (cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I)) h₁b,
+    clear h₁b,
+    simp only [algebra.id.smul_eq_mul] at h₁c,
+    have h₁d : ∀ (i : ℕ), cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I) * ((z * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) ^ i / ↑i!) =
+      ((z * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) ^ i / ↑i!) * cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I),
+    {
+      intros i,
+      ring_nf,
+    },
+    simp_rw h₁d at h₁c,
+    exact h₁c,
+  },
+  have h₂ := (tsum_sum h₁).symm,
+  simp_rw h₂,
+  clear h₁ h₂,
+  rw ←tsum_div_const,
+  congr,
+  ext1 k₁,
+  simp_rw mul_pow z _ _,
+  have h₄ : ∀ (x : ℕ), cexp (2 * ↑real.pi * (↑x / ↑n) * I) ^ k₁ = cexp (2 * ↑real.pi * (↑x / ↑n) * I * k₁),
+  {
+    intros x,
+    have h₄a := complex.exp_int_mul (2 * ↑real.pi * (↑x / ↑n) * I) k₁,
+    have h₄b : cexp (2 * ↑real.pi * (↑x / ↑n) * I) ^ (k₁ : ℤ) = cexp (2 * ↑real.pi * (↑x / ↑n) * I) ^ k₁,
+    {
+      refine rfl,
+    },
+    rw ← h₄a at h₄b,
+    rw ← h₄b,
+    clear h₄a h₄b,
+    have h₄c : ↑↑k₁ * (2 * ↑real.pi * (↑x / ↑n) * I) = 2 * ↑real.pi * (↑x / ↑n) * I * ↑k₁,
+    {
+      simp only [int.cast_coe_nat],
+      ring_nf,
+    },
+    rw h₄c,
+  },
+  simp_rw h₄,
+  clear h₄,
+  have h₅ : ∀ (x : ℕ), z ^ k₁ * cexp (2 * ↑real.pi * (↑x / ↑n) * I * ↑k₁) / ↑k₁! *
+    cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I) =
+    z ^ k₁  / ↑k₁! * (cexp (2 * ↑real.pi * (↑x / ↑n) * I * ↑k₁) *
+    cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I)),
+  {
+    intros x,
+    ring,
+  },
+  simp_rw h₅,
+  clear h₅,
+  have h₆ : ∀ (x : ℕ), cexp (2 * ↑real.pi * (↑x / ↑n) * I * ↑k₁) * cexp (↑m * 2 * ↑real.pi * (↑x / ↑n) * I) = 
+    cexp (2 * ↑real.pi * (↑x / ↑n) * I * (↑k₁ + ↑m)),
+  {
+    intros x,
+    rw ← (exp_add (2 * ↑real.pi * (↑x / ↑n) * I * ↑k₁) (↑m * 2 * ↑real.pi * (↑x / ↑n) * I)),
+    congr,
+    ring,
+  },
+  simp_rw h₆,
+  clear h₆,
+  simp_rw mul_sum.symm,
+  have h₇ := ruGeomSumEqIte3 n (k₁ + m) h,
+  have h₈ : ∑ (x : ℕ) in range n, cexp (2 * ↑real.pi * (↑x / ↑n) * I * ↑(↑k₁ + m)) =
+            ∑ (x : ℕ) in range n, cexp (2 * ↑real.pi * (↑x / ↑n) * I * (↑k₁ + ↑m)),
+  {
+    congr,
+    ext1 k₂,
+    congr,
+    simp only [int.cast_add, int.cast_coe_nat],
+  },
+  rw [← h₈, h₇],
+  clear h₇ h₈,
+  cases classical.em (↑n ∣ ↑k₁ + m) with h₉ h₉n,
+  {
+    rw if_pos h₉,
+    simp only [euclidean_domain.mod_eq_zero],
+    rw if_pos h₉,
+    rw mul_div_cancel _ (nNeqComplex0 n h),
+  },
+  {
+    simp only [euclidean_domain.mod_eq_zero],
+    rw [if_neg h₉n, if_neg h₉n],
+    simp only [mul_zero, zero_div],
+  },
 end
 
 
