@@ -1162,16 +1162,55 @@ end
 lemma ruesDiffArgumentSumRule (n : ℕ) (h : 0 < n) (m : ℤ) (z₀ z₁ : ℂ) :
         ruesDiff n m (z₀ + z₁) = ∑ k in range n, (ruesDiff n (m + k) z₀ * ruesDiff n (n - k) z₁) :=
 begin
-  have h₀ : (∀ (z : ℂ), rues n (z + z₁) = ∑ (k : ℕ) in range n, ruesDiff n ↑k z * ruesDiff n (↑n - ↑k) z₁),
+  rw ruesDiffEqExpSum,
+  simp_rw complex.exp_add,
+  have h₀ : ∀ (x : ℕ), (z₀ + z₁) * cexp (2 * ↑real.pi * (↑x / ↑n) * I) =
+    z₀ * cexp (2 * ↑real.pi * (↑x / ↑n) * I) + z₁ * cexp (2 * ↑real.pi * (↑x / ↑n) * I),
   {
-    intros z,
-    exact ruesArgumentSumRule n h z z₁,
+    intros x,
+    ring_nf,
   },
-  have h₁ := funext h₀,
+  simp_rw h₀,
   clear h₀,
-  have h₂ := @congr_arg (ℂ → ℂ) (ℂ → ℂ) (λ (z : ℂ), rues n (z + z₁)) (λ (z : ℂ), ∑ (k : ℕ) in range n, ruesDiff n ↑k z * ruesDiff n (↑n - ↑k) z₁) (iterated_deriv (int.nat_mod m n)),
-  have h₃ := h₂ h₁,
-  clear h₂ h₁,
-  rw ruesDiffM0EqRues2 n h at *,
+  simp_rw complex.exp_add,
+  have h₁ : ∀ (x : ℕ) (z₂ : ℂ), cexp (z₂ * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) =
+    ∑ (k₀ : ℕ) in range n, ruesDiff n ↑k₀ (z₂ * cexp (2 * ↑real.pi * (↑x / ↑n) * I)),
+  {
+    intros x z₂,
+    exact (expSumOfRuesDiff n h (z₂ * cexp (2 * ↑real.pi * (↑x / ↑n) * I))),
+  },
+  simp_rw h₁,
+  clear h₁,
+  have h₂ : ∀ (k₂ x : ℕ) (z₂ : ℂ), ruesDiff n ↑k₂ (z₂ * cexp (2 * ↑real.pi * (↑x / ↑n) * I)) =
+    cexp (2 * ↑real.pi * (↑x / ↑n) * I) ^ -↑k₂ * ruesDiff n ↑k₂ z₂,
+  {
+    intros k₂ x z₂,
+    exact ruesDiffRotationallySymmetric n h k₂ z₂ (cexp (2 * ↑real.pi * (↑x / ↑n) * I)) (standardRouForm n h x),
+  },
+  simp_rw h₂,
+  clear h₂,
+  simp_rw [finset.sum_mul, finset.mul_sum, finset.sum_mul],
+  rw sum_three_cycle,
+  have h₃ : ∀ (z₂ z₃ z₄ z₅ z₆ : ℂ), z₂ * z₃ * (z₄ * z₅) * z₆ = z₃ * z₅ * (z₂ * z₄ * z₆),
+  {
+    intros z₂ z₃ z₄ z₅ z₆,
+    ring_nf,
+  },
+  simp_rw h₃,
+  clear h₃,
+  simp_rw ← finset.mul_sum,
+  simp_rw ← complex.exp_int_mul,
+  simp_rw ← complex.exp_add,
+  simp only [int.cast_neg, int.cast_coe_nat, neg_mul],
+  have h₄ : ∀ (x x_1 x_2 : ℕ), -(↑x * (2 * ↑real.pi * (↑x_2 / ↑n) * I)) + -(↑x_1 * (2 * ↑real.pi * (↑x_2 / ↑n) * I)) +
+  ↑m * 2 * ↑real.pi * (↑x_2 / ↑n) * I = (2 * ↑real.pi * (↑x_2 / ↑n) * I) * (m - ↑x - ↑x_1),
+  {
+    intros x x_1 x_2,
+    ring_nf,
+  },
+  simp_rw h₄,
+  clear h₄,
   sorry,
+  exact h,
 end
+
