@@ -1160,7 +1160,7 @@ end
 
 
 lemma ruesDiffArgumentSumRule (n : ℕ) (h : 0 < n) (m : ℤ) (z₀ z₁ : ℂ) :
-        ruesDiff n m (z₀ + z₁) = ∑ k in range n, (ruesDiff n (m + k) z₀ * ruesDiff n (n - k) z₁) :=
+        ruesDiff n m (z₀ + z₁) = ∑ k in range n, (ruesDiff n k z₀ * ruesDiff n (m - k) z₁) :=
 begin
   rw ruesDiffEqExpSum,
   simp_rw complex.exp_add,
@@ -1210,7 +1210,31 @@ begin
   },
   simp_rw h₄,
   clear h₄,
+  have h₆ : ∀ (x x_1 : ℕ), ∑ (x_2 : ℕ) in range n, cexp (2 * ↑real.pi * (↑x_2 / ↑n) * I * ↑(m - ↑x - ↑x_1 : ℤ)) =
+    ite (↑n ∣ (m - ↑x - ↑x_1 : ℤ)) ↑n 0,
+  {
+    intros x x_1,
+    exact ruGeomSumEqIte3 n ((m : ℤ) - (x : ℤ) - (x_1 : ℤ)) h,
+  },
+  have h₅ : ∀ (x x_1 : ℕ), (m : ℂ) - (x : ℂ) - (x_1 : ℂ) = ((m : ℤ) - (x : ℤ) - (x_1 : ℤ) : ℂ),
+  {
+    intros x x_1,
+    simp only [int.cast_coe_nat],
+  },
+  simp_rw h₅,
+  clear h₅,
+  have h₇ : ∀ (x x_1 : ℕ), ↑(m - ↑x - ↑x_1) = ((m : ℤ) - (x : ℤ) - (x_1 : ℤ) : ℂ),
+  {
+    intros x x_1,
+    simp only [int.cast_sub],
+  },
+  simp_rw h₇ at h₆,
+  clear h₇,
+  simp_rw h₆,
+  clear h₆,
+  rw finset.sum_div,
+  congr,
+  ext1 k,
   sorry,
   exact h,
 end
-
