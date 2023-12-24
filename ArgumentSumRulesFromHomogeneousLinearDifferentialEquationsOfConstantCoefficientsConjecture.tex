@@ -78,26 +78,26 @@
 		0=\sum_{k=0}^{n}a_k\pdiff{z}{k}f\pqty{z}
 		=\sum_{k=0}^{n}a_k f^\pqty{k}\pqty{z}
 	\end{equation}
-	where $a_k\in\mathbb{C}, f:\mathbb{C}\to\mathbb{C}$.
-	Let $f_1\pqty{z},\dots,f_n\pqty{z}$ be solutions that span the vector space of solutions of the [homogeneous linear differential equation of constant coefficients]. To be clear:
+	where $\forall k, a_k\in\mathbb{C}, a_n \neq 0$, and $f:\mathbb{C}\to\mathbb{C}$ is differentiable everywhere.
+	Let $g_0\pqty{z},\dots,g_{n-1}\pqty{z}$ be solutions that span the vector space of solutions of the [homogeneous linear differential equation of constant coefficients]. To be clear:
 	\begin{equation}
-		\Bqty{f\pqty{z} \mid 0=\sum_{k=0}^{n}a_k f^\pqty{k}\pqty{z}}
-		=\Bqty{\sum_{k=1}^{n}b_k f_k\pqty{z} \mid b_k\in\mathbb{C}}
+		\Bqty{h\pqty{z} \mid 0=\sum_{k=0}^{n}a_k h^\pqty{k}\pqty{z}}
+		=\Bqty{\sum_{k=0}^{n-1}b_k g_k\pqty{z} \mid b_k\in\mathbb{C}}
 	\end{equation}
 	Let us define a column vector and clarify its transpose (a row vector):
 	\begin{equation}
 		v\pqty{z_0}=
 		\begin{pmatrix}
-			f_1\pqty{z_0} \\
+			g_0\pqty{z_0} \\
 			\vdots \\
-			f_n\pqty{z_0} \\
+			g_{n-1}\pqty{z_0} \\
 		\end{pmatrix}
 		,
 		v\pqty{z_1}^T=
 		\begin{pmatrix}
-			f_1\pqty{z_1} &
+			g_0\pqty{z_1} &
 			\dots &
-			f_n\pqty{z_1}
+			g_{n-1}\pqty{z_1}
 		\end{pmatrix}
 	\end{equation}
 	I conjecture there exists a complex-valued constant $n$ by $n$ symmetric matrix $A$ ($A=A^T$) such that
