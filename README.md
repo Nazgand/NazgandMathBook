@@ -6,15 +6,6 @@ Later, I used Zim to create a wiki. I disliked that it made a new image file for
 
 Thus, multiple LaTeX files reference each other. They may also reference kig files or images for geometry.
 
-# I implemented some proofs in Lean.
+# I implemented some proofs in Lean 3, but they are now obsolete with the release of Lean 4
 
-[Click here for Lean installation instructions](https://leanprover-community.github.io/get_started.html#regular-install)
-
-To initialize the Lean code and download mathlib, try:
-
-```
-cd NazgandLean3
-leanproject get-mathlib-cache
-./_target/deps/mathlib/scripts/mk_all.sh
-```
-I needed to increase the memory limit from the default in the settings of the Lean3 VSCode extention.
+[Click here for my Lean 4 code](https://github.com/Nazgand/NazgandLean4)
