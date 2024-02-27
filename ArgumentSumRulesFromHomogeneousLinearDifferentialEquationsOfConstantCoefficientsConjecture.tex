@@ -81,6 +81,7 @@
 	where $\forall k, a_k\in\mathbb{C}, a_n \neq 0$, and $f:\mathbb{C}\to\mathbb{C}$ is differentiable everywhere.
 	Let $g_0\pqty{z},\dots,g_{n-1}\pqty{z}$ be solutions that span the vector space of solutions of the [homogeneous linear differential equation of constant coefficients]. To be clear:
 	\begin{equation}
+		\text{Solutions}=
 		\Bqty{h\pqty{z} \mid 0=\sum_{k=0}^{n}a_k h^\pqty{k}\pqty{z}}
 		=\Bqty{\sum_{k=0}^{n-1}b_k g_k\pqty{z} \mid b_k\in\mathbb{C}}
 	\end{equation}
@@ -119,4 +120,45 @@
 		f\pqty{z_0+z_1}=v\pqty{z_1}^T \frac{B+B^T}{2} v\pqty{z_0}
 	\end{equation}
 	Note that we can set $A=\frac{B+B^T}{2}$ because it is symmetric. \qed
+
+	\section{Motivation}
+	The first thing of note is
+	\begin{equation}
+		f\pqty{z}\in\text{Solutions}
+	\end{equation}
+	The next thing of note is that offsetting the function's argument by a constant results in the same differential equation, with a solution of the same form.
+	\begin{equation}
+		\pdiff{z}{}z_0=0 \Rightarrow f\pqty{z+z_0}\in\text{Solutions}
+	\end{equation}	
+	One thing to note is that all constants are replaced with functions of the constant \(z_0\). This allows us that change \(z_0\) from a constant to a variable and still have working math when we consider all possible constants \(z_0\).
+	\begin{equation}
+		\bqty{\pdiff{z}{}z_0=0 \land f\pqty{z+z_0}\in\text{Solutions}}
+		\Rightarrow \exists b_{0,k} : \mathbb{C}\to\mathbb{C}, f\pqty{z+z_0} = \sum_{k=0}^{n-1}b_{0,k}\pqty{z_0} g_k\pqty{z}
+	\end{equation}
+	Because we were careful about making all constants a function of the constant \(z_0\), we can make \(z_0\) a variable with the conclusion
+	\begin{equation}
+		\label{fzz0}
+		\exists b_{0,k} : \mathbb{C}\to\mathbb{C}, f\pqty{z+z_0} = \sum_{k=0}^{n-1}b_{0,k}\pqty{z_0} g_k\pqty{z}
+	\end{equation}
+	Follow the same logic with a constant named \(z_1\):
+	\begin{equation}
+		\pdiff{z}{}z_1=0 \Rightarrow f\pqty{z+z_1}\in\text{Solutions}
+	\end{equation}	
+	\begin{equation}
+		\bqty{\pdiff{z}{}z_1=0 \land f\pqty{z+z_1}\in\text{Solutions}}
+		\Rightarrow \exists b_{1,k} : \mathbb{C}\to\mathbb{C}, f\pqty{z+z_1} = \sum_{k=0}^{n-1}b_{1,k}\pqty{z_1} g_k\pqty{z}
+	\end{equation}
+	\begin{equation}
+		\label{fzz1}
+		\exists b_{1,k} : \mathbb{C}\to\mathbb{C}, f\pqty{z+z_1} = \sum_{k=0}^{n-1}b_{1,k}\pqty{z_1} g_k\pqty{z}
+	\end{equation}
+	Now we substitute \(z\to z_1\) in \eqref{fzz0}, and we substitute \(z\to z_0\) in \eqref{fzz1}, and combine them.
+	\begin{equation}
+		\exists b_{0,k} : \mathbb{C}\to\mathbb{C},
+		\exists b_{1,k} : \mathbb{C}\to\mathbb{C},
+		f\pqty{z_0+z_1}
+		= \sum_{k=0}^{n-1}b_{0,k}\pqty{z_0} g_k\pqty{z_1}
+		= \sum_{k=0}^{n-1}b_{1,k}\pqty{z_1} g_k\pqty{z_0}
+	\end{equation}
+	We now have 2 ways of viewing \(f\pqty{z_0+z_1}\), and we could imagine a sum of a line from the front, a sum of a line from the right, and 'deduce' that the true form is probably the sum of a square from above, which leads to the matrix form conjectured, but this is slightly sketchy logic that needs more rigor.
 \end{document}
