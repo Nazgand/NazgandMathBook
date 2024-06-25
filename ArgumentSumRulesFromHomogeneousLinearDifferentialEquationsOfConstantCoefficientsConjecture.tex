@@ -161,4 +161,11 @@
 		= \sum_{k=0}^{n-1}b_{1,k}\pqty{z_1} g_k\pqty{z_0}
 	\end{equation}
 	We now have 2 ways of viewing \(f\pqty{z_0+z_1}\), and we could imagine a sum of a line from the front, a sum of a line from the right, and 'deduce' that the true form is probably the sum of a square from above, which leads to the matrix form conjectured, but this is slightly sketchy logic that needs more rigor.
+
+	\section{LEAN 4 code}
+		This conjecture has been formalized in LEAN 4:
+		
+		\href{https://github.com/Nazgand/NazgandLean4/blob/master/NazgandLean4/ArgumentSumConjecture.lean}{https://github.com/Nazgand/NazgandLean4/blob/master/NazgandLean4/ArgumentSumConjecture.lean}
+		
+		For a given differential equation, if the conjecture is true for 1 basis, then it is true for all basises.
 \end{document}
