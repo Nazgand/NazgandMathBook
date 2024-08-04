@@ -73,13 +73,14 @@
 		The goal of this paper is to conjecture a seemingly fundamental calculus fact.
 	\end{abstract}
 	
+	\section{Assumptions and definitions}
 	A [homogeneous linear differential equation of constant coefficients] has the form
 	\begin{equation}
 		0=\sum_{k=0}^{n}a_k\pdiff{z}{k}f\pqty{z}
 		=\sum_{k=0}^{n}a_k f^\pqty{k}\pqty{z}
 	\end{equation}
-	where $\forall k, a_k\in\mathbb{C}, a_n \neq 0$, and $f:\mathbb{C}\to\mathbb{C}$ is differentiable everywhere.
-	Let $g_0\pqty{z},\dots,g_{n-1}\pqty{z}$ be solutions that span the vector space of solutions of the [homogeneous linear differential equation of constant coefficients]. To be clear:
+	where $\forall k, a_k\in\mathbb{C}, n\in\mathbb{Z}^+, a_n \neq 0$, and $f:\mathbb{C}\to\mathbb{C}$ is differentiable at least $n$ times everywhere.
+	Let $g_0\pqty{z},\dots,g_{n-1}\pqty{z}$ be solutions that are a basis of the vector space of solutions of the [homogeneous linear differential equation of constant coefficients]. To be clear:
 	\begin{equation}
 		\text{Solutions}=
 		\Bqty{h\pqty{z} \mid 0=\sum_{k=0}^{n}a_k h^\pqty{k}\pqty{z}}
@@ -101,12 +102,14 @@
 			g_{n-1}\pqty{z_1}
 		\end{pmatrix}
 	\end{equation}
+
+	\section{Main conjecture with 2 arguments}
 	I conjecture there exists a complex-valued constant $n$ by $n$ symmetric matrix $A$ ($A=A^T$) such that
 	\begin{equation}
 		f\pqty{z_0+z_1}=v\pqty{z_1}^T A v\pqty{z_0}=v\pqty{z_0}^T A v\pqty{z_1}
 	\end{equation}
 
-	\section{A reason $A$ is symmetric}
+	\subsection{A reason $A$ is symmetric}
 	Suppose instead of a symmetric matrix $A$, we find a matrix $B$ such that
 	\begin{equation}
 		f\pqty{z_0+z_1}=v\pqty{z_1}^T B v\pqty{z_0}
@@ -168,4 +171,33 @@
 		\href{https://github.com/Nazgand/NazgandLean4/blob/master/NazgandLean4/ArgumentSumConjecture.lean}{https://github.com/Nazgand/NazgandLean4/blob/master/NazgandLean4/ArgumentSumConjecture.lean}
 		
 		For a given differential equation, if the conjecture is true for 1 basis, then it is true for all basises.
+	
+	\section{Conjecture generalized to positive integer amounts of arguments in addition to 2}
+	The following statements use the same assumptions and definitions as the main conjecture.
+	\subsection{1 argument}
+	The following statement, which I call $\text{ArgSumCon}\pqty{1}$, is known to be true and seems to have been proved by Euler, though I have not seen a rigorous formalized proof yet.
+	\begin{equation}
+		\exists c\pqty{k_0}\in\mathbb{C}, f\pqty{z_0} = \sum_{k_0=0}^{n-1}c\pqty{k_0} g_{k_0}\pqty{z_0}
+	\end{equation}
+	
+	\subsection{2 arguments}
+	The following statement, which I call $\text{ArgSumCon}\pqty{2}$, is equivalent to the main conjecture, minus the symmetry requirement.
+	\begin{equation}
+		\exists c\pqty{k_0,k_1}\in\mathbb{C}, f\pqty{z_0+z_1} = \sum_{k_0=0}^{n-1}\sum_{k_1=0}^{n-1}c\pqty{k_0,k_1} g_{k_0}\pqty{z_0} g_{k_1}\pqty{z_1}
+	\end{equation}
+	
+	\subsection{3 arguments}
+	The following statement, I call $\text{ArgSumCon}\pqty{3}$.
+	\begin{equation}
+		\exists c\pqty{k_0,k_1,k_2}\in\mathbb{C}, f\pqty{z_0+z_1+z_2} =
+		\sum_{k_0=0}^{n-1}\sum_{k_1=0}^{n-1}\sum_{k_2=0}^{n-1}c\pqty{k_0,k_1,k_2} g_{k_0}\pqty{z_0} g_{k_1}\pqty{z_1} g_{k_2}\pqty{z_2}
+	\end{equation}
+	
+	\subsection{$m$ arguments for $m\in\mathbb{Z}^+$}
+	The following statement, I call $\text{ArgSumCon}\pqty{m}$.
+	\begin{equation}
+		\exists c\pqty{k_0,k_1,\dots,k_{m-1}}\in\mathbb{C}, f\pqty{\sum_{k=0}^{n-1}z_k} =
+		\sum_{k_0=0}^{n-1}\sum_{k_1=0}^{n-1}\dots\sum_{k_{m-1}=0}^{n-1}c\pqty{k_0,k_1,\dots,k_{m-1}} \prod_{j=0}^{n-1}g_{k_j}\pqty{z_j}
+	\end{equation}
+	Note $\text{ArgSumCon}\pqty{m+1}\Rightarrow\text{ArgSumCon}\pqty{m}$, as can be seen by replacing 1 of the variables with 0.
 \end{document}
