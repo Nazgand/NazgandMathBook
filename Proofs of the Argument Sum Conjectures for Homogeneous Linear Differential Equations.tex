@@ -1,0 +1,297 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=.51in}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+
+% Title and author
+\title{Proofs of the Argument Sum Conjectures for Homogeneous Linear Differential Equations}
+\author{Assistant(Grok 3)}
+\date{2025-03-01}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Introduction}
+	
+	We consider homogeneous linear differential equations with constant coefficients of the form:
+	
+	\begin{equation}
+		0 = \sum_{k=0}^n a_k f^{(k)}(z), \quad a_k \in \mathbb{C}, \quad a_n \neq 0,
+	\end{equation}
+	
+	where \(f^{(k)}(z)\) denotes the \(k\)-th derivative of \(f(z)\). The solution space of this equation is \(n\)-dimensional, and we let \(\{g_0(z), g_1(z), \ldots, g_{n-1}(z)\}\) be a basis for this space. Define the vector:
+	
+	\begin{equation}
+		v(z) = \begin{bmatrix} g_0(z) \\ g_1(z) \\ \vdots \\ g_{n-1}(z) \end{bmatrix}.
+	\end{equation}
+	
+	The conjectures \(\text{ArgSumCon}(m)\) for positive integers \(m \in \mathbb{Z}^+\) assert that for any solution \(f\), there exist constants \(c(k_0, \ldots, k_{m-1})\) such that:
+	
+	\begin{equation}
+		f\left( \sum_{j=0}^{m-1} z_j \right) = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} c(k_0, \ldots, k_{m-1}) \prod_{j=0}^{m-1} g_{k_j}(z_j).
+	\end{equation}
+	
+	In this document, we prove \(\text{ArgSumCon}(2)\) explicitly, generalize to \(\text{ArgSumCon}(m)\) using induction, and justify the invertibility of any matrix inverted during the proofs.
+	
+	\section{Proof of \(\text{ArgSumCon}(2)\)}
+	
+	\begin{theorem}
+		For any solution \(f\) to the differential equation, there exists a unique symmetric matrix \(A \in \mathbb{C}^{n \times n}\) such that:
+		
+		\begin{equation}
+			f(z_0 + z_1) = v(z_1)^T A v(z_0).
+		\end{equation}
+	\end{theorem}
+	
+	\begin{proof}
+		We proceed through a series of steps, using lemmas and claims to build the result.
+		
+		\begin{lemma}
+			For any solution \(f\) and fixed \(z_1 \in \mathbb{C}\), the function \(h(z_0) := f(z_0 + z_1)\) is also a solution to the differential equation.
+		\end{lemma}
+		
+		\begin{proof}
+			Since the differential equation has constant coefficients, compute the derivatives:
+			
+			\begin{equation}
+				h^{(k)}(z_0) = f^{(k)}(z_0 + z_1).
+			\end{equation}
+			
+			Applying the differential operator:
+			
+			\begin{equation}
+				\sum_{k=0}^n a_k h^{(k)}(z_0) = \sum_{k=0}^n a_k f^{(k)}(z_0 + z_1) = 0,
+			\end{equation}
+			
+			since \(f\) satisfies the original equation. Thus, \(h(z_0)\) is a solution.
+		\end{proof}
+		
+		\begin{lemma}
+			There exist infinitely differentiable functions \(c_k: \mathbb{C} \to \mathbb{C}\) such that:
+			
+			\begin{equation}
+				f(z_0 + z_1) = \sum_{k=0}^{n-1} c_k(z_1) g_k(z_0).
+			\end{equation}
+		\end{lemma}
+		
+		\begin{proof}
+			Fix \(z_1\). Since \(h(z_0) = f(z_0 + z_1)\) is a solution, and \(\{g_0(z_0), \ldots, g_{n-1}(z_0)\}\) is a basis, we can express:
+			
+			\begin{equation}
+				h(z_0) = \sum_{k=0}^{n-1} c_k(z_1) g_k(z_0),
+			\end{equation}
+			
+			where the coefficients \(c_k(z_1)\) depend on \(z_1\). To find these coefficients, consider the Wronskian matrix of the basis at \(z_0 = 0\):
+			
+			\begin{equation}
+				W(0) = \begin{bmatrix}
+					g_0(0) & g_1(0) & \cdots & g_{n-1}(0) \\
+					g_0'(0) & g_1'(0) & \cdots & g_{n-1}'(0) \\
+					\vdots & \vdots & \ddots & \vdots \\
+					g_0^{(n-1)}(0) & g_1^{(n-1)}(0) & \cdots & g_{n-1}^{(n-1)}(0)
+				\end{bmatrix}.
+			\end{equation}
+			
+			Since \(\{g_0, \ldots, g_{n-1}\}\) are linearly independent solutions, \(W(0)\) is invertible (justified in Section 4). Solve for the coefficients using initial conditions at \(z_0 = 0\):
+			
+			\begin{equation}
+				\begin{bmatrix} h(0) \\ h'(0) \\ \vdots \\ h^{(n-1)}(0) \end{bmatrix} = \begin{bmatrix} f(z_1) \\ f'(z_1) \\ \vdots \\ f^{(n-1)}(z_1) \end{bmatrix} = W(0) \begin{bmatrix} c_0(z_1) \\ c_1(z_1) \\ \vdots \\ c_{n-1}(z_1) \end{bmatrix}.
+			\end{equation}
+			
+			Thus:
+			
+			\begin{equation}
+				\begin{bmatrix} c_0(z_1) \\ c_1(z_1) \\ \vdots \\ c_{n-1}(z_1) \end{bmatrix} = W(0)^{-1} \begin{bmatrix} f(z_1) \\ f'(z_1) \\ \vdots \\ f^{(n-1)}(z_1) \end{bmatrix}.
+			\end{equation}
+			
+			Since \(f\) is infinitely differentiable (as a solution to a linear ODE with constant coefficients), each \(c_k(z_1)\) is infinitely differentiable.
+		\end{proof}
+		
+		\begin{claim}
+			Each coefficient \(c_k(z_1)\) satisfies the differential equation:
+			
+			\begin{equation}
+				\sum_{j=0}^n a_j c_k^{(j)}(z_1) = 0.
+			\end{equation}
+		\end{claim}
+		
+		\begin{proof}
+			Differentiate \(f(z_0 + z_1) = \sum_{k=0}^{n-1} c_k(z_1) g_k(z_0)\) with respect to \(z_1\):
+			
+			\begin{equation}
+				\frac{\partial^j}{\partial z_1^j} f(z_0 + z_1) = \sum_{k=0}^{n-1} c_k^{(j)}(z_1) g_k(z_0).
+			\end{equation}
+			
+			Since \(f(z_0 + z_1)\) satisfies the differential equation in \(z_0 + z_1\), apply the operator with respect to \(z_1\) (noting \(\frac{\partial}{\partial z_1} f = f'\)):
+			
+			\begin{equation}
+				0 = \sum_{j=0}^n a_j \frac{\partial^j}{\partial z_1^j} f(z_0 + z_1) = \sum_{j=0}^n a_j \sum_{k=0}^{n-1} c_k^{(j)}(z_1) g_k(z_0) = \sum_{k=0}^{n-1} \left( \sum_{j=0}^n a_j c_k^{(j)}(z_1) \right) g_k(z_0).
+			\end{equation}
+			
+			Since the \(g_k(z_0)\) are linearly independent, each coefficient must vanish:
+			
+			\begin{equation}
+				\sum_{j=0}^n a_j c_k^{(j)}(z_1) = 0,
+			\end{equation}
+			
+			proving that each \(c_k(z_1)\) is a solution.
+		\end{proof}
+		
+		\begin{lemma}
+			There exist constants \(d_{km} \in \mathbb{C}\) such that:
+			
+			\begin{equation}
+				c_k(z_1) = \sum_{m=0}^{n-1} d_{km} g_m(z_1).
+			\end{equation}
+		\end{lemma}
+		
+		\begin{proof}
+			Since \(c_k(z_1)\) satisfies the differential equation and \(\{g_0(z_1), \ldots, g_{n-1}(z_1)\}\) is a basis for the solution space, we can write:
+			
+			\begin{equation}
+				c_k(z_1) = \sum_{m=0}^{n-1} d_{km} g_m(z_1),
+			\end{equation}
+			
+			where the \(d_{km}\) are constants because the differential equation has constant coefficients.
+		\end{proof}
+		
+		Now, substitute into the expression for \(f\):
+		
+		\begin{equation}
+			f(z_0 + z_1) = \sum_{k=0}^{n-1} c_k(z_1) g_k(z_0) = \sum_{k=0}^{n-1} \left( \sum_{m=0}^{n-1} d_{km} g_m(z_1) \right) g_k(z_0) = \sum_{k=0}^{n-1} \sum_{m=0}^{n-1} d_{km} g_m(z_1) g_k(z_0).
+		\end{equation}
+		
+		Define the matrix \(D\) with entries \(D_{mk} = d_{km}\), so:
+		
+		\begin{equation}
+			f(z_0 + z_1) = v(z_1)^T D v(z_0).
+		\end{equation}
+		
+		Since \(f(z_0 + z_1) = f(z_1 + z_0)\), we have:
+		
+		\begin{equation}
+			v(z_1)^T D v(z_0) = v(z_0)^T D v(z_1) = v(z_1)^T D^T v(z_0).
+		\end{equation}
+		
+		This holds for all \(z_0, z_1\), so \(D = D^T\). Set \(A = D\), which is symmetric. Thus:
+		
+		\begin{equation}
+			f(z_0 + z_1) = v(z_1)^T A v(z_0).
+		\end{equation}
+		
+		For uniqueness, suppose there exist two symmetric matrices \(A\) and \(B\) such that \(v(z_1)^T A v(z_0) = v(z_1)^T B v(z_0)\) for all \(z_0, z_1\). Then:
+		
+		\begin{equation}
+			v(z_1)^T (A - B) v(z_0) = 0.
+		\end{equation}
+		
+		Since the \(g_k(z)\) span the solution space, and thus \(v(z_0), v(z_1)\) can take on independent values, \(A - B = 0\), so \(A = B\). Hence, \(A\) is unique.
+	\end{proof}
+	
+	\section{Proof of \(\text{ArgSumCon}(m)\)}
+	
+	\begin{theorem}
+		For any positive integer \(m\), \(\text{ArgSumCon}(m)\) holds: there exist constants \(c(k_0, \ldots, k_{m-1})\) such that:
+		
+		\begin{equation}
+			f\left( \sum_{j=0}^{m-1} z_j \right) = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} c(k_0, \ldots, k_{m-1}) \prod_{j=0}^{m-1} g_{k_j}(z_j).
+		\end{equation}
+	\end{theorem}
+	
+	\begin{proof}
+		We prove this by induction on \(m\).
+		
+		\textbf{Base Case (\(m = 1\)):} For any solution \(f(z_0)\), since \(\{g_0(z_0), \ldots, g_{n-1}(z_0)\}\) is a basis:
+		
+		\begin{equation}
+			f(z_0) = \sum_{k_0=0}^{n-1} c(k_0) g_{k_0}(z_0),
+		\end{equation}
+		
+		where the \(c(k_0)\) are constants. Thus, \(\text{ArgSumCon}(1)\) holds.
+		
+		\textbf{Inductive Step:} Assume \(\text{ArgSumCon}(m)\) holds for some \(m \geq 1\). We show it holds for \(m+1\). Consider:
+		
+		\begin{equation}
+			f\left( \sum_{j=0}^{m} z_j \right).
+		\end{equation}
+		
+		Define \(u = \sum_{j=0}^{m-1} z_j\), so:
+		
+		\begin{equation}
+			f\left( \sum_{j=0}^{m} z_j \right) = f(u + z_m).
+		\end{equation}
+		
+		By \(\text{ArgSumCon}(2)\) (Theorem 1), there exists a symmetric matrix \(A\) such that:
+		
+		\begin{equation}
+			f(u + z_m) = v(z_m)^T A v(u).
+		\end{equation}
+		
+		Now, \(v(u) = \begin{bmatrix} g_0(u) \\ \vdots \\ g_{n-1}(u) \end{bmatrix}\), where \(u = \sum_{j=0}^{m-1} z_j\). Since each \(g_l(u)\) is a solution, by the inductive hypothesis:
+		
+		\begin{equation}
+			g_l(u) = g_l\left( \sum_{j=0}^{m-1} z_j \right) = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} d_l(k_0, \ldots, k_{m-1}) \prod_{j=0}^{m-1} g_{k_j}(z_j),
+		\end{equation}
+		
+		for some constants \(d_l(k_0, \ldots, k_{m-1})\). Substitute into the expression:
+		
+		\begin{align}
+			f(u + z_m) &= v(z_m)^T A v(u) = \sum_{k=0}^{n-1} \sum_{l=0}^{n-1} A_{kl} g_k(z_m) g_l(u) \\
+			&= \sum_{k=0}^{n-1} \sum_{l=0}^{n-1} A_{kl} g_k(z_m) \left[ \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} d_l(k_0, \ldots, k_{m-1}) \prod_{j=0}^{m-1} g_{k_j}(z_j) \right].
+		\end{align}
+		
+		Rearrange the summations:
+		
+		\begin{align}
+			f\left( \sum_{j=0}^{m} z_j \right) = \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} \sum_{k=0}^{n-1} \sum_{l=0}^{n-1} A_{kl} d_l(k_0, \ldots, k_{m-1}) g_k(z_m) \prod_{j=0}^{m-1} g_{k_j}(z_j).
+		\end{align}
+		
+		Let \(k_m = k\), and define:
+		
+		\begin{equation}
+			c(k_0, \ldots, k_m) = \sum_{l=0}^{n-1} A_{kl_m} d_l(k_0, \ldots, k_{m-1}),
+		\end{equation}
+		
+		which are constants. Then:
+		
+		\begin{align}
+			f\left( \sum_{j=0}^{m} z_j \right) &= \sum_{k_0=0}^{n-1} \cdots \sum_{k_{m-1}=0}^{n-1} \sum_{k_m=0}^{n-1} \left( \sum_{l=0}^{n-1} A_{k_m l} d_l(k_0, \ldots, k_{m-1}) \right) g_{k_m}(z_m) \prod_{j=0}^{m-1} g_{k_j}(z_j) \\
+			&= \sum_{k_0=0}^{n-1} \cdots \sum_{k_m=0}^{n-1} c(k_0, \ldots, k_m) \prod_{j=0}^{m} g_{k_j}(z_j),
+		\end{align}
+		
+		proving \(\text{ArgSumCon}(m+1)\). By induction, \(\text{ArgSumCon}(m)\) holds for all \(m \geq 1\).
+	\end{proof}
+	
+	\section{Justification of Matrix Invertibility}
+	
+	In the proof of \(\text{ArgSumCon}(2)\), we inverted the Wronskian matrix \(W(0)\). Here, we justify its invertibility.
+	
+	\begin{lemma}
+		The Wronskian matrix \(W(z)\) of the basis \(\{g_0(z), g_1(z), \ldots, g_{n-1}(z)\}\) is invertible for some \(z \in \mathbb{C}\), including \(z = 0\).
+	\end{lemma}
+	
+	\begin{proof}
+		The Wronskian matrix at \(z\) is:
+		
+		\begin{equation}
+			W(z) = \begin{bmatrix}
+				g_0(z) & g_1(z) & \cdots & g_{n-1}(z) \\
+				g_0'(z) & g_1'(z) & \cdots & g_{n-1}'(z) \\
+				\vdots & \vdots & \ddots & \vdots \\
+				g_0^{(n-1)}(z) & g_1^{(n-1)}(z) & \cdots & g_{n-1}^{(n-1)}(z)
+			\end{bmatrix}.
+		\end{equation}
+		
+		The determinant \(\det W(z)\) is the Wronskian of the functions \(g_0, \ldots, g_{n-1}\). Since these are linearly independent solutions to an \(n\)-th order linear differential equation, \(\det W(z) \neq 0\) for some \(z\). For constant-coefficient equations, if the characteristic equation has distinct roots, the solutions (e.g., \(e^{\lambda_i z}\)) ensure \(\det W(z) \neq 0\) for all \(z\). Even with repeated roots, using solutions like \(z^k e^{\lambda z}\), the Wronskian is non-zero at \(z = 0\). Thus, \(W(0)\) is invertible.
+	\end{proof}
+	
+	This completes the justification of all matrix inversions in the proofs.
+	
+\end{document}
