@@ -1,3 +1,9 @@
+# ⚠️ GitHub does not yet support SHA256 repositories. ⚠️
+# ⚠️ Thus, development ceasing at GitHub. ⚠️
+# Check the following repositories:
+# [SHA256✅CodeBerg](https://codeberg.org/Nazgand/NazgandMathBook)
+# [SHA256✅GitLab](https://gitlab.com/Nazgand/NazgandMathBook)
+
 # This is a collection of math notes.
 
 I first tried using knowls in PreTeXt HTML. Unfortunately, the HTML book is not properly viewable offline.
