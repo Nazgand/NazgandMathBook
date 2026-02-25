@@ -1,4 +1,4 @@
-# ⚠️ GitHub does not yet support SHA256 repositories. ⚠️
+# ⚠️ GitHub does not support SHA256 repositories. ⚠️
 # ⚠️ Thus, development ceasing at GitHub. ⚠️
 # Check the following repositories:
 # [SHA256✅CodeBerg](https://codeberg.org/Nazgand/NazgandMathBook)
